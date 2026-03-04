@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — Designer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Space+Grotesk:wght@300;400;600;700&display=swap');
+
+:root {
+  --black: #0a0a0a;
+  --shimmer: #fffff4;
+  --peach: #f2b692;
+  --volt: #d4b906;
+  --pulse: #d94383;
+  --deep-red: #370707;
+  --mid: #888;
+  --border: #1e1e1e;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--shimmer);
+  font-family: 'DM Mono', monospace;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--black);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 56px;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.05em;
+  color: var(--shimmer);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 0;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,243,0.45);
+  text-decoration: none;
+  padding: 18px 20px;
+  transition: color 0.2s;
+  border-left: 1px solid var(--border);
+}
+.nav-links a:hover { color: var(--peach); }
+.nav-links a.resume-link {
+  color: var(--shimmer);
+  border: 1px solid var(--border);
+  margin-left: 16px;
+  padding: 8px 16px;
+  font-size: 10px;
+}
+.nav-links a.resume-link:hover {
+  background: var(--peach);
+  color: var(--black);
+  border-color: var(--peach);
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  padding: 56px 0 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-top {
+  padding: 60px 48px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--peach);
+}
+
+.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 13vw, 200px);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: var(--shimmer);
+  mix-blend-mode: normal;
+}
+.hero-name .accent { color: var(--volt); }
+
+.hero-descriptor {
+  margin-top: 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  max-width: 800px;
+}
+.hero-bio {
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(255,255,243,0.55);
+  font-style: italic;
+  max-width: 460px;
+  border-left: 2px solid var(--volt);
+  padding-left: 20px;
+}
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+.hero-tag {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.tag-volt { background: var(--volt); color: var(--black); }
+.tag-peach { border: 1px solid var(--peach); color: var(--peach); }
+.tag-out { border: 1px solid var(--border); color: rgba(255,255,243,0.35); }
+.tag-pulse { background: var(--pulse); color: white; }
+
+.hero-scroll {
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+.hero-scroll-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,243,0.25);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-scroll-label::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: rgba(255,255,243,0.15);
+}
+.hero-count {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,243,0.2);
+  letter-spacing: 0.1em;
+}
+
+/* ── WORK SECTION ── */
+.work-section {
+  background: var(--shimmer);
+  color: var(--black);
+  padding: 0;
+}
+
+.work-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 64px 48px 40px;
+  border-bottom: 2px solid var(--black);
+}
+.work-header-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 7vw, 100px);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+.work-header-sub {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding-bottom: 8px;
+}
+
+/* TERM SECTIONS */
+.term-block { border-bottom: 1px solid #d0cdc8; }
+
+.term-label-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  border-bottom: 1px solid #d0cdc8;
+}
+.term-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--mid);
+  padding: 20px 24px;
+  border-right: 1px solid #d0cdc8;
+  display: flex;
+  align-items: center;
+}
+.term-title-cell {
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.term-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.term-badge {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  background: var(--black);
+  color: var(--shimmer);
+}
+
+/* PROJECT ROWS */
+.project-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 140px 100px;
+  align-items: center;
+  border-bottom: 1px solid #e8e5e0;
+  text-decoration: none;
+  color: var(--black);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.project-row:hover { background: #f0ede8; }
+.project-row:hover .proj-arrow { transform: translateX(4px); opacity: 1; }
+.project-row:hover .proj-title { text-decoration: underline; text-underline-offset: 3px; }
+
+.proj-num {
+  font-size: 10px;
+  color: #bbb;
+  letter-spacing: 0.08em;
+  padding: 24px;
+  border-right: 1px solid #e8e5e0;
+  text-align: center;
+}
+.proj-main { padding: 24px 32px; }
+.proj-category {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 6px;
+}
+.proj-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.2;
+}
+.proj-desc {
+  font-size: 11px;
+  color: #999;
+  margin-top: 5px;
+  font-style: italic;
+}
+.proj-tag-cell { padding: 24px 16px; }
+.proj-tag {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  display: inline-block;
+}
+.tag-studio { background: var(--volt); color: var(--black); }
+.tag-seminar { border: 1px solid #ccc; color: #999; }
+.tag-workshop { border: 1px solid var(--pulse); color: var(--pulse); }
+.tag-research { background: var(--deep-red); color: var(--shimmer); }
+.tag-personal { background: var(--pulse); color: white; }
+.tag-narrative { border: 1px solid var(--peach); color: #c07a50; }
+
+.proj-arrow {
+  padding: 24px;
+  font-size: 18px;
+  color: #ccc;
+  transition: transform 0.2s, opacity 0.2s;
+  opacity: 0.4;
+  text-align: right;
+}
+
+/* PERSONAL WORK HEADER */
+.personal-header {
+  background: var(--deep-red);
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.personal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--shimmer);
+  letter-spacing: 0.02em;
+}
+.personal-sub {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--peach);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--shimmer);
+  letter-spacing: 0.02em;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-links a {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,243,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--peach); }
+.footer-copy {
+  font-size: 10px;
+  color: rgba(255,255,243,0.2);
+  letter-spacing: 0.1em;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow { animation: fadeUp 0.6s 0.1s both; }
+.hero-name    { animation: fadeUp 0.7s 0.2s both; }
+.hero-descriptor { animation: fadeUp 0.7s 0.35s both; }
+.hero-scroll  { animation: fadeUp 0.5s 0.5s both; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .hero-top { padding: 40px 20px 0; }
+  .hero-scroll { padding: 24px 20px; }
+  .work-header { padding: 40px 20px 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .project-row { grid-template-columns: 48px 1fr 80px; }
+  .proj-arrow { display: none; }
+  .term-label-row { grid-template-columns: 48px 1fr; }
+  .term-num { padding: 16px; font-size: 11px; }
+  .proj-num { padding: 16px; }
+  .proj-main { padding: 16px; }
+  .proj-title { font-size: 16px; }
+  .hero-descriptor { flex-direction: column; gap: 20px; }
+  .nav-links a.resume-link { display: none; }
+  footer { flex-direction: column; gap: 20px; text-align: center; }
+  .personal-header { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">HP</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="Hannah_Peevey_Resume.pdf" target="_blank" class="resume-link">↓ Resume</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-eyebrow">Multidisciplinary Designer — Barcelona</div>
+    <div class="hero-name">HANNAH<br><span class="accent">PEEVEY</span></div>
+    <div class="hero-descriptor">
+      <div class="hero-bio">
+        Working at the intersection of architecture, AI, physical computing, and emergent futures. Research-driven design across mediums, software, and materials.
+      </div>
+      <div class="hero-tags">
+        <span class="hero-tag tag-volt">Technological Intimacy</span>
+        <span class="hero-tag tag-peach">Cyborg Identities</span>
+        <span class="hero-tag tag-out">AI Agents</span>
+        <span class="hero-tag tag-pulse">Wearable Interfaces</span>
+        <span class="hero-tag tag-out">Physical Computing</span>
+        <span class="hero-tag tag-out">Bio-Materials</span>
+        <span class="hero-tag tag-out">Barcelona 2025</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-label">Selected Work</div>
+    <div class="hero-count">12 Projects</div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work-section" id="work">
+  <div class="work-header">
+    <div class="work-header-title">SELECTED<br>WORK</div>
+    <div class="work-header-sub">MDEF 2025–2027 &nbsp;/&nbsp; Personal</div>
+  </div>
+
+  <!-- TERM 1 -->
+  <div class="term-block">
+    <div class="term-label-row">
+      <div class="term-num">T–01</div>
+      <div class="term-title-cell">
+        <div class="term-title">Term 1 — Master Project</div>
+        <div class="term-badge">2025</div>
+      </div>
+    </div>
+
+    <a href="work/design-studio-1.html" class="project-row">
+      <div class="proj-num">01</div>
+      <div class="proj-main">
+        <div class="proj-category">Studio</div>
+        <div class="proj-title">Design Studio 1</div>
+        <div class="proj-desc">Design research and practice — foundational studio work</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-studio">Studio</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/living-with-your-own-ideas.html" class="project-row">
+      <div class="proj-num">02</div>
+      <div class="proj-main">
+        <div class="proj-category">Seminar</div>
+        <div class="proj-title">Living With Your Own Ideas</div>
+        <div class="proj-desc">Reflections on inhabiting and embodying design concepts</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-seminar">Seminar</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/unpacking-tech-systems.html" class="project-row">
+      <div class="proj-num">03</div>
+      <div class="proj-main">
+        <div class="proj-category">Seminar</div>
+        <div class="proj-title">Unpacking Tech Systems</div>
+        <div class="proj-desc">Critical analysis of technological infrastructures</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-seminar">Seminar</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/atlas-of-weak-signals.html" class="project-row">
+      <div class="proj-num">04</div>
+      <div class="proj-main">
+        <div class="proj-category">Workshop</div>
+        <div class="proj-title">Atlas of Weak Signals</div>
+        <div class="proj-desc">Mapping emergent futures and speculative design territories</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-workshop">Workshop</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/fundamentals-for-future-makers.html" class="project-row">
+      <div class="proj-num">05</div>
+      <div class="proj-main">
+        <div class="proj-category">Workshop</div>
+        <div class="proj-title">Fundamentals for Future Makers</div>
+        <div class="proj-desc">Fabrication, physical computing, and material exploration</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-workshop">Workshop</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/narratives-1.html" class="project-row">
+      <div class="proj-num">06</div>
+      <div class="proj-main">
+        <div class="proj-category">Narrative</div>
+        <div class="proj-title">Narratives 1</div>
+        <div class="proj-desc">Reflective writing and design narratives from Term 1</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-narrative">Narrative</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- TERM 2 -->
+  <div class="term-block">
+    <div class="term-label-row">
+      <div class="term-num">T–02</div>
+      <div class="term-title-cell">
+        <div class="term-title">Term 2 — Master Project</div>
+        <div class="term-badge">2026</div>
+      </div>
+    </div>
+
+    <a href="work/cognitive-orgies.html" class="project-row">
+      <div class="proj-num">07</div>
+      <div class="proj-main">
+        <div class="proj-category">Seminar</div>
+        <div class="proj-title">Cognitive Orgies</div>
+        <div class="proj-desc">Collective intelligence and distributed cognition</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-seminar">Seminar</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/extended-intelligence-2.html" class="project-row">
+      <div class="proj-num">08</div>
+      <div class="proj-main">
+        <div class="proj-category">Studio</div>
+        <div class="proj-title">Extended Intelligence II</div>
+        <div class="proj-desc">Human-AI hybrid systems and relational intelligence</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-studio">Studio</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/extended-intelligence-3.html" class="project-row">
+      <div class="proj-num">09</div>
+      <div class="proj-main">
+        <div class="proj-category">Studio</div>
+        <div class="proj-title">Extended Intelligence III</div>
+        <div class="proj-desc">Advanced AI agents and multi-agent architectures</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-studio">Studio</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/situated-design.html" class="project-row">
+      <div class="proj-num">10</div>
+      <div class="proj-main">
+        <div class="proj-category">Workshop</div>
+        <div class="proj-title">Situated Design Practice</div>
+        <div class="proj-desc">Context-aware design methodologies and field research</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-workshop">Workshop</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- PERSONAL WORK -->
+  <div class="personal-header">
+    <div class="personal-title">PERSONAL WORK</div>
+    <div class="personal-sub">Independent Projects</div>
+  </div>
+
+  <div class="term-block">
+    <a href="work/personal-1.html" class="project-row">
+      <div class="proj-num">11</div>
+      <div class="proj-main">
+        <div class="proj-category">Personal</div>
+        <div class="proj-title">Project Title Here</div>
+        <div class="proj-desc">Add your personal project description here</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-personal">Personal</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a href="work/personal-2.html" class="project-row">
+      <div class="proj-num">12</div>
+      <div class="proj-main">
+        <div class="proj-category">Personal</div>
+        <div class="proj-title">Project Title Here</div>
+        <div class="proj-desc">Add your personal project description here</div>
+      </div>
+      <div class="proj-tag-cell"><span class="proj-tag tag-personal">Personal</span></div>
+      <div class="proj-arrow">→</div>
+    </a>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">HANNAH PEEVEY</div>
+  <div class="footer-links">
+    <a href="index.html#work">Work</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://instagram.com/peeveybydesign" target="_blank">Instagram</a>
+  </div>
+  <div class="footer-copy">© 2025</div>
+</footer>
+
+</body>
+</html>

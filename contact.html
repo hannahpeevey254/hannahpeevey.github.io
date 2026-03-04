@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — Contact</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&family=Space+Grotesk:wght@400;600&display=swap');
+:root { --black:#0a0a0a; --shimmer:#fffff4; --peach:#f2b692; --volt:#d4b906; --pulse:#d94383; --border:#1e1e1e; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--shimmer);font-family:'DM Mono',monospace;min-height:100vh;display:flex;flex-direction:column;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:56px;}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--shimmer);text-decoration:none;}
+.nav-links{display:flex;gap:0;align-items:center;}
+.nav-links a{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,243,0.45);text-decoration:none;padding:18px 20px;transition:color 0.2s;border-left:1px solid var(--border);}
+.nav-links a:hover,.nav-links a.active{color:var(--peach);}
+.nav-links a.resume-link{color:var(--shimmer);border:1px solid var(--border);margin-left:16px;padding:8px 16px;}
+.nav-links a.resume-link:hover{background:var(--peach);color:var(--black);border-color:var(--peach);}
+
+.contact-main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:56px 48px 48px;}
+.contact-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,200px);line-height:0.88;color:var(--shimmer);}
+.contact-title span{color:var(--peach);}
+.contact-sub{font-size:13px;color:rgba(255,255,243,0.4);margin-top:24px;letter-spacing:0.05em;max-width:400px;line-height:1.7;border-left:2px solid var(--volt);padding-left:16px;}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border);margin-top:64px;}
+.contact-item{padding:32px 0;border-bottom:1px solid var(--border);border-right:1px solid var(--border);}
+.contact-item:nth-child(even){border-right:none;padding-left:48px;}
+.contact-item:nth-child(odd){padding-right:48px;}
+.contact-type{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,243,0.3);margin-bottom:10px;}
+.contact-val{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:var(--shimmer);}
+.contact-val a{color:var(--shimmer);text-decoration:none;transition:color 0.2s;}
+.contact-val a:hover{color:var(--peach);}
+
+footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;}
+.footer-name{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--shimmer);}
+.footer-copy{font-size:10px;color:rgba(255,255,243,0.2);}
+@media(max-width:768px){.contact-main{padding:80px 20px 48px;}.contact-grid{grid-template-columns:1fr;}.contact-item{border-right:none !important;padding-left:0 !important;padding-right:0 !important;}.footer-name{display:none;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">HP</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a href="Hannah_Peevey_Resume.pdf" target="_blank" class="resume-link">↓ Resume</a>
+  </div>
+</nav>
+
+<div class="contact-main">
+  <div class="contact-title">GET IN<br><span>TOUCH</span></div>
+  <div class="contact-sub">Open to collaborations, commissions, and conversations about design, AI, and emergent futures.</div>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="contact-type">Email</div>
+      <div class="contact-val"><a href="mailto:hannah.peevey@students.iaac.net">hannah.peevey@students.iaac.net</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-type">Instagram</div>
+      <div class="contact-val"><a href="https://instagram.com/peeveybydesign" target="_blank">@peeveybydesign</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-type">LinkedIn</div>
+      <div class="contact-val"><a href="https://linkedin.com/in/" target="_blank">linkedin.com/in/hannahpeevey</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-type">Based in</div>
+      <div class="contact-val">Barcelona, Spain</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">HANNAH PEEVEY</div>
+  <div class="footer-copy">© 2025</div>
+</footer>
+</body>
+</html>

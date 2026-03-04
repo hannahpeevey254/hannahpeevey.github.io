@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — About</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Space+Grotesk:wght@300;400;600;700&display=swap');
+:root {
+  --black: #0a0a0a; --shimmer: #fffff4; --peach: #f2b692;
+  --volt: #d4b906; --pulse: #d94383; --deep-red: #370707;
+  --mid: #888; --border: #1e1e1e;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--shimmer); color: var(--black); font-family: 'DM Mono', monospace; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--black); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 56px;
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--shimmer); text-decoration: none; }
+.nav-links { display: flex; gap: 0; align-items: center; }
+.nav-links a { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,243,0.45); text-decoration: none; padding: 18px 20px; transition: color 0.2s; border-left: 1px solid var(--border); }
+.nav-links a:hover, .nav-links a.active { color: var(--peach); }
+.nav-links a.resume-link { color: var(--shimmer); border: 1px solid var(--border); margin-left: 16px; padding: 8px 16px; }
+.nav-links a.resume-link:hover { background: var(--peach); color: var(--black); border-color: var(--peach); }
+
+.about-hero {
+  padding-top: 56px;
+  background: var(--black);
+  overflow: hidden;
+}
+.about-hero-inner {
+  padding: 48px 48px 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 12vw, 160px);
+  line-height: 0.88;
+  color: var(--shimmer);
+}
+.about-hero-title span { color: var(--peach); }
+.about-hero-meta {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+.about-hero-role { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,243,0.4); }
+.about-hero-location { font-size: 11px; letter-spacing: 0.15em; color: var(--volt); }
+
+/* MAIN GRID */
+.about-body {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  min-height: calc(100vh - 300px);
+}
+.about-left {
+  border-right: 1px solid #d0cdc8;
+  padding: 48px 36px;
+  display: flex; flex-direction: column; gap: 48px;
+  background: var(--shimmer);
+}
+.about-right {
+  padding: 48px;
+  background: var(--shimmer);
+  display: flex; flex-direction: column; gap: 48px;
+}
+
+/* PHOTO */
+.photo-block { display: flex; flex-direction: column; gap: 0; }
+.photo-nameplate {
+  display: flex; justify-content: space-between;
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+  letter-spacing: 0.06em; border: 1px solid var(--black);
+  padding: 8px 12px; background: var(--black); color: var(--shimmer);
+}
+.photo-frame {
+  width: 100%; aspect-ratio: 3/4;
+  background: #e8e5e0; border: 1px solid #d0cdc8;
+  border-top: none;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+/* Replace the placeholder div with: <img src="images/your-photo.jpg" style="width:100%;height:100%;object-fit:cover;"> */
+.photo-placeholder { color: #bbb; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+.photo-foot {
+  display: flex; justify-content: space-between;
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #999; padding: 8px 0; border-bottom: 1px solid #d0cdc8;
+}
+
+/* SECTIONS */
+.section { display: flex; flex-direction: column; gap: 12px; }
+.section-label {
+  font-size: 9px; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--pulse);
+  border-bottom: 1px solid #d0cdc8; padding-bottom: 8px;
+}
+.section-body { font-size: 12px; color: #555; line-height: 1.8; }
+
+.contact-item { padding: 8px 0; border-bottom: 1px solid #e8e5e0; }
+.contact-type { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; margin-bottom: 2px; }
+.contact-val { font-size: 12px; color: var(--black); }
+
+.edu-item { padding: 10px 0; border-bottom: 1px solid #e8e5e0; }
+.edu-deg { font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Space Grotesk', sans-serif; }
+.edu-school { font-size: 11px; color: #888; margin-top: 3px; }
+.edu-year { font-size: 10px; color: var(--volt); letter-spacing: 0.1em; margin-top: 3px; }
+
+/* BIO */
+.bio-text {
+  font-size: 18px; line-height: 1.7; color: var(--black);
+  font-family: 'Space Grotesk', sans-serif; font-weight: 300;
+  border-left: 3px solid var(--peach); padding-left: 24px;
+  max-width: 600px;
+}
+
+.research-text {
+  font-size: 14px; line-height: 1.8; color: #444;
+  font-style: italic; max-width: 600px;
+}
+
+/* TAGS */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.atag {
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  border: 1px solid #d0cdc8; padding: 5px 12px; border-radius: 999px;
+  color: #666; transition: all 0.2s; cursor: default;
+}
+.atag:hover { border-color: var(--pulse); color: var(--pulse); }
+
+/* SKILLS GRID */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.skill-group-title { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; margin-bottom: 8px; }
+.skill-item { font-size: 12px; color: #555; padding: 4px 0; border-bottom: 1px solid #e8e5e0; }
+
+/* EXP */
+.exp-item { padding: 10px 0; border-bottom: 1px solid #e8e5e0; }
+.exp-title { font-size: 13px; color: var(--black); font-family: 'Space Grotesk', sans-serif; font-weight: 600; }
+.exp-meta { font-size: 10px; color: #999; margin-top: 2px; letter-spacing: 0.05em; }
+
+footer {
+  background: var(--black); border-top: 1px solid var(--border);
+  padding: 40px 48px; display: flex; align-items: center; justify-content: space-between;
+}
+.footer-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--shimmer); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,243,0.35); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--peach); }
+.footer-copy { font-size: 10px; color: rgba(255,255,243,0.2); }
+
+@media (max-width: 900px) {
+  .about-body { grid-template-columns: 1fr; }
+  .about-left { border-right: none; border-bottom: 1px solid #d0cdc8; }
+  .about-hero-inner, .about-right, nav { padding-left: 20px; padding-right: 20px; }
+  .skills-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">HP</a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="about.html" class="active">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="Hannah_Peevey_Resume.pdf" target="_blank" class="resume-link">↓ Resume</a>
+  </div>
+</nav>
+
+<div class="about-hero">
+  <div class="about-hero-inner">
+    <div class="about-hero-title">ABOUT<br><span>ME</span></div>
+    <div class="about-hero-meta">
+      <div class="about-hero-role">Multidisciplinary Designer</div>
+      <div class="about-hero-location">Barcelona — 2025</div>
+    </div>
+  </div>
+</div>
+
+<div class="about-body">
+  <div class="about-left">
+
+    <div class="photo-block">
+      <div class="photo-nameplate">
+        <span>HANNAH PEEVEY</span>
+        <span>2025</span>
+      </div>
+      <div class="photo-frame">
+        <div class="photo-placeholder">Your photo here</div>
+        <!-- Replace above with: <img src="images/your-photo.jpg" style="width:100%;height:100%;object-fit:cover;"> -->
+      </div>
+      <div class="photo-foot">
+        <span>Barcelona</span>
+        <span>MDEF 2025–27</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Contact</div>
+      <div class="contact-item">
+        <div class="contact-type">Email</div>
+        <div class="contact-val">hannah.peevey@students.iaac.net</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-type">Instagram</div>
+        <div class="contact-val">@peeveybydesign</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-type">Phone</div>
+        <div class="contact-val">+1 254 315 5357</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Education</div>
+      <div class="edu-item">
+        <div class="edu-deg">Masters in Design for Emergent Futures</div>
+        <div class="edu-school">ELISAVA / IAAC — Barcelona</div>
+        <div class="edu-year">2025 — 2027</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-deg">Bachelors in Architecture and Design</div>
+        <div class="edu-school">Fay Jones School, University of Arkansas</div>
+        <div class="edu-year">2018 — 2023</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="about-right">
+
+    <div class="bio-text">
+      I am a multidisciplinary designer currently pursuing a Master's in Design for Emergent Futures in Barcelona, working across mediums, software, and research-driven design methods.
+    </div>
+
+    <div class="section">
+      <div class="section-label">Current Research</div>
+      <div class="research-text">
+        My Master's research traces the evolution of personal data as identity infrastructure, situating my work at the threshold of technological intimacy — a space where the human-machine relationship can be reimagined from extraction into collaborative co-agency.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Areas of Exploration</div>
+      <div class="tag-cloud">
+        <span class="atag">Technological Intimacy</span>
+        <span class="atag">Cyborg Identities</span>
+        <span class="atag">Hybrid Intelligence</span>
+        <span class="atag">Immersive Data Visualization</span>
+        <span class="atag">AI Agents & AI Twins</span>
+        <span class="atag">Wearable Interfaces</span>
+        <span class="atag">Body-Centered Design</span>
+        <span class="atag">Relational Digital Systems</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Skills & Tools</div>
+      <div class="skills-grid">
+        <div>
+          <div class="skill-group-title">Software</div>
+          <div class="skill-item">Adobe Illustrator</div>
+          <div class="skill-item">Adobe Photoshop</div>
+          <div class="skill-item">Adobe InDesign</div>
+          <div class="skill-item">Rhinoceros 3D</div>
+          <div class="skill-item">Blender</div>
+          <div class="skill-item">QGIS</div>
+          <div class="skill-item">Touch Designer</div>
+        </div>
+        <div>
+          <div class="skill-group-title">Programming</div>
+          <div class="skill-item">Python</div>
+          <div class="skill-item">JavaScript</div>
+          <div class="skill-item">HTML / CSS</div>
+          <div class="skill-item">C++ (Arduino)</div>
+          <div class="skill-item">JSON</div>
+          <div style="height:16px;"></div>
+          <div class="skill-group-title">Microcontrollers</div>
+          <div class="skill-item">Arduino, ESP32</div>
+          <div class="skill-item">Raspberry Pi Pico</div>
+        </div>
+        <div>
+          <div class="skill-group-title">Digital Fabrication</div>
+          <div class="skill-item">Laser Cutter</div>
+          <div class="skill-item">CNC Machine</div>
+          <div class="skill-item">3D Printing</div>
+          <div class="skill-item">Bio-Based Materials</div>
+          <div class="skill-item">Mold Making & Casting</div>
+        </div>
+        <div>
+          <div class="skill-group-title">Emerging Tools</div>
+          <div class="skill-item">GitHub / Cursor</div>
+          <div class="skill-item">Vercel / Supabase</div>
+          <div class="skill-item">Zapier / Make.com</div>
+          <div class="skill-item">Loveable</div>
+          <div class="skill-item">Anti-Gravity</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Experience</div>
+      <div class="exp-item">
+        <div class="exp-title">Nisbet LLC — Architectural Internship</div>
+        <div class="exp-meta">2023–2024 &nbsp;/&nbsp; Waco, Texas</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-title">Levy-Dykema — Architectural Internship</div>
+        <div class="exp-meta">2022 &nbsp;/&nbsp; Austin, Texas</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-title">Building Information Modeling</div>
+        <div class="exp-meta">2021 &nbsp;/&nbsp; Fayetteville, Arkansas</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">HANNAH PEEVEY</div>
+  <div class="footer-links">
+    <a href="index.html#work">Work</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://instagram.com/peeveybydesign" target="_blank">Instagram</a>
+  </div>
+  <div class="footer-copy">© 2025</div>
+</footer>
+
+</body>
+</html>

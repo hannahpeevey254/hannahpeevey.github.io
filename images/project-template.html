@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — Project Title</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Space+Grotesk:wght@300;400;600;700&display=swap');
+:root{--black:#0a0a0a;--shimmer:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--deep-red:#370707;--mid:#888;--border:#1e1e1e;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--shimmer);color:var(--black);font-family:'DM Mono',monospace;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--black);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:56px;}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--shimmer);text-decoration:none;}
+.nav-links{display:flex;gap:0;align-items:center;}
+.nav-links a{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,243,0.45);text-decoration:none;padding:18px 20px;transition:color 0.2s;border-left:1px solid var(--border);}
+.nav-links a:hover{color:var(--peach);}
+.nav-links a.resume-link{color:var(--shimmer);border:1px solid var(--border);margin-left:16px;padding:8px 16px;}
+.nav-links a.resume-link:hover{background:var(--peach);color:var(--black);border-color:var(--peach);}
+
+/* PROJECT HEADER */
+.proj-header{background:var(--black);padding-top:56px;}
+.proj-header-inner{padding:48px 48px 40px;border-bottom:1px solid var(--border);}
+.proj-back{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,243,0.3);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:32px;transition:color 0.2s;}
+.proj-back:hover{color:var(--peach);}
+.proj-meta-row{display:flex;gap:12px;margin-bottom:16px;align-items:center;}
+.proj-term{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;background:var(--volt);color:var(--black);padding:4px 10px;}
+.proj-cat{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;border:1px solid #333;color:#666;padding:4px 10px;}
+.proj-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,120px);line-height:0.9;color:var(--shimmer);}
+.proj-subtitle{font-size:14px;color:rgba(255,255,243,0.45);margin-top:16px;font-style:italic;max-width:600px;line-height:1.6;}
+.proj-stats{display:flex;gap:0;border-top:1px solid var(--border);margin-top:32px;}
+.proj-stat{padding:16px 32px;border-right:1px solid var(--border);}
+.proj-stat:first-child{padding-left:0;}
+.stat-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,243,0.3);margin-bottom:4px;}
+.stat-val{font-size:13px;color:var(--shimmer);}
+
+/* CONTENT */
+.proj-content{max-width:1200px;margin:0 auto;padding:64px 48px;}
+.proj-section{margin-bottom:64px;}
+.proj-section-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--pulse);border-bottom:1px solid #d0cdc8;padding-bottom:8px;margin-bottom:24px;}
+.proj-text{font-size:15px;line-height:1.9;color:#333;max-width:680px;}
+.proj-text p{margin-bottom:16px;}
+
+/* IMAGE GRID */
+.img-grid-1{width:100%;aspect-ratio:16/9;background:#e8e5e0;border:1px solid #d0cdc8;display:flex;align-items:center;justify-content:center;margin-bottom:8px;overflow:hidden;}
+.img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.img-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;}
+.img-box{background:#e8e5e0;border:1px solid #d0cdc8;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.img-box img,.img-grid-1 img{width:100%;height:100%;object-fit:cover;}
+.img-placeholder{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#bbb;}
+.img-caption{font-size:10px;color:#999;letter-spacing:0.05em;margin-top:6px;font-style:italic;}
+
+/* NAV BETWEEN PROJECTS */
+.proj-nav{border-top:2px solid var(--black);display:grid;grid-template-columns:1fr 1fr;}
+.proj-nav-item{padding:32px 48px;text-decoration:none;color:var(--black);transition:background 0.15s;display:flex;flex-direction:column;gap:6px;}
+.proj-nav-item:hover{background:#f0ede8;}
+.proj-nav-item:first-child{border-right:1px solid #d0cdc8;}
+.proj-nav-dir{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#bbb;}
+.proj-nav-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;}
+
+footer{background:var(--black);border-top:1px solid var(--border);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;}
+.footer-name{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--shimmer);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,243,0.35);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--peach);}
+.footer-copy{font-size:10px;color:rgba(255,255,243,0.2);}
+
+@media(max-width:768px){nav{padding:0 20px;}.proj-header-inner,.proj-content{padding-left:20px;padding-right:20px;}.proj-stats{flex-direction:column;}.proj-stat{border-right:none;border-bottom:1px solid var(--border);padding:12px 0;}.img-grid-2,.img-grid-3{grid-template-columns:1fr;}.proj-nav{grid-template-columns:1fr;}.proj-nav-item:first-child{border-right:none;border-bottom:1px solid #d0cdc8;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">HP</a>
+  <div class="nav-links">
+    <a href="../index.html#work">Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../Hannah_Peevey_Resume.pdf" target="_blank" class="resume-link">↓ Resume</a>
+  </div>
+</nav>
+
+<!-- HEADER — edit title, subtitle, stats -->
+<div class="proj-header">
+  <div class="proj-header-inner">
+    <a href="../index.html#work" class="proj-back">← All Work</a>
+    <div class="proj-meta-row">
+      <span class="proj-term">Term 1</span>
+      <span class="proj-cat">Studio</span>
+    </div>
+    <div class="proj-title">PROJECT TITLE<br>HERE</div>
+    <div class="proj-subtitle">A short description of what this project is about — one or two sentences max.</div>
+    <div class="proj-stats">
+      <div class="proj-stat"><div class="stat-label">Year</div><div class="stat-val">2025</div></div>
+      <div class="proj-stat"><div class="stat-label">Medium</div><div class="stat-val">Physical Computing</div></div>
+      <div class="proj-stat"><div class="stat-label">Tools</div><div class="stat-val">Arduino, Blender</div></div>
+      <div class="proj-stat"><div class="stat-label">Duration</div><div class="stat-val">8 weeks</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT — duplicate/rearrange sections as needed -->
+<div class="proj-content">
+
+  <div class="proj-section">
+    <div class="proj-section-label">Overview</div>
+    <!-- Full width image -->
+    <div class="img-grid-1">
+      <div class="img-placeholder">Main project image — replace with &lt;img src="..."&gt;</div>
+    </div>
+    <div class="img-caption">Caption for main image</div>
+  </div>
+
+  <div class="proj-section">
+    <div class="proj-section-label">Context & Brief</div>
+    <div class="proj-text">
+      <p>Write your project description here. Explain the brief, the context, what problem or question you were investigating.</p>
+      <p>Add as many paragraphs as you need. Keep the tone direct and clear — let the work speak.</p>
+    </div>
+  </div>
+
+  <div class="proj-section">
+    <div class="proj-section-label">Process</div>
+    <!-- Two column images -->
+    <div class="img-grid-2">
+      <div class="img-box"><div class="img-placeholder">Process image 1</div></div>
+      <div class="img-box"><div class="img-placeholder">Process image 2</div></div>
+    </div>
+    <div class="img-caption">Caption describing the process images</div>
+    <div class="proj-text" style="margin-top:24px;">
+      <p>Describe your process. What approaches did you try? What did you learn along the way?</p>
+    </div>
+  </div>
+
+  <div class="proj-section">
+    <div class="proj-section-label">Outcome</div>
+    <!-- Three column images -->
+    <div class="img-grid-3">
+      <div class="img-box"><div class="img-placeholder">Image 1</div></div>
+      <div class="img-box"><div class="img-placeholder">Image 2</div></div>
+      <div class="img-box"><div class="img-placeholder">Image 3</div></div>
+    </div>
+    <div class="proj-text" style="margin-top:24px;">
+      <p>Describe the final outcome and what you learned or concluded.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- PREV / NEXT NAV — update hrefs and titles -->
+<div class="proj-nav">
+  <a href="previous-project.html" class="proj-nav-item">
+    <div class="proj-nav-dir">← Previous</div>
+    <div class="proj-nav-title">Previous Project Title</div>
+  </a>
+  <a href="next-project.html" class="proj-nav-item" style="text-align:right;">
+    <div class="proj-nav-dir">Next →</div>
+    <div class="proj-nav-title">Next Project Title</div>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-name">HANNAH PEEVEY</div>
+  <div class="footer-links">
+    <a href="../index.html#work">Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025</div>
+</footer>
+</body>
+</html>
