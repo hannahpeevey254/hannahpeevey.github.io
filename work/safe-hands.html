@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — SAFE HANDS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--peach);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--peach);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid var(--border);background:rgba(10,10,10,.95);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--white);text-decoration:none;}
+.nav-right{display:flex;align-items:center;}
+.nav-right a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,243,.4);text-decoration:none;padding:16px 20px;transition:color .2s;border-left:1px solid var(--border);}
+.nav-right a:hover{color:var(--peach);}
+.hero{height:100vh;background:#111 url('../images/safe-hands-hero.jpg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 48px;position:relative;}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.3) 60%,transparent 100%);}
+.hero-content{position:relative;z-index:1;max-width:900px;}
+.hero-meta{display:flex;gap:12px;margin-bottom:20px;}
+.hero-tag{font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;}
+.tag-ai{background:var(--pulse);color:white;}.tag-arch{border:1px solid #333;color:rgba(255,255,243,.4);}.tag-graphic{border:1px solid var(--peach);color:var(--peach);}.tag-3d{background:var(--volt);color:var(--black);}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);line-height:.88;letter-spacing:-.01em;}
+.hero-subtitle{font-size:14px;color:rgba(255,255,243,.5);margin-top:16px;font-style:italic;max-width:560px;line-height:1.7;}
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+.stat{padding:28px 40px;border-right:1px solid var(--border);}
+.stat:last-child{border-right:none;}
+.stat-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-bottom:8px;}
+.stat-val{font-size:14px;}
+.content{max-width:1100px;margin:0 auto;padding:80px 40px;}
+.text-block{max-width:680px;margin-bottom:72px;}
+.section-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--peach);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px;}
+.body-text{font-size:15px;line-height:1.9;color:rgba(255,255,243,.65);}
+.body-text p{margin-bottom:16px;}
+.img-full{width:100%;aspect-ratio:16/9;background:#111;border:1px solid var(--border);overflow:hidden;margin-bottom:8px;}
+.img-full img{width:100%;height:100%;object-fit:cover;}
+.img-caption{font-size:10px;color:rgba(255,255,243,.25);font-style:italic;margin-bottom:56px;}
+.split-block{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:72px;}
+.split-block.reverse{direction:rtl;}.split-block.reverse>*{direction:ltr;}
+.split-img{width:100%;aspect-ratio:4/3;background:#111;border:1px solid var(--border);overflow:hidden;}
+.split-img img{width:100%;height:100%;object-fit:cover;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:56px;}
+.grid-3 .img-box{aspect-ratio:1;background:#111;border:1px solid var(--border);overflow:hidden;}
+.grid-3 .img-box img{width:100%;height:100%;object-fit:cover;}
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);}
+.proj-nav-item{padding:32px 40px;text-decoration:none;color:var(--white);transition:background .2s;display:flex;flex-direction:column;gap:6px;}
+.proj-nav-item:hover{background:#111;}
+.proj-nav-item:first-child{border-right:1px solid var(--border);}
+.proj-nav-dir{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,243,.25);}
+.proj-nav-title{font-family:'Bebas Neue',sans-serif;font-size:24px;}
+.proj-nav-item:last-child{text-align:right;}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-meta"><span class="hero-tag tag-ai">AI / Product</span></div>
+    <div class="hero-title">SAFE HANDS</div>
+    <div class="hero-subtitle">Digital legacy platform — managing personal data after death</div>
+  </div>
+</div>
+<div class="stats-bar">
+  <div class="stat"><div class="stat-label">Year</div><div class="stat-val">2025</div></div>
+  <div class="stat"><div class="stat-label">Medium</div><div class="stat-val">Web App</div></div>
+  <div class="stat"><div class="stat-label">Tools</div><div class="stat-val">Cursor, Vercel</div></div>
+  <div class="stat"><div class="stat-label">Context</div><div class="stat-val">Elisava Vibe Coding Workshop</div></div>
+</div>
+<div class="content">
+  <div class="text-block">
+    <div class="section-label">Overview</div>
+    <div class="body-text"><p><!-- Add your overview text here --></p></div>
+  </div>
+  <div class="img-full"><img src="../images/safe-hands-1.jpg" alt="SAFE HANDS"></div>
+  <div class="img-caption"><!-- Caption --></div>
+  <div class="split-block">
+    <div class="text-block" style="margin-bottom:0">
+      <div class="section-label">Process</div>
+      <div class="body-text"><p><!-- Process description --></p></div>
+    </div>
+    <div class="split-img"><img src="../images/safe-hands-2.jpg" alt="Process"></div>
+  </div>
+  <div class="split-block reverse">
+    <div class="text-block" style="margin-bottom:0">
+      <div class="section-label">Outcome</div>
+      <div class="body-text"><p><!-- Outcome description --></p></div>
+    </div>
+    <div class="split-img"><img src="../images/safe-hands-3.jpg" alt="Outcome"></div>
+  </div>
+  <div class="section-label">Documentation</div>
+  <div class="grid-3">
+    <div class="img-box"><img src="../images/safe-hands-4.jpg"></div>
+    <div class="img-box"><img src="../images/safe-hands-5.jpg"></div>
+    <div class="img-box"><img src="../images/safe-hands-6.jpg"></div>
+  </div>
+</div>
+<div class="proj-nav">
+  <a href="PREV.html" class="proj-nav-item"><div class="proj-nav-dir">← Previous</div><div class="proj-nav-title">Previous Project</div></a>
+  <a href="NEXT.html" class="proj-nav-item"><div class="proj-nav-dir">Next →</div><div class="proj-nav-title">Next Project</div></a>
+</div>
+<script>const c=document.getElementById('cursor');document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hover'));el.addEventListener('mouseleave',()=>c.classList.remove('hover'));});</script>
+</body></html>

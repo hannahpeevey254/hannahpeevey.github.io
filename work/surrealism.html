@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — SURREALISM</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--white);color:var(--black);font-family:'DM Mono',monospace;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--pulse);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--pulse);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid #e0ddd8;background:rgba(255,255,244,.95);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--black);text-decoration:none;}
+.nav-right{display:flex;align-items:center;}
+.nav-right a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(10,10,10,.4);text-decoration:none;padding:16px 20px;transition:color .2s;border-left:1px solid #e0ddd8;}
+.nav-right a:hover{color:var(--pulse);}
+.proj-band{margin-top:52px;background:var(--black);padding:56px 40px 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;}
+.band-num{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-bottom:12px;}
+.band-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,120px);line-height:.88;color:var(--white);}
+.band-right{display:flex;flex-direction:column;gap:16px;justify-content:flex-end;}
+.band-desc{font-size:14px;line-height:1.8;color:rgba(255,255,243,.55);font-style:italic;border-left:2px solid var(--peach);padding-left:16px;}
+.band-tags{display:flex;gap:8px;}
+.band-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;}
+.tag-graphic{border:1px solid var(--peach);color:var(--peach);}.tag-arch{border:1px solid #444;color:rgba(255,255,243,.4);}.tag-ai{background:var(--pulse);color:white;}.tag-3d{background:var(--volt);color:var(--black);}
+.meta-row{display:flex;border-bottom:2px solid var(--black);}
+.meta-item{padding:20px 32px;border-right:1px solid #d0cdc8;}
+.meta-item:last-child{border-right:none;}
+.meta-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#aaa;margin-bottom:4px;}
+.meta-val{font-size:13px;}
+.editorial{padding:64px 40px;}
+.pullquote{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,72px);line-height:1.05;border-top:3px solid var(--black);border-bottom:1px solid #d0cdc8;padding:32px 0 28px;margin-bottom:56px;max-width:900px;}
+.pullquote span{color:var(--pulse);}
+.spread{width:calc(100% + 80px);margin-left:-40px;aspect-ratio:21/9;background:#e8e5e0;overflow:hidden;margin-bottom:8px;}
+.spread img{width:100%;height:100%;object-fit:cover;}
+.spread-caption{font-size:10px;color:#aaa;font-style:italic;margin-bottom:56px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:56px;align-items:start;}
+.col-img{width:100%;aspect-ratio:3/4;background:#e8e5e0;border:1px solid #d0cdc8;overflow:hidden;}
+.col-img img{width:100%;height:100%;object-fit:cover;}
+.col-img.landscape{aspect-ratio:4/3;}
+.col-text{display:flex;flex-direction:column;gap:24px;}
+.section-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--pulse);display:flex;align-items:center;gap:12px;margin-bottom:0;}
+.section-label::after{content:'';flex:1;height:1px;background:#d0cdc8;max-width:40px;}
+.body-text{font-size:14px;line-height:1.9;color:#444;}
+.body-text p{margin-bottom:14px;}
+.img-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:8px;scrollbar-width:none;}
+.img-strip::-webkit-scrollbar{display:none;}
+.strip-img{flex:0 0 320px;height:240px;background:#e8e5e0;border:1px solid #d0cdc8;overflow:hidden;}
+.strip-img img{width:100%;height:100%;object-fit:cover;}
+.strip-caption{font-size:10px;color:#aaa;font-style:italic;margin-bottom:56px;}
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--black);}
+.proj-nav-item{padding:32px 40px;text-decoration:none;color:var(--black);transition:background .15s;display:flex;flex-direction:column;gap:6px;}
+.proj-nav-item:hover{background:#f0ede8;}
+.proj-nav-item:first-child{border-right:1px solid #d0cdc8;}
+.proj-nav-dir{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#aaa;}
+.proj-nav-title{font-family:'Bebas Neue',sans-serif;font-size:24px;}
+.proj-nav-item:last-child{text-align:right;}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+<div class="proj-band">
+  <div>
+    <div class="band-num">08 / Graphic Design</div>
+    <div class="band-title">SURREALISM</div>
+  </div>
+  <div class="band-right">
+    <div class="band-desc">Fashion and architecture collage — studied abroad in Rome</div>
+    <div class="band-tags"><span class="band-tag tag-graphic">Graphic / Print</span></div>
+  </div>
+</div>
+<div class="meta-row">
+  <div class="meta-item"><div class="meta-label">Year</div><div class="meta-val">2022</div></div>
+  <div class="meta-item"><div class="meta-label">Medium</div><div class="meta-val">Collage / Digital</div></div>
+  <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-val">Photoshop, InDesign</div></div>
+  <div class="meta-item"><div class="meta-label">Context</div><div class="meta-val">Rome Study Abroad</div></div>
+</div>
+<div class="editorial">
+  <div class="pullquote">"Add a short <span>provocative statement</span> about this project here."</div>
+  <div class="spread"><img src="../images/surrealism-spread.jpg" alt="SURREALISM"></div>
+  <div class="spread-caption"><!-- Spread caption --></div>
+  <div class="two-col">
+    <div class="col-img"><img src="../images/surrealism-1.jpg" alt="SURREALISM"></div>
+    <div class="col-text">
+      <div><div class="section-label">Context</div><div class="body-text"><p><!-- Context --></p></div></div>
+      <div><div class="section-label">Process</div><div class="body-text"><p><!-- Process --></p></div></div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="col-text">
+      <div><div class="section-label">Outcome</div><div class="body-text"><p><!-- Outcome --></p></div></div>
+    </div>
+    <div class="col-img landscape"><img src="../images/surrealism-2.jpg" alt="SURREALISM"></div>
+  </div>
+  <div class="section-label">More Images</div>
+  <div class="img-strip">
+    <div class="strip-img"><img src="../images/surrealism-3.jpg"></div>
+    <div class="strip-img"><img src="../images/surrealism-4.jpg"></div>
+    <div class="strip-img"><img src="../images/surrealism-5.jpg"></div>
+    <div class="strip-img"><img src="../images/surrealism-6.jpg"></div>
+  </div>
+  <div class="strip-caption">Scroll to see more →</div>
+</div>
+<div class="proj-nav">
+  <a href="PREV.html" class="proj-nav-item"><div class="proj-nav-dir">← Previous</div><div class="proj-nav-title">Previous Project</div></a>
+  <a href="NEXT.html" class="proj-nav-item"><div class="proj-nav-dir">Next →</div><div class="proj-nav-title">Next Project</div></a>
+</div>
+<script>const c=document.getElementById('cursor');document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hover'));el.addEventListener('mouseleave',()=>c.classList.remove('hover'));});</script>
+</body></html>

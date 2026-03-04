@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — Project</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--peach);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--peach);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid var(--border);background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.08em;color:var(--white);text-decoration:none;}
+.nav-right{display:flex;align-items:center;}
+.nav-right a{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,243,0.4);text-decoration:none;padding:16px 20px;transition:color 0.2s;border-left:1px solid var(--border);}
+.nav-right a:hover{color:var(--peach);}
+
+/* ── TEMPLATE 4: SCROLL STORY ──
+   Best for: AI/research projects with a narrative — Collective Hannah, Market of Me, Safe Hands
+   Layout: Sticky text panel with scrolling images on the right — tells a story as you scroll
+*/
+
+/* INTRO */
+.intro-block{
+  padding:120px 40px 80px;
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end;
+  border-bottom:1px solid var(--border);
+}
+.intro-tag{ font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,243,0.25); margin-bottom:16px; }
+.intro-title{ font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,7vw,100px); line-height:0.88; }
+.intro-title .accent{ color:var(--peach); }
+.intro-right{ display:flex; flex-direction:column; gap:20px; }
+.intro-desc{ font-size:15px; line-height:1.85; color:rgba(255,255,243,0.55); font-style:italic; border-left:2px solid var(--peach); padding-left:16px; }
+.intro-stats{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.istat{ padding:12px 0; border-bottom:1px solid var(--border); }
+.istat-label{ font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,243,0.25); margin-bottom:4px; }
+.istat-val{ font-size:13px; }
+
+/* SCROLL STORY SECTION */
+.story{ display:grid; grid-template-columns:1fr 1fr; }
+
+/* LEFT: sticky text panels */
+.story-text{ position:sticky; top:52px; height:calc(100vh - 52px); display:flex; flex-direction:column; justify-content:center; padding:60px 56px; border-right:1px solid var(--border); }
+.chapter{ display:none; }
+.chapter.active{ display:flex; flex-direction:column; gap:20px; }
+.chapter-num{ font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--peach); }
+.chapter-title{ font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,4vw,60px); line-height:0.95; }
+.chapter-body{ font-size:14px; line-height:1.9; color:rgba(255,255,243,0.55); max-width:400px; }
+.chapter-body p{ margin-bottom:12px; }
+
+/* RIGHT: scrolling images */
+.story-imgs{ display:flex; flex-direction:column; }
+.story-panel{
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:60px 40px; border-bottom:1px solid var(--border);
+  position:relative;
+}
+.panel-img{
+  width:100%; max-height:70vh;
+  background:#111; border:1px solid var(--border); overflow:hidden;
+}
+.panel-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+.panel-caption{ position:absolute; bottom:20px; right:40px; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,243,0.25); }
+
+/* FULL WIDTH CLOSER */
+.closer{
+  border-top:1px solid var(--border);
+  padding:80px 40px;
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+}
+.closer-title{ font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,6vw,80px); line-height:0.9; }
+.closer-title span{ color:var(--peach); }
+.closer-text{ font-size:14px; line-height:1.9; color:rgba(255,255,243,0.55); }
+.closer-text p{ margin-bottom:14px; }
+
+/* PROJ NAV */
+.proj-nav{ display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--border); }
+.proj-nav-item{ padding:32px 40px; text-decoration:none; color:var(--white); transition:background 0.2s; display:flex; flex-direction:column; gap:6px; }
+.proj-nav-item:hover{ background:#111; }
+.proj-nav-item:first-child{ border-right:1px solid var(--border); }
+.proj-nav-dir{ font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,243,0.25); }
+.proj-nav-title{ font-family:'Bebas Neue',sans-serif; font-size:24px; }
+.proj-nav-item:last-child{ text-align:right; }
+
+@media(max-width:900px){
+  nav{padding:0 20px;}
+  .intro-block{grid-template-columns:1fr;padding:100px 20px 48px;gap:32px;}
+  .story{grid-template-columns:1fr;}
+  .story-text{position:relative;height:auto;padding:40px 20px;}
+  .chapter{display:flex!important;}
+  .story-panel{min-height:60vh;padding:32px 20px;}
+  .closer{grid-template-columns:1fr;padding:48px 20px;gap:32px;}
+  .proj-nav-item{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<div class="intro-block">
+  <div>
+    <div class="intro-tag">02 / AI & Systems</div>
+    <div class="intro-title">COLLECTIVE<br><span class="accent">HANNAH</span></div>
+  </div>
+  <div class="intro-right">
+    <div class="intro-desc">A multi-agent AI system composed of six personas, each built from a different slice of my real and intimate data — forming a society within me.</div>
+    <div class="intro-stats">
+      <div class="istat"><div class="istat-label">Year</div><div class="istat-val">2025</div></div>
+      <div class="istat"><div class="istat-label">Tools</div><div class="istat-val">Anti-Gravity, Ollama</div></div>
+      <div class="istat"><div class="istat-label">Medium</div><div class="istat-val">AI Agents / Web</div></div>
+      <div class="istat"><div class="istat-label">Context</div><div class="istat-val">MDEF Studio</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCROLL STORY -->
+<div class="story">
+
+  <!-- STICKY TEXT — one .chapter per scroll panel -->
+  <div class="story-text" id="storyText">
+    <div class="chapter active" data-chapter="0">
+      <div class="chapter-num">01 — Concept</div>
+      <div class="chapter-title">A SOCIETY<br>WITHIN ME</div>
+      <div class="chapter-body">
+        <p>Replace this with your project description for chapter 1. What is the central idea?</p>
+        <p>Keep it short — 2–3 sentences max per panel.</p>
+      </div>
+    </div>
+    <div class="chapter" data-chapter="1">
+      <div class="chapter-num">02 — System</div>
+      <div class="chapter-title">SIX<br>PERSONAS</div>
+      <div class="chapter-body">
+        <p>Describe the system — how it was built, what data was used, how the agents relate to each other.</p>
+      </div>
+    </div>
+    <div class="chapter" data-chapter="2">
+      <div class="chapter-num">03 — Interface</div>
+      <div class="chapter-title">DIGITAL<br>ECOSYSTEM</div>
+      <div class="chapter-body">
+        <p>Describe what the user sees and interacts with. What does the interface reveal?</p>
+      </div>
+    </div>
+    <div class="chapter" data-chapter="3">
+      <div class="chapter-num">04 — Questions</div>
+      <div class="chapter-title">WHO<br>AM I?</div>
+      <div class="chapter-body">
+        <p>What does this project ask? What does it make visible that was previously invisible?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCROLLING IMAGES — one .story-panel per chapter -->
+  <div class="story-imgs" id="storyImgs">
+    <div class="story-panel" data-panel="0">
+      <div class="panel-img" style="aspect-ratio:4/3;">
+        <!-- <img src="../images/ch1.jpg" alt="Concept"> -->
+      </div>
+      <div class="panel-caption">Concept sketch</div>
+    </div>
+    <div class="story-panel" data-panel="1">
+      <div class="panel-img" style="aspect-ratio:16/9;">
+        <!-- <img src="../images/ch2.jpg" alt="System diagram"> -->
+      </div>
+      <div class="panel-caption">System architecture</div>
+    </div>
+    <div class="story-panel" data-panel="2">
+      <div class="panel-img" style="aspect-ratio:16/9;">
+        <!-- <img src="../images/ch3.jpg" alt="Interface screenshot"> -->
+      </div>
+      <div class="panel-caption">Interface — desktop view</div>
+    </div>
+    <div class="story-panel" data-panel="3">
+      <div class="panel-img" style="aspect-ratio:4/3;">
+        <!-- <img src="../images/ch4.jpg" alt="Final"> -->
+      </div>
+      <div class="panel-caption">Final outcome</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CLOSER -->
+<div class="closer">
+  <div class="closer-title">WHAT THIS<br>PROJECT<br><span>ASKS</span></div>
+  <div class="closer-text">
+    <p>Write your closing reflection here — what you learned, what it proposes, or what it leaves unresolved.</p>
+    <p>This is a good place for the critical or speculative dimension of the work.</p>
+  </div>
+</div>
+
+<div class="proj-nav">
+  <a href="previous.html" class="proj-nav-item">
+    <div class="proj-nav-dir">← Previous</div>
+    <div class="proj-nav-title">Previous Project</div>
+  </a>
+  <a href="next.html" class="proj-nav-item">
+    <div class="proj-nav-dir">Next →</div>
+    <div class="proj-nav-title">Next Project</div>
+  </a>
+</div>
+
+<script>
+// Cursor
+const c=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hover'));el.addEventListener('mouseleave',()=>c.classList.remove('hover'));});
+
+// Scroll story — updates left text as right panels scroll into view
+const panels = document.querySelectorAll('.story-panel');
+const chapters = document.querySelectorAll('.chapter');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      const idx = entry.target.dataset.panel;
+      chapters.forEach(ch => ch.classList.remove('active'));
+      const target = document.querySelector(`.chapter[data-chapter="${idx}"]`);
+      if(target) target.classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+
+panels.forEach(p => observer.observe(p));
+</script>
+</body>
+</html>

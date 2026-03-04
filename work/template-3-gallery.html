@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — Project</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--volt);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--volt);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid var(--border);background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.08em;color:var(--white);text-decoration:none;}
+.nav-right{display:flex;align-items:center;}
+.nav-right a{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,243,0.4);text-decoration:none;padding:16px 20px;transition:color 0.2s;border-left:1px solid var(--border);}
+.nav-right a:hover{color:var(--volt);}
+
+/* ── TEMPLATE 3: IMAGE GALLERY / MASONRY ──
+   Best for: Architectural renderings, spatial diagrams, 3D work — lots of images
+   Layout: Dark, images stacked + masonry-style grid
+*/
+
+/* HEADER */
+.proj-header{
+  padding:120px 40px 48px;
+  border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:flex-end;
+}
+.header-left{}
+.proj-tag{ font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,243,0.3); margin-bottom:16px; }
+.proj-title{ font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,8vw,110px); line-height:0.88; }
+.header-right{ max-width:360px; text-align:right; }
+.proj-desc{ font-size:13px; line-height:1.8; color:rgba(255,255,243,0.45); font-style:italic; }
+.proj-meta{ display:flex; gap:24px; justify-content:flex-end; margin-top:16px; flex-wrap:wrap; }
+.meta-pill{ font-size:9px; letter-spacing:0.12em; text-transform:uppercase; padding:4px 10px; border:1px solid var(--border); color:rgba(255,255,243,0.3); }
+
+/* INTRO TEXT */
+.intro{ padding:48px 40px; max-width:800px; }
+.intro-text{ font-size:15px; line-height:1.9; color:rgba(255,255,243,0.6); }
+
+/* MASONRY GRID */
+.gallery{ padding:0 40px 80px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
+
+/* Various image sizes — mix and match using col/row span */
+.gimg{ background:#111; overflow:hidden; border:1px solid var(--border); position:relative; }
+.gimg img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s; }
+.gimg:hover img{ transform:scale(1.03); }
+.gimg-label{
+  position:absolute; bottom:0; left:0; right:0;
+  padding:32px 16px 14px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.7));
+  font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
+  color:rgba(255,255,243,0.5); opacity:0; transition:opacity 0.2s;
+}
+.gimg:hover .gimg-label{ opacity:1; }
+
+/* Size variants */
+.gimg-tall{ aspect-ratio:3/4; }
+.gimg-wide{ aspect-ratio:16/9; grid-column:span 2; }
+.gimg-square{ aspect-ratio:1; }
+.gimg-full{ aspect-ratio:21/9; grid-column:span 3; }
+.gimg-half{ aspect-ratio:4/3; }
+
+/* CAPTION / TEXT CARD — insert between images */
+.text-card{
+  background:var(--border); padding:32px;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  aspect-ratio:1;
+}
+.text-card .tc-label{ font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--volt); margin-bottom:12px; }
+.text-card .tc-body{ font-size:13px; line-height:1.7; color:rgba(255,255,243,0.6); }
+
+/* PROJ NAV */
+.proj-nav{ display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--border); }
+.proj-nav-item{ padding:32px 40px; text-decoration:none; color:var(--white); transition:background 0.2s; display:flex; flex-direction:column; gap:6px; }
+.proj-nav-item:hover{ background:#111; }
+.proj-nav-item:first-child{ border-right:1px solid var(--border); }
+.proj-nav-dir{ font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,243,0.25); }
+.proj-nav-title{ font-family:'Bebas Neue',sans-serif; font-size:24px; }
+.proj-nav-item:last-child{ text-align:right; }
+
+@media(max-width:900px){
+  nav{padding:0 20px;}
+  .proj-header{flex-direction:column;gap:24px;padding:100px 20px 32px;align-items:flex-start;}
+  .header-right{text-align:left;max-width:100%;}
+  .proj-meta{justify-content:flex-start;}
+  .intro,.gallery{padding-left:20px;padding-right:20px;}
+  .gallery{grid-template-columns:1fr 1fr;}
+  .gimg-full,.gimg-wide{grid-column:span 2;}
+  .proj-nav-item{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="proj-header">
+  <div class="header-left">
+    <div class="proj-tag">05 / Architecture</div>
+    <div class="proj-title">ARCHITECTURAL<br>RENDERINGS</div>
+  </div>
+  <div class="header-right">
+    <div class="proj-desc">Interior and exterior perspectives drawn from three collegiate design projects — demonstrating a range of rendering styles and techniques.</div>
+    <div class="proj-meta">
+      <span class="meta-pill">Architecture</span>
+      <span class="meta-pill">Rhino 3D</span>
+      <span class="meta-pill">2019–2023</span>
+    </div>
+  </div>
+</div>
+
+<div class="intro">
+  <div class="intro-text">Add a short paragraph here if you want to give context before the images. Otherwise delete this section and go straight to the gallery.</div>
+</div>
+
+<!-- GALLERY — mix and match gimg size classes -->
+<!-- Available classes: gimg-full (3 cols), gimg-wide (2 cols), gimg-half, gimg-tall, gimg-square -->
+
+<div class="gallery">
+
+  <div class="gimg gimg-wide">
+    <!-- <img src="../images/render-1.jpg" alt="Exterior render"> -->
+    <div class="gimg-label">Exterior Perspective — Project 1</div>
+  </div>
+
+  <div class="gimg gimg-tall">
+    <!-- <img src="../images/render-2.jpg" alt="Interior"> -->
+    <div class="gimg-label">Interior Section</div>
+  </div>
+
+  <div class="text-card">
+    <div class="tc-label">Note</div>
+    <div class="tc-body">These perspectives were completed across three studio courses at the University of Arkansas, 2019–2023.</div>
+  </div>
+
+  <div class="gimg gimg-half">
+    <!-- <img src="../images/render-3.jpg"> -->
+    <div class="gimg-label">Detail View</div>
+  </div>
+
+  <div class="gimg gimg-full">
+    <!-- <img src="../images/render-4.jpg"> -->
+    <div class="gimg-label">Full Building Section</div>
+  </div>
+
+  <div class="gimg gimg-square">
+    <!-- <img src="../images/render-5.jpg"> -->
+    <div class="gimg-label">Axonometric</div>
+  </div>
+
+  <div class="gimg gimg-square">
+    <!-- <img src="../images/render-6.jpg"> -->
+    <div class="gimg-label">Plan View</div>
+  </div>
+
+  <div class="gimg gimg-wide">
+    <!-- <img src="../images/render-7.jpg"> -->
+    <div class="gimg-label">Night Render</div>
+  </div>
+
+</div>
+
+<div class="proj-nav">
+  <a href="previous.html" class="proj-nav-item">
+    <div class="proj-nav-dir">← Previous</div>
+    <div class="proj-nav-title">Previous Project</div>
+  </a>
+  <a href="next.html" class="proj-nav-item">
+    <div class="proj-nav-dir">Next →</div>
+    <div class="proj-nav-title">Next Project</div>
+  </a>
+</div>
+
+<script>
+const c=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hover'));el.addEventListener('mouseleave',()=>c.classList.remove('hover'));});
+</script>
+</body>
+</html>

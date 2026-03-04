@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — Project</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+:root { --black:#0a0a0a; --white:#fffff4; --peach:#f2b692; --volt:#d4b906; --pulse:#d94383; --border:#1a1a1a; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--peach);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--peach);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid var(--border);background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.08em;color:var(--white);text-decoration:none;}
+.nav-right{display:flex;align-items:center;}
+.nav-right a{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,243,0.4);text-decoration:none;padding:16px 20px;transition:color 0.2s;border-left:1px solid var(--border);}
+.nav-right a:hover{color:var(--peach);}
+
+/* ── TEMPLATE 1: FULL BLEED HERO IMAGE ──
+   Best for: AI projects, tech work, anything with strong visuals or screen recordings
+   Layout: Dark hero with huge title over image, then text + image alternating
+*/
+
+/* HERO — swap background-image for your project image */
+.hero{
+  height: 100vh;
+  background: #111 url('') center/cover no-repeat;
+  /* ↑ Replace '' with your image path e.g. '../images/aura-hero.jpg' */
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 40px 48px;
+  position: relative;
+}
+.hero::before{
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 60%, transparent 100%);
+}
+.hero-content{ position:relative; z-index:1; max-width: 900px; }
+.hero-meta{ display:flex; gap:12px; margin-bottom:20px; align-items:center; }
+.hero-tag{ font-size:9px; letter-spacing:0.15em; text-transform:uppercase; padding:4px 10px; }
+.tag-ai{ background:var(--pulse); color:white; }
+.tag-arch{ border:1px solid #333; color:rgba(255,255,243,0.4); }
+.tag-graphic{ border:1px solid var(--peach); color:var(--peach); }
+.tag-3d{ background:var(--volt); color:var(--black); }
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size: clamp(64px, 10vw, 140px);
+  line-height: 0.88; letter-spacing:-0.01em;
+}
+.hero-subtitle{ font-size:14px; color:rgba(255,255,243,0.5); margin-top:16px; font-style:italic; max-width:560px; line-height:1.7; }
+
+/* STATS BAR */
+.stats-bar{
+  display:grid; grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+.stat{ padding:28px 40px; border-right:1px solid var(--border); }
+.stat:last-child{ border-right:none; }
+.stat-label{ font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,243,0.25); margin-bottom:8px; }
+.stat-val{ font-size:14px; color:var(--white); }
+
+/* CONTENT */
+.content{ max-width:1100px; margin:0 auto; padding:80px 40px; }
+
+/* Full width text block */
+.text-block{ max-width:680px; margin-bottom:72px; }
+.section-label{ font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--peach); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+.section-label::after{ content:''; flex:1; height:1px; background:var(--border); max-width:60px; }
+.body-text{ font-size:15px; line-height:1.9; color:rgba(255,255,243,0.65); }
+.body-text p{ margin-bottom:16px; }
+
+/* Full width image */
+.img-full{ width:100%; aspect-ratio:16/9; background:#111; border:1px solid var(--border); overflow:hidden; margin-bottom:8px; }
+.img-full img{ width:100%; height:100%; object-fit:cover; }
+.img-caption{ font-size:10px; color:rgba(255,255,243,0.25); font-style:italic; margin-bottom:56px; }
+
+/* Side by side: text left, image right */
+.split-block{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; margin-bottom:72px; }
+.split-block.reverse{ direction:rtl; }
+.split-block.reverse > *{ direction:ltr; }
+.split-img{ width:100%; aspect-ratio:4/3; background:#111; border:1px solid var(--border); overflow:hidden; }
+.split-img img{ width:100%; height:100%; object-fit:cover; }
+
+/* 3 column image grid */
+.grid-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:56px; }
+.grid-3 .img-box{ aspect-ratio:1; background:#111; border:1px solid var(--border); overflow:hidden; }
+.grid-3 .img-box img{ width:100%; height:100%; object-fit:cover; }
+
+/* PROJECT NAV */
+.proj-nav{ display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--border); }
+.proj-nav-item{ padding:32px 40px; text-decoration:none; color:var(--white); transition:background 0.2s; display:flex; flex-direction:column; gap:6px; }
+.proj-nav-item:hover{ background:#111; }
+.proj-nav-item:first-child{ border-right:1px solid var(--border); }
+.proj-nav-dir{ font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,243,0.25); }
+.proj-nav-title{ font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:0.02em; }
+.proj-nav-item:last-child{ text-align:right; }
+
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .hero{padding:0 20px 40px;}
+  .stats-bar{grid-template-columns:1fr 1fr;}
+  .stat{padding:20px;}
+  .content{padding:48px 20px;}
+  .split-block{grid-template-columns:1fr;}
+  .grid-3{grid-template-columns:1fr 1fr;}
+  .proj-nav-item{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO: set background-image in CSS above, or add <img> inside -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-meta">
+      <span class="hero-tag tag-ai">AI / Wearable</span>
+      <!-- Change tag class: tag-ai | tag-arch | tag-graphic | tag-3d -->
+    </div>
+    <div class="hero-title">PROJECT<br>TITLE HERE</div>
+    <div class="hero-subtitle">One sentence that captures what this project is and why it matters.</div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-label">Year</div><div class="stat-val">2025</div></div>
+  <div class="stat"><div class="stat-label">Medium</div><div class="stat-val">Physical Computing</div></div>
+  <div class="stat"><div class="stat-label">Tools</div><div class="stat-val">Arduino, Blender</div></div>
+  <div class="stat"><div class="stat-label">Duration</div><div class="stat-val">8 weeks</div></div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- INTRO TEXT -->
+  <div class="text-block">
+    <div class="section-label">Overview</div>
+    <div class="body-text">
+      <p>Write your project description here. Explain the brief, what question you were investigating, and what makes this work interesting.</p>
+      <p>Keep it direct. Let the images carry the rest.</p>
+    </div>
+  </div>
+
+  <!-- FULL WIDTH IMAGE -->
+  <div class="img-full">
+    <!-- <img src="../images/your-image.jpg" alt="Description"> -->
+    <!-- or for a screenshot: <img src="../images/screenshot.png" alt="Description"> -->
+  </div>
+  <div class="img-caption">Caption — describe what's shown</div>
+
+  <!-- SPLIT: TEXT LEFT, IMAGE RIGHT -->
+  <div class="split-block">
+    <div class="text-block" style="margin-bottom:0;">
+      <div class="section-label">Process</div>
+      <div class="body-text">
+        <p>Describe your process here — what you tried, what failed, what you discovered. Be specific about materials, tools, or decisions.</p>
+      </div>
+    </div>
+    <div class="split-img">
+      <!-- <img src="../images/process.jpg" alt="Process"> -->
+    </div>
+  </div>
+
+  <!-- SPLIT: IMAGE LEFT, TEXT RIGHT (reversed) -->
+  <div class="split-block reverse">
+    <div class="text-block" style="margin-bottom:0;">
+      <div class="section-label">Outcome</div>
+      <div class="body-text">
+        <p>What did you make? What did you learn? What would you do differently?</p>
+      </div>
+    </div>
+    <div class="split-img">
+      <!-- <img src="../images/outcome.jpg" alt="Outcome"> -->
+    </div>
+  </div>
+
+  <!-- 3-COLUMN IMAGE GRID -->
+  <div class="section-label">Documentation</div>
+  <div class="grid-3">
+    <div class="img-box"><!-- <img src="../images/doc-1.jpg"> --></div>
+    <div class="img-box"><!-- <img src="../images/doc-2.jpg"> --></div>
+    <div class="img-box"><!-- <img src="../images/doc-3.jpg"> --></div>
+  </div>
+
+</div>
+
+<!-- PREV / NEXT -->
+<div class="proj-nav">
+  <a href="previous.html" class="proj-nav-item">
+    <div class="proj-nav-dir">← Previous</div>
+    <div class="proj-nav-title">Previous Project</div>
+  </a>
+  <a href="next.html" class="proj-nav-item">
+    <div class="proj-nav-dir">Next →</div>
+    <div class="proj-nav-title">Next Project</div>
+  </a>
+</div>
+
+<script>
+const c=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hover'));el.addEventListener('mouseleave',()=>c.classList.remove('hover'));});
+</script>
+</body>
+</html>
