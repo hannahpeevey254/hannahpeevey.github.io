@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hannah Peevey — SAFE HANDS</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@1,700&display=swap');
 :root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace;cursor:none;}
@@ -15,12 +15,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-right{display:flex;align-items:center;}
 .nav-right a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,243,.4);text-decoration:none;padding:16px 20px;transition:color .2s;border-left:1px solid var(--border);}
 .nav-right a:hover{color:var(--peach);}
-.hero{height:100vh;background:#111 url('../images/safe-hands-hero.jpg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 48px;position:relative;}
+.hero{height:100vh;background:#111;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 48px;position:relative;}
 .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.3) 60%,transparent 100%);}
 .hero-content{position:relative;z-index:1;max-width:900px;}
 .hero-meta{display:flex;gap:12px;margin-bottom:20px;}
 .hero-tag{font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;}
-.tag-ai{background:var(--pulse);color:white;}.tag-arch{border:1px solid #333;color:rgba(255,255,243,.4);}.tag-graphic{border:1px solid var(--peach);color:var(--peach);}.tag-3d{background:var(--volt);color:var(--black);}
+.tag-ai{background:var(--pulse);color:white;}
+.tag-arch{border:1px solid #333;color:rgba(255,255,243,.4);}
+.tag-graphic{border:1px solid var(--peach);color:var(--peach);}
+.tag-3d{background:var(--volt);color:var(--black);}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);line-height:.88;letter-spacing:-.01em;}
 .hero-subtitle{font-size:14px;color:rgba(255,255,243,.5);margin-top:16px;font-style:italic;max-width:560px;line-height:1.7;}
 .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
@@ -44,6 +47,145 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:56px;}
 .grid-3 .img-box{aspect-ratio:1;background:#111;border:1px solid var(--border);overflow:hidden;}
 .grid-3 .img-box img{width:100%;height:100%;object-fit:cover;}
+
+/* ── DIAGRAM ── */
+.diagram-section{margin-bottom:72px;}
+.diagram-wrap{
+  border:1px solid var(--border);
+  background:#0f0f0f;
+  padding:56px 40px 48px;
+  overflow-x:auto;
+}
+.dgm{
+  font-family:'DM Mono',monospace;
+  min-width:860px;
+  position:relative;
+}
+.dgm-title{margin-bottom:48px;}
+.dgm-title h2{font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;color:var(--white);}
+.dgm-title p{font-size:.46rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-top:4px;}
+
+/* Horizontal flow row */
+.dgm-flow{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  position:relative;
+  padding:0 0 40px;
+}
+
+/* Horizontal spine line */
+.dgm-flow::before{
+  content:'';
+  position:absolute;
+  top:44px;
+  left:44px;
+  right:44px;
+  height:1px;
+  background:rgba(255,255,243,.12);
+  z-index:0;
+}
+
+/* Each layer column */
+.dgm-col{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:relative;
+  z-index:1;
+  flex:1;
+}
+
+/* Arrow between cols */
+.dgm-arrow-h{
+  display:flex;
+  align-items:center;
+  margin-top:36px;
+  flex-shrink:0;
+  padding:0 4px;
+}
+.dgm-arrow-h svg{
+  width:28px;height:12px;
+  color:rgba(217,67,131,.5);
+}
+
+/* Node circle */
+.dgm-node{
+  width:88px;height:88px;
+  border-radius:50%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  margin-bottom:16px;
+  position:relative;
+}
+.dgm-node.solid{background:var(--pulse);}
+.dgm-node.outline{background:transparent;border:1.5px solid rgba(255,255,243,.2);}
+.dgm-node.dim{background:#1a1a1a;border:1px solid #2a2a2a;}
+.dgm-node-label{font-family:'Playfair Display',serif;font-style:italic;font-size:.62rem;font-weight:700;color:var(--white);line-height:1.2;}
+.dgm-node-sub{font-size:.36rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,243,.4);margin-top:3px;}
+
+/* Layer label above node */
+.dgm-layer-tag{
+  font-size:.4rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--pulse);margin-bottom:8px;
+}
+
+/* Role label below node */
+.dgm-role{
+  font-size:.44rem;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,243,.3);margin-bottom:8px;text-align:center;
+}
+
+/* Description below */
+.dgm-desc{
+  font-size:.46rem;line-height:1.7;
+  color:rgba(255,255,243,.45);
+  text-align:center;
+  max-width:110px;
+}
+
+/* Connector dot on spine */
+.dgm-col::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--pulse);
+  position:absolute;
+  top:41px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+}
+
+/* Bottom signal flow bar */
+.dgm-flow-bar{
+  display:flex;
+  align-items:center;
+  gap:0;
+  border-top:1px solid var(--border);
+  padding-top:20px;
+  margin-top:8px;
+  overflow:hidden;
+}
+.dgm-flow-step{
+  flex:1;
+  font-size:.38rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,243,.25);
+  text-align:center;
+  padding:0 4px;
+  position:relative;
+}
+.dgm-flow-step::after{
+  content:'→';
+  position:absolute;right:-6px;top:50%;transform:translateY(-50%);
+  color:var(--pulse);
+  font-size:.5rem;
+}
+.dgm-flow-step:last-child::after{display:none;}
+
 .proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);}
 .proj-nav-item{padding:32px 40px;text-decoration:none;color:var(--white);transition:background .2s;display:flex;flex-direction:column;gap:6px;}
 .proj-nav-item:hover{background:#111;}
@@ -55,6 +197,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
+
 <nav>
   <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
   <div class="nav-right">
@@ -63,50 +206,233 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <a href="../contact.html">Contact</a>
   </div>
 </nav>
+
 <div class="hero">
   <div class="hero-content">
-    <div class="hero-meta"><span class="hero-tag tag-ai">AI / Product</span></div>
+    <div class="hero-meta">
+      <span class="hero-tag tag-ai">AI / Product</span>
+      <span class="hero-tag tag-arch">Speculative Design</span>
+    </div>
     <div class="hero-title">SAFE HANDS</div>
-    <div class="hero-subtitle">Digital legacy platform — managing personal data after death</div>
+    <div class="hero-subtitle">Digital legacy platform — managing personal data, memory, and relational presence after death.</div>
   </div>
 </div>
+
 <div class="stats-bar">
   <div class="stat"><div class="stat-label">Year</div><div class="stat-val">2025</div></div>
   <div class="stat"><div class="stat-label">Medium</div><div class="stat-val">Web App</div></div>
-  <div class="stat"><div class="stat-label">Tools</div><div class="stat-val">Cursor, Vercel</div></div>
+  <div class="stat"><div class="stat-label">Tools</div><div class="stat-val">Cursor, Loveable, Vercel</div></div>
   <div class="stat"><div class="stat-label">Context</div><div class="stat-val">Elisava Vibe Coding Workshop</div></div>
 </div>
+
 <div class="content">
-  <div class="text-block">
-    <div class="section-label">Overview</div>
-    <div class="body-text"><p><!-- Add your overview text here --></p></div>
+
+   <div style="
+  width:100%;
+  max-width:1800px;
+  margin:80px auto;
+  text-align:center;
+">
+  <img src="../images/safe-hands-laptop-spread-2.jpg"
+       alt="Safe Hands Interface"
+       style="
+         width:100%;
+         height:auto;
+         display:block;
+       ">
+</div>
+
+<!-- OVERVIEW -->
+<div class="text-block" style="width:100%; max-width:1400px; margin:80px auto;">
+  
+  <div class="section-label" style="margin-bottom:20px;">
+    Overview
   </div>
-  <div class="img-full"><img src="../images/safe-hands-1.jpg" alt="SAFE HANDS"></div>
-  <div class="img-caption"><!-- Caption --></div>
-  <div class="split-block">
-    <div class="text-block" style="margin-bottom:0">
-      <div class="section-label">Process</div>
-      <div class="body-text"><p><!-- Process description --></p></div>
+
+  <div class="body-text" style="width:100%; font-size:15px; line-height:1.7;">
+    <p>
+      Safe Hands is a speculative digital legacy platform designed to manage and transfer personal digital assets — photos, voice memos, messages, decision logic, and biometric traces — after death. The project reimagines inheritance not as material wealth, but as data, memory, and relational presence.
+    </p>
+
+    <p>
+      Its purpose is to question who owns our digital selves, and how intimacy, identity, and agency persist within networked systems once the body is absent.
+    </p>
+  </div>
+
+</div>
+
+<!-- TECH STACK DIAGRAM -->
+  <div class="diagram-section">
+    <div class="section-label">Tech Stack </div>
+    <div class="diagram-wrap">
+      <div class="dgm">
+        <div class="dgm-title">
+          <h2>Safe Hands</h2>
+          <p>System Architecture · Vibe Coding Stack</p>
+        </div>
+
+        <div class="dgm-flow">
+
+          <!-- SUPABASE -->
+          <div class="dgm-col">
+            <div class="dgm-layer-tag">Backend</div>
+            <div class="dgm-node solid">
+              <span class="dgm-node-label">Supa-<br>base</span>
+            </div>
+            <div class="dgm-role">Source of Truth</div>
+            <div class="dgm-desc">Auth, PostgreSQL database & real-time listeners</div>
+          </div>
+
+          <!-- ARROW -->
+          <div class="dgm-arrow-h">
+            <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 6h24M18 1l6 5-6 5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </div>
+
+          <!-- LOVEABLE -->
+          <div class="dgm-col">
+            <div class="dgm-layer-tag">Frontend</div>
+            <div class="dgm-node outline">
+              <span class="dgm-node-label">Love-<br>able</span>
+            </div>
+            <div class="dgm-role">Rapid Prototyping</div>
+            <div class="dgm-desc">Vibe-coded initial UI components & layout</div>
+          </div>
+
+          <!-- ARROW -->
+          <div class="dgm-arrow-h">
+            <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 6h24M18 1l6 5-6 5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </div>
+
+          <!-- CURSOR -->
+          <div class="dgm-col">
+            <div class="dgm-layer-tag">IDE / Logic</div>
+            <div class="dgm-node dim">
+              <span class="dgm-node-label">Cursor</span>
+            </div>
+            <div class="dgm-role">AI Code Editor</div>
+            <div class="dgm-desc">Refines Loveable code & manages complex logic</div>
+          </div>
+
+          <!-- ARROW -->
+          <div class="dgm-arrow-h">
+            <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 6h24M18 1l6 5-6 5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </div>
+
+          <!-- GITHUB -->
+          <div class="dgm-col">
+            <div class="dgm-layer-tag">Version Control</div>
+            <div class="dgm-node dim">
+              <span class="dgm-node-label">Git-<br>Hub</span>
+            </div>
+            <div class="dgm-role">The Bridge</div>
+            <div class="dgm-desc">Stores codebase & triggers deployment builds</div>
+          </div>
+
+          <!-- ARROW -->
+          <div class="dgm-arrow-h">
+            <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 6h24M18 1l6 5-6 5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </div>
+
+          <!-- VERCEL -->
+          <div class="dgm-col">
+            <div class="dgm-layer-tag">Deployment</div>
+            <div class="dgm-node outline">
+              <span class="dgm-node-label">Vercel</span>
+            </div>
+            <div class="dgm-role">Hosting Engine</div>
+            <div class="dgm-desc">Production URL & global scaling</div>
+          </div>
+
+          <!-- ARROW -->
+          <div class="dgm-arrow-h">
+            <svg viewBox="0 0 28 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 6h24M18 1l6 5-6 5" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </div>
+
+          <!-- MAKE.COM -->
+          <div class="dgm-col">
+            <div class="dgm-layer-tag">Automation</div>
+            <div class="dgm-node solid">
+              <span class="dgm-node-label">Make<br>.com</span>
+            </div>
+            <div class="dgm-role">Marketing & Ops</div>
+            <div class="dgm-desc">Supabase triggers → email / SMS / social</div>
+          </div>
+
+        </div>
+
+        <!-- SIGNAL FLOW BAR -->
+        <div class="dgm-flow-bar">
+          <div class="dgm-flow-step">Data Layer</div>
+          <div class="dgm-flow-step">UI Build</div>
+          <div class="dgm-flow-step">Logic Layer</div>
+          <div class="dgm-flow-step">Version Control</div>
+          <div class="dgm-flow-step">Deploy</div>
+          <div class="dgm-flow-step">Automate</div>
+        </div>
+
+      </div>
     </div>
-    <div class="split-img"><img src="../images/safe-hands-2.jpg" alt="Process"></div>
   </div>
+
+  <!-- PROCESS -->
+ <div class="text-block" style="width:100%; max-width:1400px; margin:80px auto;">
+  
+  <div class="section-label" style="margin-bottom:20px;">
+    Process
+  </div>
+
+  <div class="body-text" style="width:100%; font-size:15px; line-height:1.7;">
+    <p>I rapidly prototyped the platform through iterative "vibe coding" — building a functional web-based system that simulates secure data vaults and controlled access permissions. Using Loveable for rapid UI scaffolding, Cursor for logic refinement, and Vercel for instant deployment, I moved from concept to working interface in days rather than weeks.</p>
+        <p>Supabase handled authentication and real-time data, while Make.com connected backend triggers to automated communication workflows. Every design decision was a test of how ethical questions translate into technical structures.</p>
+      </div>
+
+  <!-- OUTCOME -->
   <div class="split-block reverse">
     <div class="text-block" style="margin-bottom:0">
       <div class="section-label">Outcome</div>
-      <div class="body-text"><p><!-- Outcome description --></p></div>
+      <div class="body-text">
+        <p>Safe Hands operates as both product proposal and critical design experiment — exploring digital legacy as infrastructure rather than afterthought. The working prototype demonstrates how a platform can hold the weight of human memory: structured, transferable, and controlled by the person who generated it.</p>
+        <p>The project raises a question that technology has so far refused to answer cleanly: what happens to your digital self when you are no longer present to manage it?</p>
+      </div>
     </div>
-    <div class="split-img"><img src="../images/safe-hands-3.jpg" alt="Outcome"></div>
+    <div class="split-img"><img src="../images/safe-hands-phone-1.jpg" alt="Safe Hands outcome"></div>
   </div>
-  <div class="section-label">Documentation</div>
-  <div class="grid-3">
-    <div class="img-box"><img src="../images/safe-hands-4.jpg"></div>
-    <div class="img-box"><img src="../images/safe-hands-5.jpg"></div>
-    <div class="img-box"><img src="../images/safe-hands-6.jpg"></div>
-  </div>
+
+    <!-- FUTURE GOALS -->
+  <div class="split-block reverse">
+    <div class="text-block" style="margin-bottom:0">
+      <div class="section-label">Future Goals</div>
+      <div class="body-text">
+        <p>In the future I plan to progress this project to a level where I can launch it on the app store.</p>
+      </div>
+  
+
+
+
 </div>
+
 <div class="proj-nav">
   <a href="PREV.html" class="proj-nav-item"><div class="proj-nav-dir">← Previous</div><div class="proj-nav-title">Previous Project</div></a>
   <a href="NEXT.html" class="proj-nav-item"><div class="proj-nav-dir">Next →</div><div class="proj-nav-title">Next Project</div></a>
 </div>
-<script>const c=document.getElementById('cursor');document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hover'));el.addEventListener('mouseleave',()=>c.classList.remove('hover'));});</script>
-</body></html>
+
+<script>
+const c=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>c.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>c.classList.remove('hover'));
+});
+</script>
+</body>
+</html>
