@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — ECHO OF MIND</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@1,700&display=swap');
+:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--white);color:var(--black);font-family:'DM Mono',monospace;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--pulse);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--pulse);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid #e0ddd8;background:rgba(255,255,244,.95);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--black);text-decoration:none;}
+.nav-right{display:flex;align-items:center;}
+.nav-right a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(10,10,10,.4);text-decoration:none;padding:16px 20px;transition:color .2s;border-left:1px solid #e0ddd8;}
+.nav-right a:hover{color:var(--pulse);}
+.proj-band{margin-top:52px;background:var(--black);padding:56px 40px 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;}
+.band-num{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-bottom:12px;}
+.band-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,120px);line-height:.88;color:var(--white);}
+.band-right{display:flex;flex-direction:column;gap:16px;justify-content:flex-end;}
+.band-desc{font-size:14px;line-height:1.8;color:rgba(255,255,243,.55);font-style:italic;border-left:2px solid var(--peach);padding-left:16px;}
+.band-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.band-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;}
+.tag-graphic{border:1px solid var(--peach);color:var(--peach);}
+.tag-ai{background:var(--pulse);color:white;}
+.tag-3d{background:var(--volt);color:var(--black);}
+.tag-arch{border:1px solid #444;color:rgba(255,255,243,.4);}
+.meta-row{display:flex;border-bottom:2px solid var(--black);flex-wrap:wrap;}
+.meta-item{padding:20px 32px;border-right:1px solid #d0cdc8;}
+.meta-item:last-child{border-right:none;}
+.meta-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#aaa;margin-bottom:4px;}
+.meta-val{font-size:13px;}
+.editorial{padding:64px 40px;}
+.pullquote{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,72px);line-height:1.05;border-top:3px solid var(--black);border-bottom:1px solid #d0cdc8;padding:32px 0 28px;margin-bottom:56px;max-width:900px;}
+.pullquote span{color:var(--pulse);}
+.spread{width:calc(100% + 80px);margin-left:-40px;aspect-ratio:21/9;background:#e8e5e0;overflow:hidden;margin-bottom:8px;display:flex;align-items:center;justify-content:center;}
+.spread img{width:100%;height:100%;object-fit:cover;}
+.spread-placeholder{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#bbb;}
+.spread-caption{font-size:10px;color:#aaa;font-style:italic;margin-bottom:56px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:56px;align-items:start;}
+.col-img{width:100%;aspect-ratio:3/4;background:#e8e5e0;border:1px solid #d0cdc8;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.col-img img{width:100%;height:100%;object-fit:cover;}
+.col-img.landscape{aspect-ratio:4/3;}
+.col-img-placeholder{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#bbb;}
+.col-text{display:flex;flex-direction:column;gap:24px;}
+.section-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--pulse);display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.section-label::after{content:'';flex:1;height:1px;background:#d0cdc8;max-width:40px;}
+.body-text{font-size:13px;line-height:1.9;color:#444;}
+.body-text p{margin-bottom:14px;}
+
+/* ── DIAGRAM SECTION ── */
+.diagram-section{margin-bottom:56px;}
+.diagram-section .section-label{margin-bottom:24px;}
+.diagram-wrap{
+  border:1px solid #d0cdc8;
+  padding:48px 40px;
+  background:#f7f5f2;
+  overflow:hidden;
+}
+
+/* Diagram internals */
+.dgm{
+  font-family:'DM Mono',monospace;
+  position:relative;
+  max-width:620px;
+  margin:0 auto;
+}
+.dgm-title{text-align:center;margin-bottom:40px;}
+.dgm-title h2{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:#111;}
+.dgm-title p{font-size:.48rem;letter-spacing:.35em;text-transform:uppercase;color:#999;margin-top:4px;}
+
+/* Spine */
+.dgm-spine{position:absolute;left:50%;top:80px;bottom:0;width:1px;background:#ccc;transform:translateX(-50%);}
+
+/* Row */
+.dgm-row{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;margin:0;}
+
+/* Divider */
+.dgm-divider{
+  width:100%;height:1px;background:#ccc;
+  margin:6px 0;position:relative;z-index:1;
+}
+.dgm-divider-label{
+  position:absolute;left:0;top:-10px;
+  font-size:.44rem;letter-spacing:.35em;text-transform:uppercase;
+  color:#e05a2b;font-weight:700;
+}
+.dgm-divider-num{
+  position:absolute;right:0;top:-10px;
+  font-size:.44rem;letter-spacing:.3em;color:#bbb;
+}
+
+/* Node */
+.dgm-node{
+  border-radius:50%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  position:relative;z-index:2;margin:12px 0;
+}
+.dgm-node.solid{background:#111;color:#fff;}
+.dgm-node.outline{background:transparent;border:1.5px solid #111;color:#111;}
+.dgm-node.accent{background:#e05a2b;color:#fff;}
+.dgm-node-lg{width:100px;height:100px;}
+.dgm-node-md{width:88px;height:88px;}
+.dgm-node-sm{width:76px;height:76px;}
+.dgm-node-label{font-family:'Playfair Display',serif;font-size:.68rem;font-weight:700;line-height:1.2;font-style:normal;}
+.dgm-node-sub{font-size:.38rem;letter-spacing:.12em;text-transform:uppercase;margin-top:2px;opacity:.65;}
+
+/* Branches */
+.dgm-branches{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;width:100%;}
+.dgm-branch-l,.dgm-branch-r{position:absolute;display:flex;flex-direction:column;gap:7px;}
+.dgm-branch-l{right:calc(50% + 52px);align-items:flex-end;}
+.dgm-branch-r{left:calc(50% + 52px);align-items:flex-start;}
+.dgm-branch-item{display:flex;align-items:center;gap:6px;font-size:.46rem;color:#333;line-height:1.3;}
+.dgm-branch-l .dgm-branch-item{flex-direction:row-reverse;}
+.dgm-branch-line{width:32px;height:1px;background:#aaa;flex-shrink:0;}
+.dgm-branch-dot{width:4px;height:4px;border-radius:50%;background:#e05a2b;flex-shrink:0;}
+
+/* Connector */
+.dgm-connector{display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;margin:2px 0;}
+.dgm-connector-line{width:1px;background:#ccc;}
+.dgm-arrow{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid #ccc;}
+.dgm-flow-tag{font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:#999;background:#f7f5f2;padding:0 8px;position:absolute;top:50%;transform:translateY(-50%);white-space:nowrap;}
+
+/* Funnel ovals */
+.dgm-funnel{display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px 0;position:relative;z-index:2;}
+.dgm-oval{border:1.5px solid #e05a2b;border-radius:50px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.46rem;letter-spacing:.06em;color:#111;padding:8px 14px;}
+.dgm-oval.dashed{border-style:dashed;color:#555;}
+
+/* Output */
+.dgm-output{border:2px solid #111;border-radius:50px;padding:10px 32px;font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;color:#111;background:#f7f5f2;position:relative;z-index:2;margin-top:6px;}
+
+/* ── IMAGE STRIP ── */
+.img-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:8px;scrollbar-width:none;}
+.img-strip::-webkit-scrollbar{display:none;}
+.strip-img{flex:0 0 320px;height:240px;background:#e8e5e0;border:1px solid #d0cdc8;overflow:hidden;}
+.strip-img img{width:100%;height:100%;object-fit:cover;}
+.strip-caption{font-size:10px;color:#aaa;font-style:italic;margin-bottom:56px;}
+
+/* ── PROJECT NAV ── */
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--black);}
+.proj-nav-item{padding:32px 40px;text-decoration:none;color:var(--black);transition:background .15s;display:flex;flex-direction:column;gap:6px;}
+.proj-nav-item:hover{background:#f0ede8;}
+.proj-nav-item:first-child{border-right:1px solid #d0cdc8;}
+.proj-nav-dir{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#aaa;}
+.proj-nav-title{font-family:'Bebas Neue',sans-serif;font-size:24px;}
+.proj-nav-item:last-child{text-align:right;}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- HEADER BAND -->
+<div class="proj-band">
+  <div>
+    <div class="band-num">01 / Speculative Design</div>
+    <div class="band-title">ECHO OF<br>MIND</div>
+  </div>
+  <div class="band-right">
+    <div class="band-desc">A voice-driven dream interpretation system — speak your dream, receive its visual echo. A live psychoanalytic pattern generated in real time and archived in a collective record of human subconscious states.</div>
+    <div class="band-tags">
+      <span class="band-tag tag-ai">AI / Generative</span>
+      <span class="band-tag tag-arch">Speculative Design</span>
+      <span class="band-tag tag-3d">Physical Computing</span>
+    </div>
+  </div>
+</div>
+
+<!-- META ROW -->
+<div class="meta-row">
+  <div class="meta-item"><div class="meta-label">Year</div><div class="meta-val">2026</div></div>
+  <div class="meta-item"><div class="meta-label">Hardware</div><div class="meta-val">Raspberry Pi 5</div></div>
+  <div class="meta-item"><div class="meta-label">AI Models</div><div class="meta-val">Whisper, GPT, FLUX.1</div></div>
+  <div class="meta-item"><div class="meta-label">Stack</div><div class="meta-val">Flask, Docker, GitHub Pages</div></div>
+  <div class="meta-item"><div class="meta-label">Context</div><div class="meta-val">Speculative Design Studio</div></div>
+</div>
+
+<!-- EDITORIAL -->
+<div class="editorial">
+
+  <!-- PULLQUOTE -->
+  <div class="pullquote">"What if your <span>subconscious</span> could be seen by strangers?"</div>
+
+<!-- TWO COL — Context + Process -->
+<div class="two-col">
+  <div class="col-img">
+    <img src="images/echo-of-mind-1.jpg" alt="Echo of Mind project image">
+  </div>
+  <div class="col-text">
+    <div>
+        <div class="section-label">Context</div>
+        <div class="body-text">
+          <p>Echo of Mind began with a question about radical vulnerability — what happens when we make our most private mental states publicly visible? Dreams occupy a unique position: they are deeply intimate, impossible to fake, and entirely beyond our conscious control.</p>
+          <p>The project explores whether technology can act as a bridge between interior experience and collective understanding — not through language, but through abstract visual form.</p>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Process</div>
+        <div class="body-text">
+          <p>A person presses the blue button and speaks their dream into a microphone. OpenAI Whisper transcribes the voice recording into text, which is passed to a custom DreamWeaver GPT Agent. The agent interprets the dream across three psychoanalytic dimensions — figurative, environmental, and emotional — and outputs a structured Dream Signature as JSON.</p>
+          <p>This signature becomes a visual prompt sent to FLUX.1-schnell via Hugging Face, generating a unique painterly image. The image is post-processed at 800×480 with grain and vignette, displayed on the Pi screen, and simultaneously pushed to a public GitHub archive.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWO COL — Outcome -->
+  <div class="two-col">
+    <div class="col-text">
+      <div>
+        <div class="section-label">Outcome</div>
+        <div class="body-text">
+          <p>The Collective Archive — a live website hosted on GitHub Pages — fills up over time as more people use the device. Each grid square represents one person's subconscious state. The archive persists and grows, connecting strangers through their interior lives in a way that language cannot.</p>
+          <p>The system runs entirely on a Raspberry Pi 5 inside Docker, exposed publicly via a Cloudflare Tunnel. The website polls GitHub every 10 seconds and automatically places each new generated image into the next empty square on the grid.</p>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Signal Flow</div>
+        <div class="body-text">
+          <p>Voice → Whisper → Transcription → DreamWeaver GPT → Dream Signature JSON → Visual Prompt → FLUX.1-schnell → Painterly Image → 800×480 Post-Processing → Pi Display + Local DB + GitHub Push → Archive Website</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-img landscape">
+      <span class="col-img-placeholder">Add image</span>
+    </div>
+  </div>
+
+  <!-- SYSTEM DIAGRAM -->
+  <div class="diagram-section">
+    <div class="section-label">System Architecture</div>
+    <div class="diagram-wrap">
+      <div class="dgm">
+        <div class="dgm-spine"></div>
+
+        <div class="dgm-title">
+          <h2>Echo of Mind</h2>
+          <p>System Architecture · Signal Flow</p>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="dgm-divider"><span class="dgm-divider-label">Input</span><span class="dgm-divider-num">01</span></div>
+        <div class="dgm-row" style="margin-top:16px;">
+          <div class="dgm-node solid dgm-node-lg">
+            <span class="dgm-node-label">Raspberry<br>Pi 5</span>
+            <span class="dgm-node-sub">Hardware</span>
+          </div>
+        </div>
+        <div class="dgm-branches" style="height:90px;">
+          <div class="dgm-branch-l">
+            <div class="dgm-branch-item"><span>USB Microphone</span><div class="dgm-branch-line"></div><div class="dgm-branch-dot"></div></div>
+            <div class="dgm-branch-item"><span>Blue Button (GPIO 17)</span><div class="dgm-branch-line"></div><div class="dgm-branch-dot"></div></div>
+            <div class="dgm-branch-item"><span>Red Button (GPIO 27)</span><div class="dgm-branch-line"></div><div class="dgm-branch-dot"></div></div>
+          </div>
+          <div class="dgm-branch-r">
+            <div class="dgm-branch-item"><div class="dgm-branch-dot"></div><div class="dgm-branch-line"></div><span>5" HDMI Display</span></div>
+            <div class="dgm-branch-item"><div class="dgm-branch-dot"></div><div class="dgm-branch-line"></div><span>LED (GPIO 22)</span></div>
+            <div class="dgm-branch-item"><div class="dgm-branch-dot"></div><div class="dgm-branch-line"></div><span>Docker + Flask</span></div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="dgm-divider"><span class="dgm-divider-label">AI Pipeline</span><span class="dgm-divider-num">02</span></div>
+        <div class="dgm-connector" style="margin-top:14px;">
+          <div class="dgm-connector-line" style="height:28px;"></div>
+          <span class="dgm-flow-tag">/ Voice Input /</span>
+        </div>
+        <div class="dgm-row">
+          <div class="dgm-node outline dgm-node-md">
+            <span class="dgm-node-label">Whisper</span>
+            <span class="dgm-node-sub">OpenAI</span>
+          </div>
+        </div>
+        <div class="dgm-branches" style="height:36px;">
+          <div class="dgm-branch-r" style="top:50%;transform:translateY(-50%);">
+            <div class="dgm-branch-item"><div class="dgm-branch-dot"></div><div class="dgm-branch-line"></div><span>Speech → Text</span></div>
+          </div>
+        </div>
+        <div class="dgm-connector">
+          <div class="dgm-connector-line" style="height:20px;"></div>
+        </div>
+        <div class="dgm-row">
+          <div class="dgm-node outline dgm-node-lg" style="width:108px;height:108px;">
+            <span class="dgm-node-label" style="font-size:.62rem;">DreamWeaver<br>GPT Agent</span>
+            <span class="dgm-node-sub">Interpreter</span>
+          </div>
+        </div>
+        <div class="dgm-branches" style="height:72px;">
+          <div class="dgm-branch-l" style="top:50%;transform:translateY(-50%);">
+            <div class="dgm-branch-item"><span>Figurative</span><div class="dgm-branch-line"></div><div class="dgm-branch-dot"></div></div>
+            <div class="dgm-branch-item"><span>Environment</span><div class="dgm-branch-line"></div><div class="dgm-branch-dot"></div></div>
+          </div>
+          <div class="dgm-branch-r" style="top:50%;transform:translateY(-50%);">
+            <div class="dgm-branch-item"><div class="dgm-branch-dot"></div><div class="dgm-branch-line"></div><span>Emotional</span></div>
+            <div class="dgm-branch-item"><div class="dgm-branch-dot"></div><div class="dgm-branch-line"></div><span>Dream Signature JSON</span></div>
+          </div>
+        </div>
+        <div class="dgm-connector">
+          <div class="dgm-connector-line" style="height:20px;"></div>
+          <span class="dgm-flow-tag">/ Visual Prompt /</span>
+        </div>
+        <div class="dgm-row">
+          <div class="dgm-node accent dgm-node-lg" style="width:108px;height:108px;">
+            <span class="dgm-node-label" style="font-size:.6rem;">FLUX.1-schnell</span>
+            <span class="dgm-node-sub">Hugging Face</span>
+          </div>
+        </div>
+        <div class="dgm-branches" style="height:50px;">
+          <div class="dgm-branch-l" style="top:50%;transform:translateY(-50%);">
+            <div class="dgm-branch-item"><span>Grain + Vignette</span><div class="dgm-branch-line"></div><div class="dgm-branch-dot"></div></div>
+          </div>
+          <div class="dgm-branch-r" style="top:50%;transform:translateY(-50%);">
+            <div class="dgm-branch-item"><div class="dgm-branch-dot"></div><div class="dgm-branch-line"></div><span>Painterly 800×480px</span></div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="dgm-divider" style="margin-top:8px;"><span class="dgm-divider-label">Output</span><span class="dgm-divider-num">03</span></div>
+        <div class="dgm-funnel" style="margin-top:16px;">
+          <div class="dgm-oval" style="width:260px;">Pi Display — Live Pattern</div>
+          <div class="dgm-oval dashed" style="width:222px;">SQLite Local Database</div>
+          <div class="dgm-oval dashed" style="width:184px;">GitHub Push</div>
+          <div class="dgm-oval dashed" style="width:150px;">Cloudflare Tunnel</div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="dgm-divider" style="margin-top:16px;"><span class="dgm-divider-label">Archive</span><span class="dgm-divider-num">04</span></div>
+        <div class="dgm-connector" style="margin-top:14px;">
+          <div class="dgm-connector-line" style="height:24px;"></div>
+          <div class="dgm-arrow"></div>
+        </div>
+        <div class="dgm-row" style="margin-top:8px;">
+          <div class="dgm-output">Collective Archive</div>
+        </div>
+        <div class="dgm-branches" style="height:60px;margin-top:4px;">
+          <div class="dgm-branch-l" style="top:50%;transform:translateY(-50%);">
+            <div class="dgm-branch-item"><span>GitHub Pages</span><div class="dgm-branch-line"></div><div class="dgm-branch-dot"></div></div>
+          </div>
+          <div class="dgm-branch-r" style="top:50%;transform:translateY(-50%);">
+            <div class="dgm-branch-item"><div class="dgm-branch-dot"></div><div class="dgm-branch-line"></div><span>GitHub API (10s poll)</span></div>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:16px;position:relative;z-index:2;">
+          <div style="font-size:.4rem;letter-spacing:.35em;text-transform:uppercase;color:#e05a2b;">/ Human Connection Through a Subconscious State /</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE STRIP -->
+  <div class="section-label">Documentation</div>
+  <div class="img-strip">
+    <div class="strip-img"><img src="../images/echo-1.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-2.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-3.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-4.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-5.jpg" alt="Echo of Mind"></div>
+  </div>
+  <div class="strip-caption">Scroll to see more →</div>
+
+</div>
+
+<!-- PROJECT NAV -->
+<div class="proj-nav">
+  <a href="PREV.html" class="proj-nav-item"><div class="proj-nav-dir">← Previous</div><div class="proj-nav-title">Previous Project</div></a>
+  <a href="NEXT.html" class="proj-nav-item"><div class="proj-nav-dir">Next →</div><div class="proj-nav-title">Next Project</div></a>
+</div>
+
+<script>
+const c=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>c.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>c.classList.remove('hover'));
+});
+</script>
+</body>
+</html>
