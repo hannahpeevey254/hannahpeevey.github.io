@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hannah Peevey — AURA</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@1,700&display=swap');
 :root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace;cursor:none;}
@@ -20,7 +20,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero-content{position:relative;z-index:1;max-width:900px;}
 .hero-meta{display:flex;gap:12px;margin-bottom:20px;}
 .hero-tag{font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;}
-.tag-ai{background:var(--pulse);color:white;}.tag-arch{border:1px solid #333;color:rgba(255,255,243,.4);}.tag-graphic{border:1px solid var(--peach);color:var(--peach);}.tag-3d{background:var(--volt);color:var(--black);}
+.tag-ai{background:var(--pulse);color:white;}
+.tag-arch{border:1px solid #333;color:rgba(255,255,243,.4);}
+.tag-graphic{border:1px solid var(--peach);color:var(--peach);}
+.tag-3d{background:var(--volt);color:var(--black);}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);line-height:.88;letter-spacing:-.01em;}
 .hero-subtitle{font-size:14px;color:rgba(255,255,243,.5);margin-top:16px;font-style:italic;max-width:560px;line-height:1.7;}
 .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
@@ -30,7 +33,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .stat-val{font-size:14px;}
 .content{max-width:1100px;margin:0 auto;padding:80px 40px;}
 .text-block{max-width:680px;margin-bottom:72px;}
-.section-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--peach);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.section-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--peach);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px;}
 .body-text{font-size:15px;line-height:1.9;color:rgba(255,255,243,.65);}
 .body-text p{margin-bottom:16px;}
@@ -44,6 +47,98 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:56px;}
 .grid-3 .img-box{aspect-ratio:1;background:#111;border:1px solid var(--border);overflow:hidden;}
 .grid-3 .img-box img{width:100%;height:100%;object-fit:cover;}
+
+/* ── DIAGRAM ── */
+.diagram-section{margin-bottom:72px;}
+.diagram-wrap{
+  border:1px solid var(--border);
+  background:#0d0d0d;
+  padding:56px 40px 48px;
+}
+.dgm{
+  font-family:'DM Mono',monospace;
+  position:relative;
+  max-width:700px;
+  margin:0 auto;
+}
+.dgm-header{text-align:center;margin-bottom:52px;}
+.dgm-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--white);}
+.dgm-header p{font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,243,.2);margin-top:5px;}
+
+/* ── SVG TRACK ── */
+.dgm-track{width:100%;overflow:visible;display:block;}
+
+/* Node circles */
+.dgm-node-circle{
+  fill:none;stroke:rgba(255,255,243,.15);stroke-width:1;
+}
+.dgm-node-circle.active{fill:var(--peach);stroke:none;}
+.dgm-node-circle.pulse-col{fill:var(--pulse);stroke:none;}
+.dgm-node-circle.volt-col{fill:var(--volt);stroke:none;}
+.dgm-node-circle.dim{fill:#1a1a1a;stroke:rgba(255,255,243,.2);stroke-width:1;}
+
+/* Node number */
+.dgm-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;
+  fill:var(--black);
+  text-anchor:middle;
+  dominant-baseline:middle;
+}
+.dgm-num.light{fill:var(--white);}
+
+/* Step title */
+.dgm-step-title{
+  font-family:'DM Mono',monospace;
+  font-size:7.5px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  fill:var(--white);
+}
+
+/* Step body */
+.dgm-step-body{
+  font-family:'DM Mono',monospace;
+  font-size:6.5px;
+  fill:rgba(255,255,243,.4);
+  line-height:1.6;
+}
+
+/* Track path */
+.dgm-path{
+  fill:none;
+  stroke:rgba(255,255,243,.1);
+  stroke-width:1.5;
+  stroke-dasharray:4 4;
+}
+.dgm-path.solid{
+  stroke:rgba(255,255,243,.18);
+  stroke-dasharray:none;
+}
+
+/* Arrow marker */
+.arrow-head{fill:var(--peach);}
+
+/* Bottom tag */
+.dgm-bottom-tag{
+  text-align:center;
+  margin-top:32px;
+  font-size:.4rem;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:rgba(255,255,243,.2);
+}
+.dgm-bottom-tag span{color:var(--peach);}
+
+/* Wiring section */
+.wiring-wrap{
+  border:1px solid var(--border);
+  background:#0d0d0d;
+  padding:40px;
+  margin-bottom:72px;
+}
+.wiring-wrap img{width:100%;height:auto;display:block;opacity:.9;}
+
 .proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);}
 .proj-nav-item{padding:32px 40px;text-decoration:none;color:var(--white);transition:background .2s;display:flex;flex-direction:column;gap:6px;}
 .proj-nav-item:hover{background:#111;}
@@ -55,6 +150,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
+
 <nav>
   <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
   <div class="nav-right">
@@ -63,6 +159,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <a href="../contact.html">Contact</a>
   </div>
 </nav>
+
 <div class="hero">
   <div class="hero-content">
     <div class="hero-meta"><span class="hero-tag tag-ai">AI / Wearable</span></div>
@@ -70,43 +167,184 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="hero-subtitle">Wearable earpiece that externalises heartbeat as rhythmic light</div>
   </div>
 </div>
+
 <div class="stats-bar">
   <div class="stat"><div class="stat-label">Year</div><div class="stat-val">2025</div></div>
   <div class="stat"><div class="stat-label">Medium</div><div class="stat-val">Physical Computing</div></div>
-  <div class="stat"><div class="stat-label">Tools</div><div class="stat-val">Arduino, LED, Pulse Sensor</div></div>
+  <div class="stat"><div class="stat-label">Tools</div><div class="stat-val">Raspberry Pi Pico, NeoPixel, Pulse Sensor</div></div>
   <div class="stat"><div class="stat-label">Context</div><div class="stat-val">Cognitive Orgies — MDEF</div></div>
 </div>
+
 <div class="content">
-  <div class="text-block">
-    <div class="section-label">Overview</div>
-    <div class="body-text"><p><!-- Add your overview text here --></p></div>
+
+  <div style="max-width: 100%; margin-bottom: 72px;">
+  <div class="section-label">Overview</div>
+  <div class="body-text">
+    <p>Aura is a wearable, organ-like earpiece that senses the wearer's pulse and translates biometric data into light. The heartbeat is captured through a pulse sensor, interpreted by a Raspberry Pi Pico W, and expressed as a rhythmic NeoPixel pattern — rendering bodily rhythm as atmosphere rather than data on a screen. The electronics are embedded in biotic skin made from bacterial cellulose, situating the device between organism and artefact.</p>
   </div>
-  <div class="img-full"><img src="../images/aura-1.jpg" alt="AURA"></div>
-  <div class="img-caption"><!-- Caption --></div>
+</div>
+
+  <div class="img-full" style="aspect-ratio: 3/1;">
+  <img src="../images/aura-3-horizontal-photo.jpeg" alt="AURA">
+</div>
+<div class="img-caption">Aura components — bacterial cellulose casing, NeoPixel ring, mirror system · 2025</div>
+
+
   <div class="split-block">
     <div class="text-block" style="margin-bottom:0">
       <div class="section-label">Process</div>
-      <div class="body-text"><p><!-- Process description --></p></div>
+      <div class="body-text"><p>The project began by asking how internal physiological processes could be externalised in a way that feels relational rather than extractive. Working across macrobiotic therapy, biometric AI, and speculative domestic infrastructure — we prototyped a pulse-sensing circuit using a Raspberry Pi Pico W, ADC pulse sensor, and an 18-LED NeoPixel strip powered by a 6V battery. The hardware was programmed in MicroPython to map real-time BPM directly to light rhythm and intensity. The biotic casing was grown from bacterial cellulose — introducing time, care, and fragility into the material system.</p></div>
     </div>
-    <div class="split-img"><img src="../images/aura-2.jpg" alt="Process"></div>
+    <div class="split-img" style="aspect-ratio: 3/4; max-width: 70%;">
+  <img src="../images/aura-2-best-iamge.jpeg" alt="Process">
+</div>
   </div>
+
   <div class="split-block reverse">
     <div class="text-block" style="margin-bottom:0">
       <div class="section-label">Outcome</div>
-      <div class="body-text"><p><!-- Outcome description --></p></div>
+      <div class="body-text"><p>Aura proposes an alternative vision of domestic infrastructure: not centralized, invisible, or automated — but intimate, responsive, and grounded in biological rhythm. The device functions as a soft symbiotic organ, neither fully internal nor external, that extends the body into its surroundings through light. The project brings together physical computing, biotic materials, and speculative design into a single artefact exploring how future systems of care might operate through attunement rather than control.</p></div>
     </div>
-    <div class="split-img"><img src="../images/aura-3.jpg" alt="Outcome"></div>
+    <div class="split-img"><img src="../images/aura-5.jpeg" alt="Outcome"></div>
   </div>
+
+  <!-- ── SIGNAL FLOW DIAGRAM ── -->
+  <div class="diagram-section">
+    <div class="section-label">Signal Flow</div>
+    <div class="diagram-wrap">
+      <div class="dgm">
+        <div class="dgm-header">
+          <h2>Aura</h2>
+          <p>Signal Flow · Hardware Architecture</p>
+        </div>
+
+        <!-- SVG DIAGRAM — snake/timeline hybrid -->
+        <svg class="dgm-track" viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" class="arrow-head"/>
+            </marker>
+          </defs>
+
+          <!-- ── ROW 1 track: left to right ── -->
+          <!-- path from node 01 → 02 → 03 -->
+          <path class="dgm-path solid" d="M 100,80 L 310,80" marker-end="url(#arr)"/>
+          <path class="dgm-path solid" d="M 350,80 L 560,80" marker-end="url(#arr)"/>
+          <!-- curve down right side -->
+          <path class="dgm-path solid" d="M 600,80 Q 660,80 660,140 L 660,240 Q 660,300 600,300"/>
+
+          <!-- ── ROW 2 track: right to left ── -->
+          <path class="dgm-path solid" d="M 560,300 L 350,300" marker-end="url(#arr)"/>
+          <path class="dgm-path solid" d="M 310,300 L 100,300" marker-end="url(#arr)"/>
+          <!-- curve down left side -->
+          <path class="dgm-path solid" d="M 60,300 Q 0,300 0,360 L 0,420 Q 0,460 60,460"/>
+
+          <!-- ── ROW 3: final node centred ── -->
+          <path class="dgm-path solid" d="M 100,460 L 310,460" marker-end="url(#arr)"/>
+
+          <!-- ════ NODE 01 — Heart ════ -->
+          <circle cx="60" cy="80" r="36" class="dgm-node-circle pulse-col"/>
+          <text x="60" y="74" class="dgm-num">01</text>
+          <text x="60" y="86" class="dgm-num" style="font-size:9px;">♥</text>
+
+          <text x="104" y="66" class="dgm-step-title">Your Heart</text>
+          <text x="104" y="78" class="dgm-step-body">Produces a pulse.</text>
+          <text x="104" y="90" class="dgm-step-body">Biological electrical</text>
+          <text x="104" y="100" class="dgm-step-body">signal generated.</text>
+
+          <!-- ════ NODE 02 — Pulse Sensor ════ -->
+          <circle cx="330" cy="80" r="36" class="dgm-node-circle active"/>
+          <text x="330" y="76" class="dgm-num">02</text>
+
+          <text x="374" y="58" class="dgm-step-title">Pulse Sensor</text>
+          <text x="374" y="70" class="dgm-step-body">Converts BPM into</text>
+          <text x="374" y="81" class="dgm-step-body">an electrical signal.</text>
+          <text x="374" y="92" class="dgm-step-body">Connected to ADC (GP26).</text>
+
+          <!-- ════ NODE 03 — Pico Reads ════ -->
+          <circle cx="580" cy="80" r="36" class="dgm-node-circle dim"/>
+          <text x="580" y="76" class="dgm-num light">03</text>
+
+          <text x="460" y="130" class="dgm-step-title">Raspberry Pi Pico W</text>
+          <text x="460" y="142" class="dgm-step-body">Reads &amp; interprets</text>
+          <text x="460" y="153" class="dgm-step-body">the analogue signal.</text>
+          <text x="460" y="164" class="dgm-step-body">Runs MicroPython logic.</text>
+
+          <!-- ════ NODE 04 — Pico Controls ════ -->
+          <circle cx="580" cy="300" r="36" class="dgm-node-circle dim"/>
+          <text x="580" y="296" class="dgm-num light">04</text>
+
+          <text x="460" y="248" class="dgm-step-title">Pico Controls LEDs</text>
+          <text x="460" y="260" class="dgm-step-body">Maps BPM data to</text>
+          <text x="460" y="271" class="dgm-step-body">NeoPixel brightness</text>
+          <text x="460" y="282" class="dgm-step-body">&amp; pulse timing.</text>
+
+          <!-- ════ NODE 05 — NeoPixel Strip ════ -->
+          <circle cx="330" cy="300" r="36" class="dgm-node-circle active"/>
+          <text x="330" y="296" class="dgm-num">05</text>
+
+          <text x="104" y="258" class="dgm-step-title">NeoPixel 18 LEDs</text>
+          <text x="104" y="270" class="dgm-step-body">Receives data via GPIO</text>
+          <text x="104" y="281" class="dgm-step-body">(GP14 / DIN pin).</text>
+          <text x="104" y="292" class="dgm-step-body">Powered by 6V battery.</text>
+
+          <!-- ════ NODE 06 — LEDs Pulse ════ -->
+          <circle cx="60" cy="300" r="36" class="dgm-node-circle volt-col"/>
+          <text x="60" y="296" class="dgm-num">06</text>
+
+          <text x="24" y="348" class="dgm-step-title" style="fill:var(--volt);">LEDs Pulse</text>
+          <text x="24" y="360" class="dgm-step-body">Respond to heart</text>
+          <text x="24" y="371" class="dgm-step-body">activity in real time.</text>
+
+          <!-- ════ NODE 07 — Projection ════ -->
+          <circle cx="60" cy="460" r="36" class="dgm-node-circle pulse-col"/>
+          <text x="60" y="456" class="dgm-num">07</text>
+
+          <text x="104" y="442" class="dgm-step-title">Light + Mirror System</text>
+          <text x="104" y="454" class="dgm-step-body">LED pulse projected</text>
+          <text x="104" y="465" class="dgm-step-body">onto wall — heartbeat</text>
+          <text x="104" y="476" class="dgm-step-body">made visible &amp; shared.</text>
+
+          <!-- Step labels on nodes -->
+          <text x="60" y="126" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Heart</text>
+          <text x="330" y="126" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Sensor</text>
+          <text x="580" y="126" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Process</text>
+          <text x="580" y="346" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Control</text>
+          <text x="330" y="346" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Output</text>
+          <text x="60" y="346" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Light</text>
+          <text x="60" y="506" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Project</text>
+
+        </svg>
+
+        <div class="dgm-bottom-tag">/ Heart → Sensor → Pico → NeoPixel → <span>Light</span> → Wall /</div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- DOCUMENTATION -->
   <div class="section-label">Documentation</div>
   <div class="grid-3">
-    <div class="img-box"><img src="../images/aura-4.jpg"></div>
-    <div class="img-box"><img src="../images/aura-5.jpg"></div>
-    <div class="img-box"><img src="../images/aura-6.jpg"></div>
+    <div class="img-box"><img src="../images/aura-4-earpeice.jpeg"></div>
+    <div class="img-box"><img src="../images/aura-6.jpeg"></div>
+    <div class="img-box"><img src="../images/aura-1-vertical.jpeg"></div>
   </div>
+
 </div>
+
 <div class="proj-nav">
   <a href="PREV.html" class="proj-nav-item"><div class="proj-nav-dir">← Previous</div><div class="proj-nav-title">Previous Project</div></a>
   <a href="NEXT.html" class="proj-nav-item"><div class="proj-nav-dir">Next →</div><div class="proj-nav-title">Next Project</div></a>
 </div>
-<script>const c=document.getElementById('cursor');document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hover'));el.addEventListener('mouseleave',()=>c.classList.remove('hover'));});</script>
-</body></html>
+
+<script>
+const c=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>c.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>c.classList.remove('hover'));
+});
+</script>
+</body>
+</html>
