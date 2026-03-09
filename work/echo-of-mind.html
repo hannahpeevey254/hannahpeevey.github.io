@@ -38,16 +38,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .spread img{width:100%;height:100%;object-fit:cover;}
 .spread-placeholder{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#bbb;}
 .spread-caption{font-size:10px;color:#aaa;font-style:italic;margin-bottom:56px;}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:56px;align-items:start;}
+.two-col{display:grid;grid-template-columns:1fr 2fr;gap:48px;margin-bottom:56px;align-items:start;}
 .col-img{width:100%;aspect-ratio:3/4;background:#e8e5e0;border:1px solid #d0cdc8;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .col-img img{width:100%;height:100%;object-fit:cover;}
 .col-img.landscape{aspect-ratio:4/3;}
 .col-img-placeholder{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#bbb;}
 .col-text{display:flex;flex-direction:column;gap:24px;}
-.section-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--pulse);display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.section-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--pulse);display:flex;align-items:center;gap:12px;margin-bottom:8px;}
 .section-label::after{content:'';flex:1;height:1px;background:#d0cdc8;max-width:40px;}
 .body-text{font-size:13px;line-height:1.9;color:#444;}
 .body-text p{margin-bottom:14px;}
+.outcome-col { grid-template-columns: 2fr 1fr; }
 
 /* ── DIAGRAM SECTION ── */
 .diagram-section{margin-bottom:56px;}
@@ -190,37 +191,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   <!-- PULLQUOTE -->
   <div class="pullquote">"What if your <span>subconscious</span> could be seen by strangers?"</div>
 
-  <!-- HERO SPREAD (placeholder) -->
-  <div class="spread">
-    <span class="spread-placeholder">Hero image — add echo-of-mind-spread.jpg</span>
-  </div>
-  <div class="spread-caption">Echo of Mind installation — Raspberry Pi 5, 5" display, voice interface · 2026</div>
 
-  <!-- TWO COL — Context + Process -->
-  <div class="two-col">
-    <div class="col-img">
-      <span class="col-img-placeholder">Add image</span>
-    </div>
-    <div class="col-text">
-      <div>
-        <div class="section-label">Context</div>
-        <div class="body-text">
-          <p>Echo of Mind began with a question about radical vulnerability — what happens when we make our most private mental states publicly visible? Dreams occupy a unique position: they are deeply intimate, impossible to fake, and entirely beyond our conscious control.</p>
-          <p>The project explores whether technology can act as a bridge between interior experience and collective understanding — not through language, but through abstract visual form.</p>
-        </div>
+<!-- TWO COL — Context + Process -->
+<div class="two-col">
+  <div class="col-img">
+    <img src="../images/echo-of-mind-1.jpg" alt="Echo of Mind">
+  </div>
+  <div class="col-text">
+    <div>
+      <div class="section-label">Context</div>
+      <div class="body-text">
+        <p>Echo of Mind began with a question about radical vulnerability — what happens when we make our most private mental states publicly visible? Dreams occupy a unique position: they are deeply intimate, impossible to fake, and entirely beyond our conscious control.</p>
+        <p>The project explores whether technology can act as a bridge between interior experience and collective understanding — not through language, but through abstract visual form.</p>
       </div>
-      <div>
-        <div class="section-label">Process</div>
-        <div class="body-text">
-          <p>A person presses the blue button and speaks their dream into a microphone. OpenAI Whisper transcribes the voice recording into text, which is passed to a custom DreamWeaver GPT Agent. The agent interprets the dream across three psychoanalytic dimensions — figurative, environmental, and emotional — and outputs a structured Dream Signature as JSON.</p>
-          <p>This signature becomes a visual prompt sent to FLUX.1-schnell via Hugging Face, generating a unique painterly image. The image is post-processed at 800×480 with grain and vignette, displayed on the Pi screen, and simultaneously pushed to a public GitHub archive.</p>
-        </div>
+    </div>
+    <div>
+      <div class="section-label">Process</div>
+      <div class="body-text">
+        <p>A person presses the blue button and speaks their dream into a microphone. OpenAI Whisper transcribes the voice recording into text, which is passed to a custom DreamWeaver GPT Agent. The agent interprets the dream across three psychoanalytic dimensions — figurative, environmental, and emotional — and outputs a structured Dream Signature as JSON.</p>
+        <p>This signature becomes a visual prompt sent to FLUX.1-schnell via Hugging Face, generating a unique painterly image. The image is post-processed at 800×480 with grain and vignette, displayed on the Pi screen, and simultaneously pushed to a public GitHub archive.</p>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- TWO COL — Outcome -->
-  <div class="two-col">
+
+
+<!-- TWO COL — Outcome -->
+<div class="two-col outcome-col">
     <div class="col-text">
       <div>
         <div class="section-label">Outcome</div>
@@ -236,10 +234,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         </div>
       </div>
     </div>
-    <div class="col-img landscape">
-      <span class="col-img-placeholder">Add image</span>
-    </div>
-  </div>
+    <div class="col-img" style="aspect-ratio: 1/1;">
+  <img src="../images/echo-of-mind-12.jpg" alt="Echo of Mind">
+</div>
+  </div> 
 
   <!-- SYSTEM DIAGRAM -->
   <div class="diagram-section">
@@ -364,15 +362,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 
   <!-- IMAGE STRIP -->
-  <div class="section-label">Documentation</div>
+  <div class="section-label">Documented Dreams</div>
   <div class="img-strip">
-    <div class="strip-img"><img src="../images/echo-1.jpg" alt="Echo of Mind"></div>
-    <div class="strip-img"><img src="../images/echo-2.jpg" alt="Echo of Mind"></div>
-    <div class="strip-img"><img src="../images/echo-3.jpg" alt="Echo of Mind"></div>
-    <div class="strip-img"><img src="../images/echo-4.jpg" alt="Echo of Mind"></div>
-    <div class="strip-img"><img src="../images/echo-5.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-of-mind-6.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-of-mind-7.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-of-mind-8.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-of-mind-9.jpg" alt="Echo of Mind"></div>
+    <div class="strip-img"><img src="../images/echo-of-mind-11.jpg" alt="Echo of Mind"></div>
   </div>
   <div class="strip-caption">Scroll to see more →</div>
+
+</div>
+
+<!-- DEVICE DOCUMENTATION GRID -->
+<div class="section-label">Documentation</div>
+<div style="display:grid; grid-template-rows:auto auto; gap:8px; margin-bottom:56px;">
+  
+
+  <!-- Bottom row — three equal photos -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
+    <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid #d0cdc8;">
+      <img src="../images/echo-of-mind-15-render.jpg" alt="Echo of Mind" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid #d0cdc8;">
+      <img src="../images/echo-of-mind-3.jpg" alt="Echo of Mind" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <div style="aspect-ratio:1/1; overflow:hidden; border:1px solid #d0cdc8;">
+      <img src="../images/echo-of-mind-14-system-diagram.jpg" alt="Echo of Mind" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+  </div>
 
 </div>
 
