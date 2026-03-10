@@ -1,64 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hannah Peevey — SURREALISM</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
-:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--white);color:var(--black);font-family:'DM Mono',monospace;cursor:none;}
-.cursor{width:8px;height:8px;background:var(--pulse);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
-.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--pulse);}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid #e0ddd8;background:rgba(255,255,244,.95);backdrop-filter:blur(8px);}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--black);text-decoration:none;}
-.nav-right{display:flex;align-items:center;}
-.nav-right a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(10,10,10,.4);text-decoration:none;padding:16px 20px;transition:color .2s;border-left:1px solid #e0ddd8;}
-.nav-right a:hover{color:var(--pulse);}
-.proj-band{margin-top:52px;background:var(--black);padding:56px 40px 40px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;}
-.band-num{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-bottom:12px;}
-.band-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,120px);line-height:.88;color:var(--white);}
-.band-right{display:flex;flex-direction:column;gap:16px;justify-content:flex-end;}
-.band-desc{font-size:14px;line-height:1.8;color:rgba(255,255,243,.55);font-style:italic;border-left:2px solid var(--peach);padding-left:16px;}
-.band-tags{display:flex;gap:8px;}
-.band-tag{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;}
-.tag-graphic{border:1px solid var(--peach);color:var(--peach);}.tag-arch{border:1px solid #444;color:rgba(255,255,243,.4);}.tag-ai{background:var(--pulse);color:white;}.tag-3d{background:var(--volt);color:var(--black);}
-.meta-row{display:flex;border-bottom:2px solid var(--black);}
-.meta-item{padding:20px 32px;border-right:1px solid #d0cdc8;}
-.meta-item:last-child{border-right:none;}
-.meta-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#aaa;margin-bottom:4px;}
-.meta-val{font-size:13px;}
-.editorial{padding:64px 40px;}
-.pullquote{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,72px);line-height:1.05;border-top:3px solid var(--black);border-bottom:1px solid #d0cdc8;padding:32px 0 28px;margin-bottom:56px;max-width:900px;}
-.pullquote span{color:var(--pulse);}
-.spread{width:calc(100% + 80px);margin-left:-40px;aspect-ratio:21/9;background:#e8e5e0;overflow:hidden;margin-bottom:8px;}
-.spread img{width:100%;height:100%;object-fit:cover;}
-.spread-caption{font-size:10px;color:#aaa;font-style:italic;margin-bottom:56px;}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:56px;align-items:start;}
-.col-img{width:100%;aspect-ratio:3/4;background:#e8e5e0;border:1px solid #d0cdc8;overflow:hidden;}
-.col-img img{width:100%;height:100%;object-fit:cover;}
-.col-img.landscape{aspect-ratio:4/3;}
-.col-text{display:flex;flex-direction:column;gap:24px;}
-.section-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--pulse);display:flex;align-items:center;gap:12px;margin-bottom:0;}
-.section-label::after{content:'';flex:1;height:1px;background:#d0cdc8;max-width:40px;}
-.body-text{font-size:14px;line-height:1.9;color:#444;}
-.body-text p{margin-bottom:14px;}
-.img-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:8px;scrollbar-width:none;}
-.img-strip::-webkit-scrollbar{display:none;}
-.strip-img{flex:0 0 320px;height:240px;background:#e8e5e0;border:1px solid #d0cdc8;overflow:hidden;}
-.strip-img img{width:100%;height:100%;object-fit:cover;}
-.strip-caption{font-size:10px;color:#aaa;font-style:italic;margin-bottom:56px;}
-.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--black);}
-.proj-nav-item{padding:32px 40px;text-decoration:none;color:var(--black);transition:background .15s;display:flex;flex-direction:column;gap:6px;}
-.proj-nav-item:hover{background:#f0ede8;}
-.proj-nav-item:first-child{border-right:1px solid #d0cdc8;}
-.proj-nav-dir{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#aaa;}
-.proj-nav-title{font-family:'Bebas Neue',sans-serif;font-size:24px;}
-.proj-nav-item:last-child{text-align:right;}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@1,700&display=swap');
+
+:root {
+  --black: #0a0a0a;
+  --white: #fffff4;
+  --peach: #f2b692;
+  --volt: #d4b906;
+  --pulse: #d94383;
+  --border: #1a1a1a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'DM Mono', monospace;
+  cursor: none;
+}
+
+/* ── Cursor ── */
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--peach);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .2s, height .2s;
+}
+.cursor.hover {
+  width: 44px; height: 44px;
+  background: transparent;
+  border: 1px solid var(--peach);
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 52px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10,10,10,.95);
+  backdrop-filter: blur(8px);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: .08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-right { display: flex; align-items: center; }
+.nav-right a {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,243,.4); text-decoration: none;
+  padding: 16px 20px; transition: color .2s;
+  border-left: 1px solid var(--border);
+}
+.nav-right a:hover { color: var(--peach); }
+
+/* ── Hero ── */
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 40px 48px;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: #111 url('https://hannahpeevey254.github.io/hannahpeevey.github.io/images/surrealism-spread.jpg') center/cover no-repeat;
+  transform: scale(1.04);
+  transition: transform 8s ease;
+}
+.hero:hover .hero-bg { transform: scale(1); }
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,.96) 0%, rgba(10,10,10,.4) 55%, transparent 100%);
+  z-index: 1;
+}
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+.hero-meta { display: flex; gap: 12px; margin-bottom: 20px; }
+.hero-tag {
+  font-size: 9px; letter-spacing: .15em; text-transform: uppercase;
+  padding: 4px 10px;
+}
+.tag-index { border: 1px solid #333; color: rgba(255,255,243,.4); }
+.tag-cat { border: 1px solid var(--peach); color: var(--peach); }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 10vw, 140px);
+  line-height: .88; letter-spacing: -.01em;
+}
+.hero-subtitle {
+  font-size: 14px; color: rgba(255,255,243,.5);
+  margin-top: 16px; font-style: italic;
+  max-width: 560px; line-height: 1.7;
+}
+
+/* ── Stats bar ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+.stat {
+  padding: 28px 40px;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat-label {
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,243,.25); margin-bottom: 8px;
+}
+.stat-val { font-size: 14px; }
+
+/* ── Content ── */
+.content { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+
+.text-block { max-width: 680px; margin-bottom: 72px; }
+.section-label {
+  font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--peach); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border); max-width: 60px;
+}
+.body-text { font-size: 15px; line-height: 1.9; color: rgba(255,255,243,.65); }
+.body-text p { margin-bottom: 16px; }
+
+/* ── Full-width image (16:9) ── */
+.img-full {
+  width: 100%; aspect-ratio: 16/9;
+  background: #111; border: 1px solid var(--border);
+  overflow: hidden; margin-bottom: 8px;
+}
+.img-full img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-caption {
+  font-size: 10px; color: rgba(255,255,243,.25);
+  font-style: italic; margin-bottom: 56px;
+}
+
+/* ── Split block ── */
+.split-block {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center; margin-bottom: 72px;
+}
+.split-block.reverse { direction: rtl; }
+.split-block.reverse > * { direction: ltr; }
+.split-img {
+  width: 100%; aspect-ratio: 4/3;
+  background: #111; border: 1px solid var(--border); overflow: hidden;
+}
+.split-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ── 2-col grid ── */
+.grid-2 {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; margin-bottom: 56px;
+}
+.grid-2 .img-box {
+  aspect-ratio: 16/9;
+  background: #111; border: 1px solid var(--border); overflow: hidden;
+}
+.grid-2 .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ── Nav footer ── */
+.project-nav {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border);
+}
+.project-nav a {
+  padding: 40px; text-decoration: none;
+  color: rgba(255,255,243,.4);
+  transition: color .2s, background .2s;
+  border-right: 1px solid var(--border);
+}
+.project-nav a:last-child { border-right: none; text-align: right; }
+.project-nav a:hover { color: var(--white); background: var(--border); }
+.pn-label {
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.pn-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: .02em;
+}
+
+/* ── Progress strip (wide, natural aspect) ── */
+.progress-strip {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #111;
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  position: relative;
+  cursor: none;
+}
+.progress-strip img {
+  display: block;
+  height: 340px;
+  width: auto;
+  max-width: none;
+}
+.progress-img {
+  width: 100%; aspect-ratio: 16/9;
+  background: #111; border: 1px solid var(--border);
+  overflow: hidden; margin-bottom: 8px;
+  position: relative; cursor: none;
+}
+.progress-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.progress-overlay {
+  position: absolute; inset: 0;
+  background: rgba(10,10,10,0);
+  display: flex; align-items: flex-end; justify-content: flex-end;
+  padding: 16px;
+  transition: background .25s;
+  pointer-events: none;
+}
+.progress-strip:hover .progress-overlay,
+.progress-img:hover .progress-overlay { background: rgba(10,10,10,.45); }
+.expand-icon {
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--peach); opacity: 0;
+  transition: opacity .25s;
+  border: 1px solid var(--peach); padding: 6px 12px;
+}
+.progress-strip:hover .expand-icon,
+.progress-img:hover .expand-icon { opacity: 1; }
+
+/* ── Lightbox ── */
+.lightbox {
+  display: none;
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(10,10,10,.96);
+  align-items: center; justify-content: center;
+  padding: 40px;
+}
+.lightbox.open { display: flex; }
+.lightbox-close {
+  position: absolute; top: 20px; right: 28px;
+  background: none; border: none;
+  color: rgba(255,255,243,.5); font-size: 20px;
+  cursor: none; transition: color .2s;
+}
+.lightbox-close:hover { color: var(--peach); }
+.lightbox-inner {
+  max-width: 95vw; max-height: 90vh;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.lightbox-inner img {
+  max-width: 95vw; max-height: 82vh;
+  width: auto; height: auto;
+  border: 1px solid var(--border);
+  object-fit: contain;
+}
+#lightbox-caption {
+  font-size: 10px; color: rgba(255,255,243,.3);
+  font-style: italic; letter-spacing: .08em;
+}
+
+/* ── Quote ── */
+.quote-block {
+  border-left: 2px solid var(--peach);
+  padding: 4px 0 4px 28px;
+  margin-bottom: 72px;
+}
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(255,255,243,.75);
+}
 </style>
 </head>
 <body>
+
 <div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
 <nav>
   <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
   <div class="nav-right">
@@ -67,51 +299,158 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <a href="../contact.html">Contact</a>
   </div>
 </nav>
-<div class="proj-band">
-  <div>
-    <div class="band-num">08 / Graphic Design</div>
-    <div class="band-title">SURREALISM</div>
+
+<!-- HERO — full-width 16:9 image fills viewport -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-content">
+    <div class="hero-meta">
+      <span class="hero-tag tag-index">08 / Graphic Design</span>
+      <span class="hero-tag tag-cat">Graphic / Print</span>
+    </div>
+    <h1 class="hero-title">SURREALISM</h1>
+    <p class="hero-subtitle">Fashion and architecture collage — studied abroad in Rome</p>
   </div>
-  <div class="band-right">
-    <div class="band-desc">Fashion and architecture collage — studied abroad in Rome</div>
-    <div class="band-tags"><span class="band-tag tag-graphic">Graphic / Print</span></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-label">Year</div>
+    <div class="stat-val">2022</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Medium</div>
+    <div class="stat-val">Collage / Digital</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Tools</div>
+    <div class="stat-val">Photoshop, InDesign</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">Context</div>
+    <div class="stat-val">Rome Study Abroad</div>
   </div>
 </div>
-<div class="meta-row">
-  <div class="meta-item"><div class="meta-label">Year</div><div class="meta-val">2022</div></div>
-  <div class="meta-item"><div class="meta-label">Medium</div><div class="meta-val">Collage / Digital</div></div>
-  <div class="meta-item"><div class="meta-label">Tools</div><div class="meta-val">Photoshop, InDesign</div></div>
-  <div class="meta-item"><div class="meta-label">Context</div><div class="meta-val">Rome Study Abroad</div></div>
-</div>
-<div class="editorial">
-  <div class="pullquote">"Add a short <span>provocative statement</span> about this project here."</div>
-  <div class="spread"><img src="../images/surrealism-spread.jpg" alt="SURREALISM"></div>
-  <div class="spread-caption"><!-- Spread caption --></div>
-  <div class="two-col">
-    <div class="col-img"><img src="../images/surrealism-1.jpg" alt="SURREALISM"></div>
-    <div class="col-text">
-      <div><div class="section-label">Context</div><div class="body-text"><p><!-- Context --></p></div></div>
-      <div><div class="section-label">Process</div><div class="body-text"><p><!-- Process --></p></div></div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- Context -->
+  <div class="text-block">
+    <div class="section-label">Context</div>
+    <div class="body-text">
+      <p>The class "Fashion and Architecture" was a course taken while studying abroad in Rome with the goal to broaden students' horizon and give them an enriched point of view towards design. For this assignment students were asked to develop a concept that merged architecture and fashion to demonstrate an enriched point of view towards design.</p>
+      <p>Through the design process I found myself most drawn to the descriptive words: ambiguity, extravagant, bizarre, and unconventional. Through careful study and trial the idea formed into a more conceptual idea of Surrealism.</p>
     </div>
   </div>
-  <div class="two-col">
-    <div class="col-text">
-      <div><div class="section-label">Outcome</div><div class="body-text"><p><!-- Outcome --></p></div></div>
+
+  <!-- Quote -->
+  <div class="quote-block">
+    <p class="quote-text">"Taking objects out of context to create a new sense of the term surrealism — in relation to architecture and fashion design."</p>
+  </div>
+
+  <!-- Surrealism collage — full width 16:9 -->
+  <div class="img-full">
+    <img src="../images/SURREALISM-3.jpg" alt="Surrealism mood board collage">
+  </div>
+  <p class="img-caption">Surrealism collage — textures, colour schemes and objects taken out of context</p>
+
+  <!-- Process -->
+  <div class="text-block">
+    <div class="section-label">Process</div>
+    <div class="body-text">
+      <p>This collage was designed to find different interpretations of surrealism through experimentation. The use of textures, colour schemes, and taking objects out of context created a new sense of the term surrealism in relation to architecture and fashion design.</p>
+      <p>The next step in the progression of the project was to create collages on Adobe Photoshop derived from the photo collage. I took different inanimate objects and textures to create form rather than fashion, derived from my interpretation of surrealism.</p>
     </div>
-    <div class="col-img landscape"><img src="../images/surrealism-2.jpg" alt="SURREALISM"></div>
   </div>
-  <div class="section-label">More Images</div>
-  <div class="img-strip">
-    <div class="strip-img"><img src="../images/surrealism-3.jpg"></div>
-    <div class="strip-img"><img src="../images/surrealism-4.jpg"></div>
-    <div class="strip-img"><img src="../images/surrealism-5.jpg"></div>
-    <div class="strip-img"><img src="../images/surrealism-6.jpg"></div>
+
+  <!-- Wide strip image — natural width, scrollable, clickable -->
+  <div class="progress-strip" onclick="openLightbox('1773162310588_surrealism-5.jpg', 'Initial sketches and Photoshop fashion collages')">
+    <img src="../images/surrealism-5.jpg" alt="Progress sketches strip">
+    <div class="progress-overlay"><span class="expand-icon">↗ Click to expand</span></div>
   </div>
-  <div class="strip-caption">Scroll to see more →</div>
+  <p class="img-caption">Initial sketches — figure development and Photoshop collages</p>
+
+  <!-- Material studies — full width 16:9, clickable -->
+  <div class="progress-img" onclick="openLightbox('1773162310590_SURREALISM-1.jpg', 'Final material and texture studies — textile meets technological fabrication')">
+    <img src="../images/SURREALISM-4.jpg" alt="Final material and texture studies">
+    <div class="progress-overlay"><span class="expand-icon">↗ Click to expand</span></div>
+  </div>
+
+<!-- Working -->
+  <div class="text-block">
+    <div class="section-label">Next step</div>
+    <div class="body-text">
+      <p> We then used these forms to study shapes and formed created within the designs.</p>
+  </div>
+
 </div>
-<div class="proj-nav">
-  <a href="PREV.html" class="proj-nav-item"><div class="proj-nav-dir">← Previous</div><div class="proj-nav-title">Previous Project</div></a>
-  <a href="NEXT.html" class="proj-nav-item"><div class="proj-nav-dir">Next →</div><div class="proj-nav-title">Next Project</div></a>
+
+  <!-- Sketches row — full width 16:9 -->
+  <div class="img-full">
+    <img src="../images/surrealism-2.jpg" alt="Initial fashion sketches and Photoshop collages">
+  </div>
+
+
+  <!-- Outcome -->
+  <div class="text-block">
+    <div class="section-label">Outcome</div>
+    <div class="body-text">
+      <p>For the final process in the project students were asked to bring the designs to life through texture and material studies. My personal design process was to explore the materialistic relationship between textile and technological fabrication.</p>
+      <p>The cohesive series serves the purpose of defining the interaction between fashion, architecture and technology.</p>
+    </div>
+  </div>
+
+    <!-- Fashion drawings — full width 16:9 -->
+  <div class="img-full">
+    <img src="../images/SURREALISM-1.jpg" alt="Fashion line drawings on striped background">
+  </div>
+
+ 
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-caption"></p>
+  </div>
 </div>
-<script>const c=document.getElementById('cursor');document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>c.classList.add('hover'));el.addEventListener('mouseleave',()=>c.classList.remove('hover'));});</script>
-</body></html>
+
+<!-- PROJECT NAV -->
+<nav class="project-nav">
+  <a href="structural-design.html">
+    <div class="pn-label">← Previous</div>
+    <div class="pn-title">Structural Design</div>
+  </a>
+  <a href="graphic-design.html">
+    <div class="pn-label">Next →</div>
+    <div class="pn-title">Graphic Design</div>
+  </a>
+</nav>
+
+<script>
+  function openLightbox(src, caption) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-img').src = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+</script>
+</body>
+</html>
