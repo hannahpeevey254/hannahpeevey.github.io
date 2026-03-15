@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — DATA BODY</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--border:#1a1a1a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--peach);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--peach);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid var(--border);background:rgba(10,10,10,.95);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--white);text-decoration:none;}
+.nav-right{display:flex;align-items:center;}
+.nav-right a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,243,.4);text-decoration:none;padding:16px 20px;transition:color .2s;border-left:1px solid var(--border);}
+.nav-right a:hover{color:var(--peach);}
+.intro-block{padding:120px 40px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;border-bottom:1px solid var(--border);}
+.intro-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-bottom:16px;}
+.intro-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,100px);line-height:.88;}
+.intro-title .accent{color:var(--peach);}
+.intro-right{display:flex;flex-direction:column;gap:20px;}
+.intro-desc{font-size:15px;line-height:1.85;color:rgba(255,255,243,.55);font-style:italic;border-left:2px solid var(--peach);padding-left:16px;}
+.intro-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.istat{padding:12px 0;border-bottom:1px solid var(--border);}
+.istat-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-bottom:4px;}
+.istat-val{font-size:13px;}
+.section-divider{padding:32px 40px;border-bottom:1px solid var(--border);border-top:1px solid var(--border);display:flex;align-items:center;gap:20px;}
+.section-divider-num{font-size:15px;letter-spacing:.2em;color:var(--peach);text-transform:uppercase;}
+.section-divider-rule{flex:1;height:1px;background:var(--border);}
+.section-divider-title{font-size:15px;letter-spacing:.2em;color:rgb(255, 255, 255);text-transform:uppercase;}
+.text-section{padding:60px 40px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;}
+.text-section-num{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--peach);padding-top:4px;}
+.text-section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,52px);line-height:.95;margin-bottom:20px;}
+.text-section-body p{font-size:14px;line-height:1.9;color:rgba(255,255,243,.55);max-width:560px;margin-bottom:12px;}
+.text-section-body p:last-child{margin-bottom:0;}
+.video-block{padding:60px 40px;border-bottom:1px solid var(--border);}
+.video-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-bottom:20px;}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid var(--border);}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+.quote-block{padding:60px 40px;border-bottom:1px solid var(--border);}
+.quote-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,3.5vw,48px);line-height:1.1;color:rgba(255,255,243,.15);}
+.quote-text .highlight{color:var(--peach);}
+.live-link-block{padding:48px 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:40px;background:#d4b906;}
+.live-link-label{font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,243,.25);}
+.live-link-title{font-family:'Bebas Neue',sans-serif;font-size:28px;margin-top:6px;}
+.live-link-btn{display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--black);background:var(--white);text-decoration:none;padding:14px 24px;transition:opacity .2s;white-space:nowrap;flex-shrink:0;}
+.live-link-btn:hover{opacity:.85;}
+.closer{padding:80px 40px;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.closer-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,80px);line-height:.9;}
+.closer-title span{color:var(--peach);}
+.closer-text{font-size:14px;line-height:1.9;color:rgba(255,255,243,.55);}
+.closer-text p{margin-bottom:14px;}
+.closer-text p:last-child{margin-bottom:0;}
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);}
+.proj-nav-item{padding:32px 40px;text-decoration:none;color:var(--white);transition:background .2s;display:flex;flex-direction:column;gap:6px;}
+.proj-nav-item:hover{background:#111;}
+.proj-nav-item:first-child{border-right:1px solid var(--border);}
+.proj-nav-dir{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,243,.25);}
+.proj-nav-title{font-family:'Bebas Neue',sans-serif;font-size:24px;}
+.proj-nav-item:last-child{text-align:right;}
+@media(max-width:900px){
+  .intro-block{grid-template-columns:1fr;padding:100px 20px 48px;gap:32px;}
+  .text-section{grid-template-columns:1fr;gap:16px;padding:40px 20px;}
+  .section-divider{padding:24px 20px;}
+  .video-block,.quote-block{padding:40px 20px;}
+  .live-link-block{flex-direction:column;align-items:flex-start;padding:32px 20px;}
+  .closer{grid-template-columns:1fr;padding:48px 20px;gap:32px;}
+  .proj-nav-item{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="intro-block">
+  <div>
+    <div class="intro-tag">02–03 / AI / Data / Speculative</div>
+    <div class="intro-title">DATA<br><span class="accent">BODY</span></div>
+  </div>
+  <div class="intro-right">
+    <div class="intro-desc">Two connected projects exploring how intimate biometric data becomes a persona, a product, and a market — Collective Hannah and Market of Me.</div>
+    <div class="intro-stats">
+      <div class="istat"><div class="istat-label">Year</div><div class="istat-val">2025</div></div>
+      <div class="istat"><div class="istat-label">Tools</div><div class="istat-val">Ollama, JS, Supabase</div></div>
+      <div class="istat"><div class="istat-label">Medium</div><div class="istat-val">AI / Web / Speculative</div></div>
+      <div class="istat"><div class="istat-label">Context</div><div class="istat-val">MDEF Studio</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PART 01: COLLECTIVE HANNAH ── -->
+<div class="section-divider">
+  <div class="section-divider-num">01</div>
+  <div class="section-divider-rule"></div>
+  <div class="section-divider-title">Collective Hannah — The Digital Ecosystem</div>
+</div>
+
+<div class="live-link-block">
+  <div>
+    <div class="live-link-label">Live Project</div>
+    <div class="live-link-title">Welcome to Hannah's Digital Ecosystem</div>
+  </div>
+ <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;">
+  <span style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.45);">Click Here</span>
+  <a href="https://hannahpeevey254.github.io/COLLECTIVE-HANNAH/" target="_blank" class="live-link-btn">Visit Collective Hannah →</a>
+</div>
+</div>
+
+<div class="text-section">
+  <div class="text-section-num">01 — Concept</div>
+  <div class="text-section-body">
+    <div class="text-section-title">THE IDEA</div>
+    <p>A collective built from six AI personas, each trained on a different slice of my real, intimate data — location history, sleep cycles, biometric readings, messages, search history, calendar.</p>
+    <p>Together they form a society inside me. A digital ecosystem built of 6 AI personas using different slices of my real, intimate data to become a society inside me.</p>
+  </div>
+</div>
+
+<div class="text-section">
+  <div class="text-section-num">02 — System</div>
+  <div class="text-section-body">
+    <div class="text-section-title">HOW IT WORKS</div>
+    <p>Six local Ollama instances, each shaped by a specific data category. A multi-agent orchestration layer routes questions to all six simultaneously and surfaces their responses in real time.</p>
+    <p>They don't agree. They debate. They reflect the fragmented, contradictory self that data produces.</p>
+  </div>
+</div>
+
+<div class="text-section">
+  <div class="text-section-num">03 — Interface</div>
+  <div class="text-section-body">
+    <div class="text-section-title">WHAT YOU SEE</div>
+    <p>A web interface where visitors interact with the six AI personas — each colour-coded, each responding from its own data slice. Ask questions. Watch them debate. The disagreement between them is the point.</p>
+  </div>
+</div>
+
+<div class="text-section">
+  <div class="text-section-num">04 — Questions</div>
+  <div class="text-section-body">
+    <div class="text-section-title">WHAT IT ASKS</div>
+    <p>When strangers interact with the system, they reveal as much as the system does. The questions they ask become a mirror.</p>
+  </div>
+</div>
+
+
+
+<!-- ── PART 02: MARKET OF ME ── -->
+<div class="section-divider">
+  <div class="section-divider-num">02</div>
+  <div class="section-divider-rule"></div>
+  <div class="section-divider-title">Market of Me — The Biometric Stock Exchange</div>
+</div>
+
+<div class="live-link-block">
+  <div>
+    <div class="live-link-label">Live Project</div>
+    <div class="live-link-title">Want to buy your friends' data?</div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;">
+  <span style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.45);">Click Here</span>
+  <a href="https://hannahpeevey254.github.io/market-of-me/" target="_blank" class="live-link-btn">Visit Collective Hannah →</a>
+</div>
+</div>
+
+<div class="quote-block">
+  <div class="quote-text">
+    ARE YOU CONSCIOUS OF THE <span class="highlight">PERSONAL INFORMATION</span> YOU INPUT INTO YOUR PHONE EVERY DAY?<br>
+    SLEEP. PERIOD CYCLES. STRESS LEVELS. WEIGHT. PHYSICAL MOVEMENT. MOOD.<br><br>
+    <span class="highlight">WOULD YOU TELL ALL THIS TO A STRANGER?</span><br>
+    YOU ALREADY DO.
+  </div>
+</div>
+
+<div class="text-section">
+  <div class="text-section-num">01 — Concept</div>
+  <div class="text-section-body">
+    <div class="text-section-title">THE MARKET</div>
+    <p>Your biometric data isn't personal. It's a product. Your biological statistics become microeconomic units the moment they enter your phone.</p>
+    <p>Market of Me makes that visible — a speculative data stock exchange where intimate body data is listed, traded, and valued on an open market.</p>
+  </div>
+</div>
+
+<div class="text-section">
+  <div class="text-section-num">02 — System</div>
+  <div class="text-section-body">
+    <div class="text-section-title">HOW IT WORKS</div>
+    <p>Built with JavaScript and Supabase, the platform collects confessional biometric data through an anonymous form — age, sleep, anxiety, screen time, weight, heart rate — and feeds it into a live stock market interface.</p>
+    <p>I betrayed their trust and turned their bodies into profiles. Their data into currency. To mirror the biometric economy we already live inside.</p>
+  </div>
+</div>
+
+<div class="text-section">
+  <div class="text-section-num">03 — Interface</div>
+  <div class="text-section-body">
+    <div class="text-section-title">WHAT YOU SEE</div>
+    <p>A terminal-style web interface styled after financial data dashboards — but trading in heartbeats, stress levels, and confessions instead of currencies.</p>
+    <p>What if we could see how our intimate data becomes quantifiable and tradeable?</p>
+  </div>
+</div>
+
+<div class="text-section">
+  <div class="text-section-num">04 — Questions</div>
+  <div class="text-section-body">
+    <div class="text-section-title">WHAT IT ASKS</div>
+    <p>Would you rethink what information you're putting into your phone?</p>
+    <p>Your personal, intimate information is already living inside a biometric economy. This project just shows you the ledger.</p>
+  </div>
+</div>
+
+
+<!-- CLOSER -->
+<div class="closer">
+  <div class="closer-title">WHAT THIS<br>PROJECT<br><span>ASKS</span></div>
+  <div class="closer-text">
+    <p>Both projects sit inside a larger body of work about digital legacy. The AI personas explore how identity fragments and persists through machine interpretation. The biometric stock market reframes bodily data as something that can be quantified, valued, and exchanged.</p>
+    <p>Together they trace the full arc of how personal data moves in the world — from body, to persona, to commodity. Neither project attempts to define a complete or truthful self. They accept the digital body as partial, contextual, and unresolved.</p>
+    <p>Technological intimacy is the act of deciding what traces are allowed to remain, circulate, and outlive the individual.</p>
+  </div>
+</div>
+
+<div class="proj-nav">
+  <a href="aura.html" class="proj-nav-item">
+    <div class="proj-nav-dir">← Previous</div>
+    <div class="proj-nav-title">AURA</div>
+  </a>
+  <a href="safe-hands.html" class="proj-nav-item">
+    <div class="proj-nav-dir">Next →</div>
+    <div class="proj-nav-title">SAFE HANDS</div>
+  </a>
+</div>
+
+<script>
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; });
+document.querySelectorAll('a').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
+});
+</script>
+</body>
+</html>
