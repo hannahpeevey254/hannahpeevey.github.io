@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hannah Peevey — MOCHI</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@1,700&display=swap');
+:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace;cursor:none;}
+.cursor{width:8px;height:8px;background:var(--peach);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--peach);}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid var(--border);background:rgba(10,10,10,.95);backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--white);text-decoration:none;}
+.nav-right{display:flex;align-items:center;}
+.nav-right a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,243,.4);text-decoration:none;padding:16px 20px;transition:color .2s;border-left:1px solid var(--border);}
+.nav-right a:hover{color:var(--peach);}
+.hero{height:100vh;background:#111 url('../images/mochi-hero.jpg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 48px;position:relative;}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.3) 60%,transparent 100%);}
+.hero-content{position:relative;z-index:1;max-width:900px;}
+.hero-meta{display:flex;gap:12px;margin-bottom:20px;}
+.hero-tag{font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;}
+.tag-ai{background:var(--pulse);color:white;}
+.tag-arch{border:1px solid #333;color:rgba(255,255,243,.4);}
+.tag-graphic{border:1px solid var(--peach);color:var(--peach);}
+.tag-3d{background:var(--volt);color:var(--black);}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);line-height:.88;letter-spacing:-.01em;}
+.hero-subtitle{font-size:14px;color:rgba(255,255,243,.5);margin-top:16px;font-style:italic;max-width:560px;line-height:1.7;}
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+.stat{padding:28px 40px;border-right:1px solid var(--border);}
+.stat:last-child{border-right:none;}
+.stat-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,243,.25);margin-bottom:8px;}
+.stat-val{font-size:14px;}
+.content{max-width:1100px;margin:0 auto;padding:80px 40px;}
+.text-block{max-width:680px;margin-bottom:72px;}
+.section-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--peach);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px;}
+.body-text{font-size:15px;line-height:1.9;color:rgba(255,255,243,.65);}
+.body-text p{margin-bottom:16px;}
+.img-full{width:100%;aspect-ratio:16/9;background:#111;border:1px solid var(--border);overflow:hidden;margin-bottom:8px;}
+.img-full img{width:100%;height:100%;object-fit:cover;}
+.img-caption{font-size:10px;color:rgba(255,255,243,.25);font-style:italic;margin-bottom:56px;}
+.split-block{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:72px;}
+.split-block.reverse{direction:rtl;}.split-block.reverse>*{direction:ltr;}
+.split-img{width:100%;aspect-ratio:4/3;background:#111;border:1px solid var(--border);overflow:hidden;}
+.split-img img{width:100%;height:100%;object-fit:cover;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:56px;}
+.grid-3 .img-box{aspect-ratio:1;background:#111;border:1px solid var(--border);overflow:hidden;}
+.grid-3 .img-box img{width:100%;height:100%;object-fit:cover;}
+
+/* ── DIAGRAM ── */
+.diagram-section{margin-bottom:72px;}
+.diagram-wrap{
+  border:1px solid var(--border);
+  background:#0d0d0d;
+  padding:56px 40px 48px;
+}
+.dgm{
+  font-family:'DM Mono',monospace;
+  position:relative;
+  max-width:700px;
+  margin:0 auto;
+}
+.dgm-header{text-align:center;margin-bottom:52px;}
+.dgm-header h2{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--white);}
+.dgm-header p{font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(255,255,243,.2);margin-top:5px;}
+
+/* ── SVG TRACK ── */
+.dgm-track{width:100%;overflow:visible;display:block;}
+
+/* Node circles */
+.dgm-node-circle{
+  fill:none;stroke:rgba(255,255,243,.15);stroke-width:1;
+}
+.dgm-node-circle.active{fill:var(--peach);stroke:none;}
+.dgm-node-circle.pulse-col{fill:var(--pulse);stroke:none;}
+.dgm-node-circle.volt-col{fill:var(--volt);stroke:none;}
+.dgm-node-circle.dim{fill:#1a1a1a;stroke:rgba(255,255,243,.2);stroke-width:1;}
+
+/* Node number */
+.dgm-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px;
+  fill:var(--black);
+  text-anchor:middle;
+  dominant-baseline:middle;
+}
+.dgm-num.light{fill:var(--white);}
+
+/* Step title */
+.dgm-step-title{
+  font-family:'DM Mono',monospace;
+  font-size:7.5px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  fill:var(--white);
+}
+
+/* Step body */
+.dgm-step-body{
+  font-family:'DM Mono',monospace;
+  font-size:6.5px;
+  fill:rgba(255,255,243,.4);
+  line-height:1.6;
+}
+
+/* Track path */
+.dgm-path{
+  fill:none;
+  stroke:rgba(255,255,243,.1);
+  stroke-width:1.5;
+  stroke-dasharray:4 4;
+}
+.dgm-path.solid{
+  stroke:rgba(255,255,243,.18);
+  stroke-dasharray:none;
+}
+
+/* Arrow marker */
+.arrow-head{fill:var(--peach);}
+
+/* Bottom tag */
+.dgm-bottom-tag{
+  text-align:center;
+  margin-top:32px;
+  font-size:.4rem;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:rgba(255,255,243,.2);
+}
+.dgm-bottom-tag span{color:var(--peach);}
+
+/* Wiring section */
+.wiring-wrap{
+  border:1px solid var(--border);
+  background:#0d0d0d;
+  padding:40px;
+  margin-bottom:72px;
+}
+.wiring-wrap img{width:100%;height:auto;display:block;opacity:.9;}
+
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);}
+.proj-nav-item{padding:32px 40px;text-decoration:none;color:var(--white);transition:background .2s;display:flex;flex-direction:column;gap:6px;}
+.proj-nav-item:hover{background:#111;}
+.proj-nav-item:first-child{border-right:1px solid var(--border);}
+.proj-nav-dir{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,243,.25);}
+.proj-nav-title{font-family:'Bebas Neue',sans-serif;font-size:24px;}
+.proj-nav-item:last-child{text-align:right;}
+.trilogy-a{cursor:pointer;transition:opacity .2s;}
+.trilogy-a:hover{opacity:.7;}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-meta"><span class="hero-tag tag-ai">AI / Speculative / Hardware</span></div>
+    <div class="hero-title">MOCHI</div>
+    <div class="hero-subtitle">A handheld cyberdeck that mirrors your self-care back at you — and dies if you stop.</div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-label">Year</div><div class="stat-val">2025</div></div>
+  <div class="stat"><div class="stat-label">Medium</div><div class="stat-val">Physical Device / Firmware</div></div>
+  <div class="stat"><div class="stat-label">Tools</div><div class="stat-val">ESP32 · Cursor · Expo · Arduino</div></div>
+  <div class="stat"><div class="stat-label">Context</div><div class="stat-val"><a href="https://github.com/hannahpeevey254/MOCHI-PET" target="_blank" style="color:var(--peach);text-decoration:none;">MDEF Thesis / Open Source →</a></div></div>
+</div>
+
+<div class="content">
+
+  <div style="max-width:100%;margin-bottom:72px;">
+    <div class="section-label">Overview</div>
+    <div class="body-text">
+      <p>Mochi is a self-contained cyberdeck companion — no cloud, no app store, no extraction. You feed it data through physical buttons: sleep, water, food. It responds with its body. Tend to it and it grows. Neglect it and it shrinks. Abandon it and it dies. It is not a wellness tracker. It is not a fitness app. It is a mirror with a body — a physical object that makes the invisible exchange between you and your data visible, chosen, and consequential.</p>
+    </div>
+  </div>
+
+  <div class="img-full">
+    <img src="../images/mochi 3.jpeg" alt="MOCHI">
+  </div>
+  <div class="img-caption">MOCHI — handheld cyberdeck companion · ESP32 · 2025</div>
+
+  <div class="split-block">
+    <div class="text-block" style="margin-bottom:0">
+      <div class="section-label">The Question It Asks</div>
+      <div class="body-text"><p>We already log ourselves constantly. Our phones know more about our sleep, hunger, and movement than most people in our lives do. But that data flows silently outward — extracted, profiled, sold — without us ever feeling it leave. Mochi inverts that. The data stays inside the device. The only thing that changes is Mochi itself. When you stop showing up, it shows. When you die to it, it dies. That consequence is the design.</p></div>
+    </div>
+    <div class="split-img">
+      <img src="../images/mochi 2.jpeg" alt="MOCHI in hand">
+    </div>
+  </div>
+
+  <!-- ── STACK DIAGRAM ── -->
+  <div class="diagram-section" style="display:none;">
+    <div class="section-label">Stack</div>
+    <div class="diagram-wrap">
+      <div class="dgm">
+        <div class="dgm-header">
+          <h2>Mochi</h2>
+          <p>Hardware Architecture · Signal Flow</p>
+        </div>
+
+        <svg class="dgm-track" viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" class="arrow-head"/>
+            </marker>
+          </defs>
+
+          <!-- ── ROW 1 track: left to right ── -->
+          <path class="dgm-path solid" d="M 100,80 L 310,80" marker-end="url(#arr)"/>
+          <path class="dgm-path solid" d="M 350,80 L 560,80" marker-end="url(#arr)"/>
+          <!-- curve down right side -->
+          <path class="dgm-path solid" d="M 600,80 Q 660,80 660,140 L 660,240 Q 660,300 600,300"/>
+
+          <!-- ── ROW 2 track: right to left ── -->
+          <path class="dgm-path solid" d="M 560,300 L 350,300" marker-end="url(#arr)"/>
+          <path class="dgm-path solid" d="M 310,300 L 100,300" marker-end="url(#arr)"/>
+          <!-- curve down left side -->
+          <path class="dgm-path solid" d="M 60,300 Q 0,300 0,360 L 0,420 Q 0,460 60,460"/>
+
+          <!-- ── ROW 3: final node ── -->
+          <path class="dgm-path solid" d="M 100,460 L 310,460" marker-end="url(#arr)"/>
+
+          <!-- ════ NODE 01 — Physical Buttons ════ -->
+          <circle cx="60" cy="80" r="36" class="dgm-node-circle pulse-col"/>
+          <text x="60" y="76" class="dgm-num">01</text>
+
+          <text x="104" y="66" class="dgm-step-title">Physical Buttons</text>
+          <text x="104" y="78" class="dgm-step-body">Sleep / Water / Food.</text>
+          <text x="104" y="90" class="dgm-step-body">Three inputs. No more.</text>
+
+          <!-- ════ NODE 02 — ESP32 ════ -->
+          <circle cx="330" cy="80" r="36" class="dgm-node-circle active"/>
+          <text x="330" y="76" class="dgm-num">02</text>
+
+          <text x="374" y="58" class="dgm-step-title">ESP32</text>
+          <text x="374" y="70" class="dgm-step-body">Microcontroller.</text>
+          <text x="374" y="81" class="dgm-step-body">Offline by design.</text>
+
+          <!-- ════ NODE 03 — Firmware Logic ════ -->
+          <circle cx="580" cy="80" r="36" class="dgm-node-circle dim"/>
+          <text x="580" y="76" class="dgm-num light">03</text>
+
+          <text x="460" y="130" class="dgm-step-title">Firmware Logic</text>
+          <text x="460" y="142" class="dgm-step-body">Vibe coded from scratch.</text>
+          <text x="460" y="153" class="dgm-step-body">Sensor reads + mood</text>
+          <text x="460" y="164" class="dgm-step-body">state machine.</text>
+
+          <!-- ════ NODE 04 — Mood States ════ -->
+          <circle cx="580" cy="300" r="36" class="dgm-node-circle dim"/>
+          <text x="580" y="296" class="dgm-num light">04</text>
+
+          <text x="460" y="248" class="dgm-step-title">Mood States</text>
+          <text x="460" y="260" class="dgm-step-body">Thriving / Okay /</text>
+          <text x="460" y="271" class="dgm-step-body">Neglected / Critical.</text>
+          <text x="460" y="282" class="dgm-step-body">Each has its own behaviour.</text>
+
+          <!-- ════ NODE 05 — OLED Display ════ -->
+          <circle cx="330" cy="300" r="36" class="dgm-node-circle active"/>
+          <text x="330" y="296" class="dgm-num">05</text>
+
+          <text x="104" y="258" class="dgm-step-title">OLED Display</text>
+          <text x="104" y="270" class="dgm-step-body">128×128 pixel art.</text>
+          <text x="104" y="281" class="dgm-step-body">Animations reflect</text>
+          <text x="104" y="292" class="dgm-step-body">current state.</text>
+
+          <!-- ════ NODE 06 — Grow / Shrink / Die ════ -->
+          <circle cx="60" cy="300" r="36" class="dgm-node-circle volt-col"/>
+          <text x="60" y="296" class="dgm-num">06</text>
+
+          <text x="24" y="348" class="dgm-step-title" style="fill:var(--volt);">Grow / Shrink / Die</text>
+          <text x="24" y="360" class="dgm-step-body">The consequence.</text>
+          <text x="24" y="371" class="dgm-step-body">The design.</text>
+
+          <!-- ════ NODE 07 — Expo App ════ -->
+          <circle cx="60" cy="460" r="36" class="dgm-node-circle pulse-col"/>
+          <text x="60" y="456" class="dgm-num">07</text>
+
+          <text x="104" y="442" class="dgm-step-title">Expo App</text>
+          <text x="104" y="454" class="dgm-step-body">Optional companion.</text>
+          <text x="104" y="465" class="dgm-step-body">Mochi works without</text>
+          <text x="104" y="476" class="dgm-step-body">your phone.</text>
+
+          <!-- Step labels on nodes -->
+          <text x="60" y="126" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Input</text>
+          <text x="330" y="126" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Brain</text>
+          <text x="580" y="126" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Code</text>
+          <text x="580" y="346" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">States</text>
+          <text x="330" y="346" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Screen</text>
+          <text x="60" y="346" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Consequence</text>
+          <text x="60" y="506" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.25);">Mirror</text>
+
+        </svg>
+
+        <div class="dgm-bottom-tag">/ Buttons → ESP32 → Firmware → Mood → Screen → <span>Consequence</span> /</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── THE SCREEN ── -->
+  <div style="max-width:100%;margin-bottom:72px;">
+    <div class="section-label">The Screen</div>
+    <p class="body-text" style="font-style:italic;color:rgba(255,255,243,.4);margin-bottom:24px;">Seven states. One pixel-art body. The entire feedback loop, visible.</p>
+    <div style="overflow-x:auto;padding-bottom:16px;margin-bottom:56px;">
+      <div style="display:flex;gap:16px;width:max-content;">
+        <div style="width:180px;flex-shrink:0;">
+          <div style="width:180px;height:180px;background:#111;border:1px solid var(--border);overflow:hidden;">
+            <img src="../images/mochi_01_boot_heart.jpg" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,243,.3);font-style:italic;margin-top:6px;text-align:center;">Loading Screen</div>
+        </div>
+        <div style="width:180px;flex-shrink:0;">
+          <div style="width:180px;height:180px;background:#111;border:1px solid var(--border);overflow:hidden;">
+            <img src="../images/mochi_02_hi_im_mochi.jpg" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,243,.3);font-style:italic;margin-top:6px;text-align:center;">Introduction</div>
+        </div>
+        <div style="width:180px;flex-shrink:0;">
+          <div style="width:180px;height:180px;background:#111;border:1px solid var(--border);overflow:hidden;">
+            <img src="../images/mochi_03_size4_thriving.jpg" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,243,.3);font-style:italic;margin-top:6px;text-align:center;">Mochi Taken Care Of</div>
+        </div>
+        <div style="width:180px;flex-shrink:0;">
+          <div style="width:180px;height:180px;background:#111;border:1px solid var(--border);overflow:hidden;">
+            <img src="../images/mochi_04_size3_okay.jpg" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,243,.3);font-style:italic;margin-top:6px;text-align:center;">Mochi Needing Attention</div>
+        </div>
+        <div style="width:180px;flex-shrink:0;">
+          <div style="width:180px;height:180px;background:#111;border:1px solid var(--border);overflow:hidden;">
+            <img src="../images/mochi_05_size2_neglected.jpg" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,243,.3);font-style:italic;margin-top:6px;text-align:center;">Mochi Neglected</div>
+        </div>
+        <div style="width:180px;flex-shrink:0;">
+          <div style="width:180px;height:180px;background:#111;border:1px solid var(--border);overflow:hidden;">
+            <img src="../images/mochi_06_size1_critical.jpg" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,243,.3);font-style:italic;margin-top:6px;text-align:center;">Mochi Fatal</div>
+        </div>
+        <div style="width:180px;flex-shrink:0;">
+          <div style="width:180px;height:180px;background:#111;border:1px solid var(--border);overflow:hidden;">
+            <img src="../images/mochi_07_death.jpg" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,243,.3);font-style:italic;margin-top:6px;text-align:center;">Take Care of Mochi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="split-block">
+    <div class="text-block" style="margin-bottom:0">
+      <div class="section-label">Process</div>
+      <div class="body-text"><p>Built entirely through iterative vibe coding — no prior hardware experience, no existing template, no blueprint to follow. Starting from a concept and a components list, I programmed the full firmware from scratch: the sensor logic, the button inputs, the mood states, the shrink and grow animations, and the death mechanic. Every behaviour Mochi has was written, tested, broken, and rewritten. The stack was assembled deliberately. ESP32 as the brain — cheap, powerful, offline by design. Physical buttons as the only interface — no touchscreen, no scroll, no infinite feed. Just three inputs: sleep, water, food. The companion Expo app exists as an optional mirror, not a requirement. Mochi works without your phone. That was a non-negotiable design decision. The entire codebase is open source on GitHub — the schematic, the firmware, the death logic, all of it. Making it open wasn't an afterthought. It is part of the argument.</p></div>
+    </div>
+    <div class="split-img">
+      <img src="../images/mochi 4.jpeg" alt="Process">
+    </div>
+  </div>
+
+  <div class="split-block reverse">
+    <div class="text-block" style="margin-bottom:0">
+      <div class="section-label">Outcome</div>
+      <div class="body-text"><p>Mochi is the first act of a trilogy about what happens to your data self. Here, you choose to tend it. In Data Body, it gets extracted and traded. In Safe Hands, it outlives you. Together they trace the full arc of personal data — from body, to commodity, to ghost. Mochi asks the earliest question: what if the act of logging yourself was a practice of care, not a product to be sold?</p></div>
+    </div>
+    <div class="split-img">
+      <img src="../images/mochi 1.jpeg" alt="Outcome">
+    </div>
+  </div>
+
+  <!-- ── TRILOGY DIAGRAM ── -->
+  <div class="diagram-section">
+    <div class="section-label">The Data Trilogy</div>
+    <div class="body-text" style="margin-bottom:32px;"><p>Three projects. One arc. Personal data — from body, to commodity, to ghost.</p></div>
+    <div class="diagram-wrap">
+      <div class="dgm">
+
+        <svg class="dgm-track" viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Dashed connectors -->
+          <line x1="202" y1="120" x2="268" y2="120" stroke="rgba(255,255,243,.15)" stroke-dasharray="4 4" stroke-width="1"/>
+          <line x1="432" y1="120" x2="498" y2="120" stroke="rgba(255,255,243,.15)" stroke-dasharray="4 4" stroke-width="1"/>
+
+          <!-- Circle 1 — MOCHI (current page) -->
+          <a href="#" style="text-decoration:none;" class="trilogy-a">
+            <circle cx="120" cy="120" r="80" fill="var(--pulse)"/>
+            <text x="120" y="128" font-family="'Bebas Neue',sans-serif" font-size="28" fill="var(--black)" text-anchor="middle">01</text>
+          </a>
+          <text x="120" y="215" class="dgm-step-title" style="text-anchor:middle;">MOCHI</text>
+          <text x="120" y="228" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.4);">Body</text>
+
+          <!-- Circle 2 — DATA BODY -->
+          <a href="data-body.html" style="text-decoration:none;" class="trilogy-a">
+            <circle cx="350" cy="120" r="80" fill="#1a1a1a" stroke="rgba(255,255,243,.2)" stroke-width="1"/>
+            <text x="350" y="128" font-family="'Bebas Neue',sans-serif" font-size="28" fill="var(--white)" text-anchor="middle">02</text>
+          </a>
+          <text x="350" y="215" class="dgm-step-title" style="text-anchor:middle;">DATA BODY</text>
+          <text x="350" y="228" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.4);">Commodity</text>
+
+          <!-- Circle 3 — SAFE HANDS -->
+          <a href="safe-hands.html" style="text-decoration:none;" class="trilogy-a">
+            <circle cx="580" cy="120" r="80" fill="#1a1a1a" stroke="rgba(255,255,243,.2)" stroke-width="1"/>
+            <text x="580" y="128" font-family="'Bebas Neue',sans-serif" font-size="28" fill="var(--white)" text-anchor="middle">03</text>
+          </a>
+          <text x="580" y="215" class="dgm-step-title" style="text-anchor:middle;">SAFE HANDS</text>
+          <text x="580" y="228" class="dgm-step-body" style="text-anchor:middle;fill:rgba(255,255,243,.4);">Ghost</text>
+
+        </svg>
+
+        <div class="dgm-bottom-tag">/ Body → Commodity → <span>Ghost</span> /</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="proj-nav">
+  <a href="echo-of-mind.html" class="proj-nav-item"><div class="proj-nav-dir">← Previous</div><div class="proj-nav-title">Echo of Mind</div></a>
+  <a href="aura.html" class="proj-nav-item"><div class="proj-nav-dir">Next →</div><div class="proj-nav-title">AURA</div></a>
+</div>
+
+<script>
+const c=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';});
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>c.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>c.classList.remove('hover'));
+});
+</script>
+</body>
+</html>
