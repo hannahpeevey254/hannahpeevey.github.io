@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Hannah Peevey — THE HUMAN DATA MARKET</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@1,700&display=swap');
+/* Site tokens + one project accent (red, the colour of the booth). Peach/pink/volt stay as the three theme colours. */
+:root{--black:#0a0a0a;--white:#fffff4;--peach:#f2b692;--volt:#d4b906;--pulse:#d94383;--border:#1a1a1a;
+--red:#ff3b2f;--panel:#0d0d0d;--ph:#111;
+--mute:rgba(255,255,243,.55);--faint:rgba(255,255,243,.3);--soft:rgba(255,255,243,.45);
+--sex:var(--pulse);--mny:var(--volt);--drg:var(--peach);--sex-ink:#c42d6e;--mny-ink:#8a7900;--drg-ink:#c2602c;color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;background:var(--black);}
+body{background:var(--black);color:var(--white);font-family:'DM Mono',monospace,ui-monospace;font-size:14px;line-height:1.9;overflow-x:clip;-webkit-text-size-adjust:100%;}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;}
+
+/* nav (same as the other work pages) */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid var(--border);background:rgba(10,10,10,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;text-decoration:none;}
+.nav-right{display:flex;}
+.nav-right a{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);text-decoration:none;padding:16px 20px;border-left:1px solid var(--border);transition:color .2s;}
+.nav-right a:hover{color:var(--red);}
+
+/* intro */
+.intro-block{padding:120px 40px 72px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;border-bottom:1px solid var(--border);}
+.intro-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;}
+.intro-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(56px,8vw,112px);line-height:.88;}
+.accent{color:var(--red);}
+.intro-right{display:flex;flex-direction:column;gap:20px;}
+.intro-desc{font-size:15px;line-height:1.85;color:var(--mute);font-style:italic;border-left:2px solid var(--red);padding-left:16px;}
+.intro-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.istat{padding:12px 0;border-bottom:1px solid var(--border);}
+.istat-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:4px;}
+.istat-val{font-size:13px;line-height:1.5;}
+
+/* opening photo gallery: three columns, every photo at its own shape (no cropping) */
+.band{column-count:3;column-gap:8px;padding:40px 40px 8px;}
+.band figure{break-inside:avoid;margin:0 0 8px;cursor:zoom-in;}
+.band img{width:100%;height:auto;background:var(--ph);}
+.band figcaption{font-size:10px;font-style:italic;color:var(--faint);padding:6px 0 10px;line-height:1.5;}
+.cap{font-size:10px;font-style:italic;color:var(--faint);padding:6px 40px 18px;line-height:1.6;border-bottom:1px solid var(--border);}
+.cap.tight{padding:8px 0 0;border:0;}
+
+/* stat band */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+.stat{padding:30px 40px;border-right:1px solid var(--border);}
+.stat:last-child{border-right:0;}
+.stat strong{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(44px,5vw,72px);line-height:.9;display:block;font-variant-numeric:tabular-nums;}
+.stat span{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);display:block;margin-top:8px;line-height:1.6;}
+.stat-note{padding:12px 40px;font-size:11px;color:var(--faint);font-style:italic;border-bottom:1px solid var(--border);}
+
+/* section chrome */
+.divider{padding:32px 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:20px;}
+.divider .n{font-size:15px;letter-spacing:.2em;color:var(--red);}
+.divider .r{flex:1;height:1px;background:var(--border);}
+.divider .t{font-size:15px;letter-spacing:.2em;text-transform:uppercase;}
+.sec{padding:60px 40px;border-bottom:1px solid var(--border);}
+.sec-head{max-width:640px;margin-bottom:36px;}
+.sec-num{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);padding-bottom:10px;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(32px,4vw,52px);line-height:.95;margin-bottom:16px;}
+.sec-sub{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(26px,3vw,38px);line-height:.95;margin-bottom:12px;}
+.sec-body p{color:var(--mute);max-width:600px;margin-bottom:12px;}
+
+/* about: text left, photo stretched to the text height */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:stretch;}
+.about-photo{position:relative;min-height:340px;background:var(--ph);border:1px solid var(--border);overflow:hidden;}
+.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+/* lineage */
+.lineage{margin-top:56px;}
+.lineage h3{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);font-weight:400;margin-bottom:14px;}
+.lin{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);}
+.lin>div{padding:22px 22px 24px;border-right:1px solid var(--border);position:relative;}
+.lin>div:last-child{border-right:0;background:rgba(255,59,47,.06);}
+.lin small{display:block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:6px;}
+.lin b{display:block;font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:26px;letter-spacing:.04em;line-height:1.05;margin-bottom:8px;}
+.lin p{font-size:12px;line-height:1.7;color:var(--soft);}
+.lin a{color:var(--red);}
+.lin>div:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:24px;background:var(--black);color:var(--red);font-size:14px;line-height:1;z-index:1;}
+
+/* page grid with receipt rail */
+.page-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;border-bottom:1px solid var(--border);}
+.page-main{min-width:0;border-right:1px solid var(--border);}
+.page-main .sec:last-child{border-bottom:0;}
+.rail{padding:24px 20px;}
+.rail-sticky{position:sticky;top:76px;}
+.rail-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;line-height:1.5;}
+.rail-slot{height:8px;background:#161616;border:1px solid var(--border);border-bottom:0;}
+.rail-view{height:min(66svh,560px);overflow:hidden;position:relative;background:var(--black);box-shadow:0 0 0 1px var(--border);}
+.rail-view img{width:100%;height:auto;will-change:transform;background:#fff;filter:drop-shadow(0 6px 14px rgba(0,0,0,.6));}
+.rail-view::after{content:'';position:absolute;inset:auto 0 0 0;height:60px;background:linear-gradient(to top,var(--black),transparent);pointer-events:none;}
+.rail-prog{font-size:10px;color:var(--soft);margin-top:10px;letter-spacing:.1em;}
+.receipt-inline{display:none;}
+
+/* diagram panels */
+.panel{border:1px solid var(--border);background:var(--panel);padding:32px;}
+.panel h3{font-family:'Playfair Display',serif;font-style:italic;font-size:24px;text-align:center;font-weight:700;line-height:1.2;}
+.panel .sub{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);text-align:center;margin:6px 0 28px;line-height:1.6;}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:22px;font-size:11px;color:var(--soft);}
+.legend span{display:inline-flex;align-items:center;gap:8px;}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none;}
+.dot.s{background:var(--sex);}.dot.m{background:var(--mny);}.dot.d{background:var(--drg);}
+.flow-line{text-align:center;margin-top:24px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);line-height:1.8;}
+.flow-line b{color:var(--red);font-weight:400;}
+
+
+/* light panels: black text on cream, for readability */
+.panel.light{background:var(--white);border-color:#d9d9c9;color:#0a0a0a;--sex:var(--sex-ink);--mny:var(--mny-ink);--drg:var(--drg-ink);}
+.panel.light h3{color:#0a0a0a;}
+.panel.light .sub,.panel.light .flow-line,.panel.light .col h4,.panel.light .step .ph,.panel.light .qrow.head,.panel.light .result small,.panel.light .q small{color:rgba(10,10,10,.55);}
+.panel.light .legend,.panel.light .phase-key{color:rgba(10,10,10,.75);}
+.panel.light .step p,.panel.light .box small,.panel.light .qfree,.panel.light .cell .b{color:rgba(10,10,10,.7);}
+.panel.light .step::after{border-color:rgba(10,10,10,.28);}
+.panel.light .thumb,.panel.light .result div,.panel.light .cell{border-color:rgba(10,10,10,.16);}
+.panel.light .qrow{border-top-color:rgba(10,10,10,.12);}
+.panel.light .q i{color:rgba(10,10,10,.3);}
+.panel.light .qfree{border-color:rgba(10,10,10,.28);}
+.panel.light .qfree b{color:#d11f14;}
+.panel.light .cell.on{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.14);}
+.panel.light .cell.on .b{color:#0a0a0a;}
+.panel.light .result strong{color:#0a0a0a;}
+.panel.light .box{background:#fff;border-color:rgba(10,10,10,.25);color:#0a0a0a;}
+.panel.light .box.hot{border-color:var(--red);}
+.panel.light .box.pk{border-color:var(--pulse);}
+.panel.light .box.vt{border-color:#b39b00;}
+.panel.light .col:not(:last-child) .box::after{border-top-color:rgba(10,10,10,.35);}
+.panel.light .flow-line b{color:#d11f14;}
+.panel.grey{background:#e6e6e6;border-color:#d2d2d2;}
+.panel.light .buyer .nm{color:#0a0a0a;}
+.panel.light .buyer .wh,.panel.light .harm{color:rgba(10,10,10,.55);}
+.panel.light .fan{color:rgba(10,10,10,.75);border-color:rgba(209,31,20,.6);}
+.panel.light .fan strong{color:#d11f14;}
+
+/* journey */
+.phase-key{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;margin-bottom:26px;font-size:11px;color:var(--soft);}
+.phase-key span{display:inline-flex;gap:8px;align-items:center;}
+.phase-key i{width:10px;height:10px;border-radius:50%;display:inline-block;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 24px;}
+.step{position:relative;}
+.step .no{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--black);background:var(--peach);margin-bottom:12px;}
+.step.p-sold .no{background:var(--pulse);color:#fff;}
+.step.p-num .no{background:var(--volt);}
+.step.p-add .no{background:transparent;border:1px solid var(--red);color:var(--red);}
+.step h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:400;margin-bottom:4px;line-height:1.5;}
+.step p{font-size:12px;line-height:1.7;color:var(--soft);}
+.step .ph{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;display:block;}
+.step::after{content:'';position:absolute;top:26px;left:56px;right:-24px;border-top:1px dashed rgba(255,255,243,.18);}
+.step:nth-child(3n)::after,.step:last-child::after{display:none;}
+.thumb{width:140px;aspect-ratio:1;margin-top:14px;border:1px solid var(--border);overflow:hidden;background:var(--ph);cursor:zoom-in;}
+.thumb img{width:100%;height:100%;object-fit:cover;}
+
+/* question table */
+.qt{display:grid;}
+.qrow{display:grid;grid-template-columns:minmax(170px,1.3fr) repeat(3,minmax(0,1fr));gap:12px;align-items:stretch;padding:12px 0;border-top:1px solid var(--border);}
+.qrow.head{border-top:0;padding-top:0;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);}
+.qrow.head>div{display:flex;align-items:center;gap:8px;}
+.q{display:flex;gap:12px;align-items:baseline;}
+.q i{font-family:'Bebas Neue',sans-serif;font-style:normal;font-size:22px;color:var(--faint);letter-spacing:.05em;}
+.q span{font-size:13px;line-height:1.4;}
+.q small{display:block;font-size:10px;color:var(--faint);}
+.cell{border:1px solid var(--border);padding:10px 12px;display:flex;flex-direction:column;gap:2px;font-size:11px;line-height:1.4;min-height:56px;justify-content:center;}
+.cell .b{color:var(--soft);}
+.cell .e{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;line-height:1;}
+.cell .th{display:none;font-size:10px;letter-spacing:.15em;text-transform:uppercase;}
+.cell.on{background:rgba(255,255,243,.04);}
+.cell.on.s{border-color:var(--sex);box-shadow:0 0 18px rgba(217,67,131,.35);}
+.cell.on.m{border-color:var(--mny);box-shadow:0 0 18px rgba(212,185,6,.3);}
+.cell.on.d{border-color:var(--drg);box-shadow:0 0 18px rgba(242,182,146,.35);}
+.cell.on .b{color:var(--white);}
+.cell.on.s .e{color:var(--sex);}.cell.on.m .e{color:var(--mny);}.cell.on.d .e{color:var(--drg);}
+.qfree{margin-top:12px;border:1px dashed rgba(255,255,243,.2);padding:12px 14px;font-size:11px;color:var(--soft);line-height:1.7;}
+.qfree b{color:var(--red);font-weight:400;}
+.result{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.result div{border:1px solid var(--border);padding:10px 12px;}
+.result small{display:block;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);}
+.result strong{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:26px;letter-spacing:.04em;}
+.fig{margin-top:28px;}
+.fig .photo{border:1px solid var(--border);background:var(--ph);overflow:hidden;max-width:720px;aspect-ratio:3/2;}
+.fig .photo img{width:100%;height:100%;object-fit:cover;}
+
+/* buyer orbs */
+.orbs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;align-items:end;padding:8px 0 4px;}
+.buyer{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;justify-content:flex-end;}
+.orb{width:min(var(--w),100%);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;color:var(--ink,#0a0a0a);background:var(--bg);box-shadow:0 14px 34px rgba(0,0,0,.08);filter:blur(.4px);animation:breathe 8s ease-in-out infinite;animation-delay:var(--d,0s);}
+@keyframes breathe{0%,100%{transform:scale(1);filter:blur(.4px) hue-rotate(0deg);}50%{transform:scale(1.05);filter:blur(.4px) hue-rotate(14deg);}}
+.buyer .nm{font-size:11px;letter-spacing:.1em;text-transform:uppercase;line-height:1.4;}
+.buyer .wh{font-size:10px;color:var(--faint);line-height:1.5;}
+.fan{margin-top:26px;border:1px dashed rgba(255,59,47,.55);padding:14px 16px;font-size:12px;color:var(--soft);line-height:1.7;display:flex;gap:14px;align-items:center;}
+.fan strong{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:34px;color:var(--red);letter-spacing:.04em;line-height:1;flex:none;}
+.harm{margin-top:14px;font-size:12px;color:var(--faint);font-style:italic;text-align:center;}
+
+/* buyer research table */
+.rtable{margin-top:36px;border:1px solid var(--border);}
+.rtable h3{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);font-weight:400;padding:14px 18px;border-bottom:1px solid var(--border);}
+.rrow{display:grid;grid-template-columns:190px 70px 1.4fr 1.2fr;gap:20px;padding:14px 18px;border-bottom:1px solid var(--border);font-size:12px;line-height:1.6;align-items:baseline;}
+.rrow:last-child{border-bottom:0;}
+.rrow.head{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);}
+.rrow .p{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;line-height:1;}
+.rrow .by{display:flex;gap:10px;align-items:center;}
+.rrow .by i{width:10px;height:10px;border-radius:50%;flex:none;background:var(--c);box-shadow:0 0 10px var(--g);}
+.rrow .real{color:var(--soft);}
+.rrow .why{color:var(--mute);}
+.rnote{padding:12px 18px;font-size:11px;font-style:italic;color:var(--faint);border-top:1px solid var(--border);}
+
+/* answer ranking bars */
+.rank{margin-top:36px;border:1px solid var(--border);padding:22px 22px 8px;}
+.rank h3{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);font-weight:400;margin-bottom:4px;}
+.rank .lead{font-size:12px;color:var(--soft);max-width:640px;line-height:1.7;margin-bottom:18px;}
+.bar{display:grid;grid-template-columns:minmax(180px,1.1fr) minmax(0,2fr) 128px;gap:16px;align-items:center;padding:7px 0;border-top:1px solid var(--border);}
+.bar .lb b{display:block;font-weight:400;font-size:12px;line-height:1.4;}
+.bar .lb small{font-size:10px;color:var(--faint);}
+.bar .tr{height:10px;background:rgba(255,255,243,.06);position:relative;}
+.bar .tr i{position:absolute;left:0;top:0;bottom:0;background:var(--k);}
+.bar .vl{text-align:right;font-size:11px;color:var(--soft);line-height:1.4;font-variant-numeric:tabular-nums;}
+.bar .vl b{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:20px;letter-spacing:.04em;color:var(--white);display:block;line-height:1;}
+.theme-picks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 22px;}
+.theme-picks div{border:1px solid var(--border);padding:12px 14px;}
+.theme-picks small{display:block;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);}
+.theme-picks strong{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:34px;line-height:1;letter-spacing:.04em;}
+.rank .cav{font-size:11px;font-style:italic;color:var(--faint);padding:14px 0 16px;border-top:1px solid var(--border);line-height:1.7;}
+
+/* system */
+.sys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;}
+.col h4{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);font-weight:400;margin-bottom:12px;line-height:1.5;}
+.box{border:1px solid rgba(255,255,243,.18);padding:12px;font-size:11px;line-height:1.5;margin-bottom:12px;background:var(--black);position:relative;}
+.box b{display:block;font-weight:400;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;}
+.box.hot{border-color:var(--red);}
+.box.pk{border-color:var(--pulse);}
+.box.vt{border-color:var(--volt);}
+.box small{color:var(--faint);display:block;font-size:10px;}
+.col:not(:last-child) .box::after{content:'';position:absolute;top:50%;left:100%;width:20px;border-top:1px dashed rgba(255,255,243,.25);}
+.sysphotos{margin-top:28px;display:grid;gap:8px;}
+.sysphotos .wide{aspect-ratio:3/2;}
+.sysphotos .three{display:flex;gap:8px;}
+.sysphotos .three .photo{flex:var(--ar,.75) 1 0;min-width:0;aspect-ratio:var(--ar,.75);position:relative;}
+.sysphotos .three .photo img{position:absolute;inset:0;}
+.photo{background:var(--ph);border:1px solid var(--border);overflow:hidden;cursor:zoom-in;}
+.photo img{width:100%;height:100%;object-fit:cover;}
+
+/* loop */
+.loop{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:stretch;}
+.loop div{border:1px solid var(--border);padding:12px 10px;text-align:center;font-size:11px;line-height:1.5;display:flex;flex-direction:column;gap:6px;justify-content:center;}
+.loop div b{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:20px;letter-spacing:.06em;color:var(--red);line-height:1.1;}
+.loop div.big{border-color:var(--pulse);}
+.loop div.big b{color:var(--pulse);}
+.loop-return{margin-top:12px;text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);line-height:1.8;}
+
+.quote-block{padding:60px 40px;border-bottom:1px solid var(--border);}
+.quote-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,3.8vw,52px);line-height:1.1;color:rgba(255,255,243,.18);max-width:1000px;}
+.quote-text .hl{color:var(--red);}
+
+/* visitor quotes (empty until filled in: remove the hidden attribute on the section) */
+.quotes{padding:60px 40px;border-bottom:1px solid var(--border);}
+.quotes .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.quotes blockquote{border-left:2px solid var(--red);padding-left:16px;font-size:14px;line-height:1.8;color:var(--mute);font-style:italic;}
+.quotes cite{display:block;margin-top:8px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);font-style:normal;}
+
+/* closer / credits / nav */
+.closer{padding:64px 40px;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;border-bottom:1px solid var(--border);}
+.closer-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(40px,6vw,80px);line-height:.9;}
+.closer-title span{color:var(--red);}
+.closer-text p{color:var(--mute);margin-bottom:14px;max-width:620px;font-size:14px;}
+.credits{display:grid;grid-template-columns:1fr 220px;gap:60px;padding:60px 40px;border-bottom:1px solid var(--border);align-items:start;}
+.credits dl{display:grid;grid-template-columns:200px 1fr;gap:10px 24px;max-width:760px;}
+.credits dt{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);padding-top:4px;}
+.credits dd{font-size:14px;}
+.credits h2{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:400;margin-bottom:16px;grid-column:1/-1;}
+.credits figure .photo{aspect-ratio:3/4;}
+.credits figcaption{font-size:10px;font-style:italic;color:var(--faint);padding-top:8px;line-height:1.5;}
+.proj-nav{display:grid;grid-template-columns:1fr 1fr;}
+.proj-nav a{padding:32px 40px;text-decoration:none;display:flex;flex-direction:column;gap:6px;transition:background .2s;}
+.proj-nav a:hover{background:var(--ph);}
+.proj-nav a:first-child{border-right:1px solid var(--border);}
+.proj-nav a:last-child{text-align:right;}
+.proj-nav small{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);}
+.proj-nav span{font-family:'Bebas Neue',sans-serif;font-size:24px;}
+
+dialog{border:0;background:transparent;max-width:96vw;max-height:96svh;padding:0;}
+dialog::backdrop{background:rgba(0,0,0,.92);}
+dialog img{max-width:96vw;max-height:92svh;object-fit:contain;margin:auto;}
+dialog button{position:fixed;top:14px;right:14px;background:var(--black);color:var(--white);border:1px solid var(--border);font:inherit;font-size:11px;letter-spacing:.15em;text-transform:uppercase;padding:12px 16px;min-height:44px;cursor:pointer;}
+
+@media (hover:hover) and (pointer:fine){body{cursor:none;}.cursor{display:block;}}
+.cursor{display:none;width:8px;height:8px;background:var(--red);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+.cursor.hover{width:44px;height:44px;background:transparent;border:1px solid var(--red);}
+
+@media(max-width:1100px){
+  .page-grid{grid-template-columns:minmax(0,1fr);}
+  .rail{display:none;}
+  .page-main{border-right:0;}
+  .receipt-inline{display:block;padding:28px 0 0;}
+  .receipt-inline .crop{height:340px;overflow:hidden;background:#fff;max-width:300px;box-shadow:0 8px 24px rgba(0,0,0,.6);}
+  .receipt-inline img{width:100%;height:auto;}
+  .receipt-inline small{display:block;margin-top:10px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);}
+}
+@media(max-width:900px){
+  nav{padding:0 16px;}
+  .nav-logo{font-size:17px;white-space:nowrap;}
+  .nav-right a{padding:16px 10px;letter-spacing:.06em;white-space:nowrap;font-size:9px;}
+  .intro-block{grid-template-columns:1fr;padding:96px 16px 44px;gap:32px;}
+  .band{column-count:2;padding:24px 16px 4px;}
+  .cap{padding:10px 16px 14px;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .stat{padding:22px 16px;border-bottom:1px solid var(--border);}
+  .stat:nth-child(2n){border-right:0;}
+  .stat-note{padding:12px 16px;}
+  .divider{padding:24px 16px;}
+  .divider .t{font-size:12px;letter-spacing:.14em;}
+  .sec{padding:44px 16px;}
+  .about{grid-template-columns:1fr;gap:24px;}
+  .about-photo{min-height:0;aspect-ratio:1;}
+  .lin{grid-template-columns:1fr;}
+  .lin>div{border-right:0;border-bottom:1px solid var(--border);}
+  .lin>div:last-child{border-bottom:0;}
+  .lin>div:not(:last-child)::after{content:'↓';right:auto;left:22px;top:auto;bottom:-9px;}
+  .panel{padding:20px 14px;}
+  .qrow{grid-template-columns:1fr;gap:8px;}
+  .qrow.head{display:none;}
+  .cell{flex-direction:row;align-items:center;justify-content:space-between;gap:10px;}
+  .cell .th{display:block;}
+  .cell .tx{display:flex;flex-direction:column;flex:1;text-align:left;}
+  .result{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr;gap:0;}
+  .step{padding:0 0 26px 62px;min-height:70px;}
+  .step .no{position:absolute;left:0;top:0;margin:0;}
+  .step::after{display:block!important;top:44px;bottom:0;left:21px;right:auto;border-top:0;border-left:1px dashed rgba(255,255,243,.25);}
+  .step:last-child::after{display:none!important;}
+  .thumb{width:120px;}
+  .orbs{grid-template-columns:1fr;gap:18px;}
+  .buyer{flex-direction:row;text-align:left;gap:18px;align-items:center;justify-content:flex-start;}
+  .buyer .orb{flex:none;width:max(54px,calc(var(--w)*.55));}
+  .fan{flex-direction:column;align-items:flex-start;}
+  .rrow{grid-template-columns:1fr;gap:4px;padding:16px 18px;}
+  .rrow.head{display:none;}
+  .rrow .p{display:inline;}
+  .bar{grid-template-columns:1fr;gap:6px;}
+  .bar .vl{text-align:left;display:flex;gap:10px;align-items:baseline;}
+  .bar .vl b{display:inline;}
+  .theme-picks{grid-template-columns:1fr;}
+  .rank{padding:18px 14px 6px;}
+  .sys{grid-template-columns:1fr;}
+  .col:not(:last-child) .box::after{display:none;}
+  .sysphotos .three{gap:4px;}
+  .loop{grid-template-columns:1fr;}
+  .quote-block,.quotes{padding:44px 16px;}
+  .quotes .grid{grid-template-columns:1fr;}
+  .closer{grid-template-columns:1fr;padding:48px 16px;gap:28px;}
+  .credits{grid-template-columns:1fr;padding:44px 16px;gap:28px;}
+  .credits dl{grid-template-columns:1fr;gap:2px;}
+  .credits dt{padding-top:12px;}
+  .credits figure{max-width:220px;}
+  .proj-nav a{padding:24px 16px;}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.rail-view img{transform:none!important;}.orb{animation:none;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">HANNAH PEEVEY</a>
+  <div class="nav-right">
+    <a href="../index.html#projects">← Work</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<header class="intro-block">
+  <div>
+    <div class="intro-tag">AI / Data / Speculative</div>
+    <h1 class="intro-title">THE HUMAN<br><span class="accent">DATA MARKET</span></h1>
+  </div>
+  <div class="intro-right">
+    <div class="intro-desc">Six questions. Six buyers. Your answers priced in real time and added to a market you can watch.</div>
+    <div class="intro-stats">
+      <div class="istat"><div class="istat-label">Year</div><div class="istat-val">2026</div></div>
+      <div class="istat"><div class="istat-label">Shown at</div><div class="istat-val">MIRA Festival, Fira Montjuïc, Barcelona · 6–7 Nov</div></div>
+      <div class="istat"><div class="istat-label">Medium</div><div class="istat-val">Installation / Web / Hardware</div></div>
+      <div class="istat"><div class="istat-label">Tools</div><div class="istat-val">Next.js, Supabase, Telegram, Raspberry Pi, Arduino</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- STATEMENT (your text, verbatim) -->
+<section class="closer">
+  <div class="closer-title">ARTIST<br><span>STATEMENT</span></div>
+  <div class="closer-text">
+    <p>Intimacy has become infrastructure. What we say about ourselves no longer stays self-expression; it becomes a data layer other systems run on. My research sits at the threshold where a chosen vulnerability turns into an extracted one, and The Human Data Market stages that moment as a stock exchange of confessions, with cravings, weaknesses and desires priced in real time. Participation here is conscious: a mediated intimacy in which we negotiate the terms of our own exposure. By putting a price on our own data, we reclaim some authority over it, meeting the systems that read us as products as participants instead.</p>
+  </div>
+</section>
+
+<!-- OPENING PHOTO GALLERY (six photos, natural shapes) -->
+<div class="band" id="band">
+  <figure><img src="../images/human-data-market-hero-01.jpg" alt="A man and a woman talking beside the pink HUMAN DATA MARKET letters"><figcaption>Talking by the sign.</figcaption></figure>
+  <figure><img src="../images/human-data-market-hero-02.jpg" alt="Two visitors laughing together at the booth iPad"><figcaption>Laughing at the iPad.</figcaption></figure>
+  <figure><img src="../images/human-data-market-hero-03.jpg" alt="A participant answering on the iPad under the market screens"><figcaption>Answering.</figcaption></figure>
+  <figure><img src="../images/human-data-market-hero-04.jpg" alt="A visitor filming the booth on their phone through a plastic MIRA cup"><figcaption>Filming the booth through a MIRA cup.</figcaption></figure>
+  <figure><img src="../images/human-data-market-hero-05.jpg" alt="Two people at the iPad beneath the $SEX, $MNY and $DRG screens"><figcaption>The market screens move as people answer.</figcaption></figure>
+  <figure><img src="../images/human-data-market-hero-06.jpg" alt="A crowd gathered around the $DRG market screen"><figcaption>A crowd around the $DRG screen.</figcaption></figure>
+</div>
+<div class="cap">The booth at MIRA Festival, Fira Montjuïc, 6–7 November 2026. Photography: [photographer name]</div>
+
+<!-- STAT BAND -->
+<div class="stats">
+  <div class="stat"><strong>328</strong><span>Visitors answered</span></div>
+  <div class="stat"><strong>6</strong><span>Questions each</span></div>
+  <div class="stat"><strong>6</strong><span>Data buyers</span></div>
+  <div class="stat"><strong>2</strong><span>Days at MIRA</span></div>
+</div>
+<div class="stat-note">245 at the booth iPad, 83 on their own phone via a QR code. Euro amounts on this page are fictional.</div>
+
+<!-- 01 PROJECT -->
+<div class="divider"><div class="n">01</div><div class="r"></div><div class="t">The project</div></div>
+<section class="sec">
+  <div class="about">
+    <div class="sec-body">
+      <div class="sec-num">01 — Concept</div>
+      <!-- EDIT: replace this copy with your own words about the project -->
+      <h2 class="sec-title">WHAT YOU WALKED INTO</h2>
+      <p>A booth that buys your intimate data. You answer six quick questions. Each answer is sold to a buyer. You get a number, a receipt and a price.</p>
+      <p>The people who own the platforms see our most private thoughts as a number. This makes that number visible, and starts the conversation.</p>
+      <h3 class="sec-sub" style="margin-top:24px">WHAT IS MIRA</h3>
+      <p>MIRA is a digital arts and contemporary music festival held every year in Barcelona. This was the 15th edition, at Fira Montjuïc, on 6 and 7 November 2026.</p>
+    </div>
+    <div class="about-photo"><img src="../images/human-data-market-about-booth.jpg" alt="The booth from the side: the HUMAN DATA MARKET letters, the LED ticker and the market screens" loading="lazy"></div>
+  </div>
+
+  <div class="lineage">
+    <h3>Where it came from</h3>
+    <div class="lin">
+      <div><small>Earlier work</small><b>Biometric Stock Market</b><p>The stock-market idea this project grew from. See <a href="data-body.html">Data Body</a>.</p></div>
+      <div><small>May 2026</small><b>Find Your Match at Elisava</b><p>A dating-app version. 23 questions, 7 buyers, AI matching, a live bubble-market screen, and a terms clause that signs your data away.</p></div>
+      <div><small>Nov 2026 · MIRA</small><b>The Human Data Market</b><p>The match dropped, the market kept. Six questions, six buyers, and a booth with a printer, a ticker and three market screens.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02–06 WITH RECEIPT RAIL -->
+<div class="page-grid">
+  <div class="page-main">
+
+    <!-- 02 JOURNEY -->
+    <section class="sec" id="journey">
+      <div class="sec-head">
+        <div class="sec-num">02 — Journey</div>
+        <h2 class="sec-title">FROM ANSWER TO ASSET</h2>
+        <div class="sec-body"><p>Four phases: answer, sold, numbered, added. The ticker line is the immediate exploitation. The buyer breakdown at the booth is you being added to the system.</p></div>
+      </div>
+      <div class="panel light">
+        <h3>Participant Journey</h3>
+        <div class="sub">Nine steps · one visitor</div>
+        <div class="phase-key">
+          <span><i style="background:var(--peach)"></i>Answer</span>
+          <span><i style="background:var(--pulse)"></i>Sold</span>
+          <span><i style="background:var(--volt)"></i>Numbered</span>
+          <span><i style="border:1px solid var(--red)"></i>Added</span>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="ph">Answer</span><div class="no">01</div><h4>Question</h4><p>Six questions, on your phone via the QR code on a condom wrapper, or at the booth iPad.</p>
+            <div class="thumb"><img src="../images/human-data-market-step-01-dispenser.jpg" alt="The way in: the booth's dispensers and condom wrappers carrying the QR code" loading="lazy"></div></div>
+          <div class="step"><span class="ph">Answer</span><div class="no">02</div><h4>Answer</h4><p>You pick one answer, or type your own.</p></div>
+          <div class="step"><span class="ph">Answer</span><div class="no">03</div><h4>Category</h4><p>The answer becomes a craving: $SEX, $MNY or $DRG.</p></div>
+          <div class="step p-sold"><span class="ph">Sold</span><div class="no">04</div><h4>Buyer</h4><p>Each answer goes to one of six buyers, at its price.</p></div>
+          <div class="step p-sold"><span class="ph">Sold</span><div class="no">05</div><h4>Analysis</h4><p>The LED ticker reads you aloud in one cold line. Immediate data exploitation.</p>
+            <div class="thumb"><img src="../images/human-data-market-step-05-ticker.jpg" alt="The LED ticker at the booth, mid-sentence" loading="lazy"></div></div>
+          <div class="step p-num"><span class="ph">Numbered</span><div class="no">06</div><h4>Match</h4><p>You become MATCH-XXXX on the screen. The printer gives you a receipt of your data straight away.</p>
+            <div class="thumb"><img src="../images/human-data-market-step-06-receipts.jpg" alt="Printed receipts hanging off the booth table and piling on the floor" loading="lazy"></div></div>
+          <div class="step p-num"><span class="ph">Numbered</span><div class="no">07</div><h4>Community</h4><p>A single-use link puts you in the Telegram group of your most-picked craving.</p></div>
+          <div class="step p-add"><span class="ph">Added</span><div class="no">08</div><h4>Your price</h4><p>Your data has one price, the sum of what each buyer paid.</p></div>
+          <div class="step p-add"><span class="ph">Added</span><div class="no">09</div><h4>The market</h4><p>The buyer breakdown at the booth adds you to the collective stock market. Each sale moves a theme's price.</p></div>
+        </div>
+        <div class="flow-line">/ Question → Answer → Category → Buyer → Analysis → <b>Match</b> → Community → Price → Market /</div>
+      </div>
+      <div class="receipt-inline">
+        <div class="crop"><img loading="lazy" src="../images/human-data-market-receipt-strip.png" width="768" height="4188" alt="Sample thermal receipts from The Human Data Market, each with a MATCH number, buyer lines, a total and a QR code"></div>
+        <small>Sample receipt</small>
+      </div>
+    </section>
+
+    <!-- 03 QUESTIONS -->
+    <section class="sec" id="questions">
+      <div class="sec-head">
+        <div class="sec-num">03 — Questions</div>
+        <h2 class="sec-title">SIX QUESTIONS. THREE KINDS OF CRAVING.</h2>
+        <div class="sec-body"><p>Every question has three answers, one for each craving: closeness, power, state. Each answer is sold to a different buyer. A free-text line sits under every question.</p></div>
+      </div>
+      <div class="panel light">
+        <h3>The Question Table</h3>
+        <div class="sub">Sample path · who buys each answer</div>
+        <div class="legend">
+          <span><i class="dot s"></i>$SEX closeness · "You want to be known"</span>
+          <span><i class="dot m"></i>$MNY power · "You want to be in control"</span>
+          <span><i class="dot d"></i>$DRG state · "You want to feel something"</span>
+        </div>
+        <div class="qt" id="qt">
+          <div class="qrow head"><div>Question</div><div><i class="dot s"></i>$SEX</div><div><i class="dot m"></i>$MNY</div><div><i class="dot d"></i>$DRG</div></div>
+        </div>
+        <div class="qfree"><b>Free text.</b> Type your own answer, or refuse to answer Q4, and you are sold to all six buyers at once for €152. The text itself is never stored, only its length.</div>
+        <div class="result">
+          <div><small>Sample group</small><strong style="color:var(--drg)">$DRG</strong></div>
+          <div><small>Sample total</small><strong>€172</strong></div>
+          <div><small>Top buyer</small><strong>Government</strong></div>
+        </div>
+        <div class="flow-line">Generic sample path · <b>highlighted</b></div>
+      </div>
+      <figure class="fig">
+        <div class="photo"><img loading="lazy" src="../images/human-data-market-questions-ipad.jpg" alt="The booth iPad showing the question 'What are you here for?' with a printed receipt and QR code on the table"></div>
+        <figcaption class="cap tight">Question six on the booth iPad. A receipt with its QR code is already on the table.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 04 BUYERS -->
+    <section class="sec" id="buyers">
+      <div class="sec-head">
+        <div class="sec-num">04 — Buyers</div>
+        <h2 class="sec-title">WHO PAYS, AND HOW MUCH</h2>
+        <div class="sec-body"><p>Six buyers, ranked by what a single signal is worth to them. Each question has three answers and three different buyers. Each buyer appears exactly three times across the six questions.</p></div>
+      </div>
+      <div class="panel light grey">
+        <h3>Buyer Routing</h3>
+        <div class="sub">Orb size = price per answer</div>
+        <div class="orbs" id="orbs"></div>
+        <div class="fan"><strong>€152</strong><span>Free text, or refusing Q4, is sold to all six buyers at once: 50 + 40 + 30 + 20 + 10 + 2. Absence is data too.</span></div>
+        <div class="harm">Price per point is not harm. The €2 buyer does the most widespread damage.</div>
+      </div>
+
+      <div class="rtable" id="rtable">
+        <h3>How the buyers were ranked</h3>
+        <div class="rrow head"><div>Buyer</div><div>Price</div><div>Real-world version</div><div>Why it ranks here</div></div>
+      </div>
+
+      <div class="rank">
+        <h3>What visitors sold, answer by answer</h3>
+        <p class="lead">Festival days only. Each bar is one answer: how much it earned in total, how often it was picked, and who bought it.</p>
+        <div class="theme-picks">
+          <div><small>$DRG answers picked</small><strong style="color:var(--drg)">798</strong></div>
+          <div><small>$SEX answers picked</small><strong style="color:var(--sex)">611</strong></div>
+          <div><small>$MNY answers picked</small><strong style="color:var(--mny)">493</strong></div>
+        </div>
+        <div id="bars"></div>
+        <div class="cav">Prices come from how the market was designed. The pick counts are what visitors chose. Free-text and refused answers are not in these bars.</div>
+      </div>
+    </section>
+
+    <!-- 05 SYSTEM -->
+    <section class="sec" id="system">
+      <div class="sec-head">
+        <div class="sec-num">05 — System</div>
+        <h2 class="sec-title">HOW IT WAS BUILT</h2>
+        <div class="sec-body"><p>A web app, a database, a Telegram bot, and a small computer that drives the printer and the LED panels. Claude Code wrote the code. I planned, specified and reviewed it.</p></div>
+      </div>
+      <div class="panel light">
+        <h3>System Build</h3>
+        <div class="sub">From phone to wall</div>
+        <div class="sys">
+          <div class="col"><h4>1 · In</h4>
+            <div class="box hot"><b>Phone</b>QR code on the condom wrapper</div>
+            <div class="box hot"><b>Booth iPad</b>Same quiz, <code>?src=booth</code></div>
+          </div>
+          <div class="col"><h4>2 · App</h4>
+            <div class="box pk"><b>Next.js on Vercel</b>Quiz, scoring, market prices<small>EN / ES · spam guard · /admin</small></div>
+            <div class="box"><b>Telegram bot</b>Single-use invite links to 3 groups<small>Logs joins, never message text</small></div>
+          </div>
+          <div class="col"><h4>3 · Data</h4>
+            <div class="box vt"><b>Supabase, EU</b>participants · answers · sales · events · print_jobs<small>Views: theme prices, buyer totals, market total</small></div>
+            <div class="box"><b>Pi hub</b>Python script reads the feed, confirms prints</div>
+          </div>
+          <div class="col"><h4>4 · Out</h4>
+            <div class="box hot"><b>Thermal printer</b>58 mm receipt, 32 characters</div>
+            <div class="box hot"><b>LED ticker</b>9 red panels (3×3) on an Arduino Uno</div>
+            <div class="box hot"><b>Market screens</b>3 portrait monitors, one per theme</div>
+          </div>
+        </div>
+        <div class="flow-line">/ Phone → App → Database → <b>Pi hub</b> → Printer + Ticker + Screens /</div>
+      </div>
+
+      <!-- wide photo and the three below share the same left and right edges -->
+      <div class="sysphotos">
+        <div class="photo wide"><img loading="lazy" src="../images/human-data-market-system-wide.jpg" alt="Visitors crowd around the booth: the market screens, the pink HUMAN DATA MARKET letters and the iPad"></div>
+        <div class="three">
+          <div class="photo"><img loading="lazy" src="../images/human-data-market-system-a-led-panels.jpg" alt="Red LED panels mounted on a perforated board, hand-wired"></div>
+          <div class="photo"><img loading="lazy" src="../images/human-data-market-system-b-ticker.jpg" alt="The LED ticker showing a MATCH number and a price in euros"></div>
+          <div class="photo"><img loading="lazy" src="../images/human-data-market-system-c-monitor-mounts.jpg" alt="Portrait monitors held on the booth frame with metal brackets"></div>
+        </div>
+      </div>
+      <div class="cap tight" style="padding-top:10px">Above: the booth in use. Below, left to right: LED panels, the ticker, the monitor mounts.</div>
+    </section>
+
+    <!-- 06 IDEA -->
+    <section class="sec" id="idea">
+      <div class="sec-head">
+        <div class="sec-num">06 — The idea</div>
+        <h2 class="sec-title">WHAT IT SHOWS</h2>
+        <!-- EDIT: replace with your own words -->
+        <div class="sec-body"><p>You give away something intimate. It becomes a number. The number joins a market. The market is what the people who own the platforms see when they look at us.</p></div>
+      </div>
+      <div class="panel">
+        <h3>The Loop</h3>
+        <div class="sub">Intimate → number → market → conversation</div>
+        <div class="loop">
+          <div><b>You</b>answer something private</div>
+          <div><b>Craving</b>$SEX · $MNY · $DRG</div>
+          <div><b>Number</b>MATCH-XXXX</div>
+          <div><b>Price</b>one sum, six buyers</div>
+          <div><b>Market</b>a theme price moves</div>
+          <div class="big"><b>Seen</b>as a number, by the buyers</div>
+        </div>
+        <div class="loop-return">↺ Then you talk about it · then you see yourself in the number</div>
+      </div>
+    </section>
+  </div>
+
+  <aside class="rail" aria-label="Sample receipt">
+    <div class="rail-sticky">
+      <div class="rail-label">Your receipt<br>(sample)</div>
+      <div class="rail-slot"></div>
+      <div class="rail-view" id="railView"><img id="railImg" src="../images/human-data-market-receipt-strip.png" width="768" height="4188" alt="Sample receipts from the booth, scrolling as you read"></div>
+      <div class="rail-prog" id="railProg">0%</div>
+    </div>
+  </aside>
+</div>
+
+<div class="quote-block"><div class="quote-text">THE PEOPLE WHO OWN THE PLATFORMS SEE OUR MOST <span class="hl">INTIMATE DATA</span> AS A NUMBER. NOW IT HAS A PRICE YOU CAN WATCH.</div></div>
+
+<!-- VISITOR QUOTES: empty on purpose. Add 2–3 quotes, then delete the word "hidden" from the next line. -->
+<section class="quotes" hidden>
+  <div class="sec-num" style="padding-bottom:20px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red)">What people said</div>
+  <div class="grid">
+    <blockquote>“Quote one.”<cite>Visitor, day 1</cite></blockquote>
+    <blockquote>“Quote two.”<cite>Visitor, day 2</cite></blockquote>
+    <blockquote>“Quote three.”<cite>Visitor</cite></blockquote>
+  </div>
+</section>
+
+<!-- CREDITS -->
+<section class="credits">
+  <dl>
+    <h2>Credits</h2>
+    <dt>Concept, design, build</dt><dd>Hannah Peevey</dd>
+    <dt>Fabrication assistant</dt><dd>Andrea Santi</dd>
+    <dt>Photography</dt><dd>[photographer name]</dd>
+    <dt>Thanks to</dt><dd>Cara Van Der Vyver, Damian Arezzo, FabLab, IAAC and MIRA</dd>
+    <dt>Context</dt><dd>Master in Design for Emergent Futures, IAAC / Elisava</dd>
+  </dl>
+  <figure>
+    <div class="photo"><img loading="lazy" src="../images/human-data-market-credits-iaac-banner.jpg" alt="The IAAC banner beside the booth, carrying the project statement and a QR code" onerror="this.closest('figure').remove()"></div>
+    <figcaption>The IAAC banner beside the booth.</figcaption>
+  </figure>
+</section>
+
+<div class="proj-nav">
+  <a href="data-body.html"><small>← Previous</small><span>DATA BODY</span></a>
+  <a href="safe-hands.html"><small>Next →</small><span>SAFE HANDS</span></a>
+</div>
+
+<dialog id="lb"><button type="button" id="lbClose">Close</button><img id="lbImg" alt=""></dialog>
+
+<script>
+/* ---------- question table ---------- */
+var BP={Pharma:50,Government:40,"Big Tech":30,Insurance:20,Behavioral:10,Identity:2};
+var Q=[
+ ["What's worth the risk?",["Pharma","Insurance","Big Tech"]],
+ ["What's your idea of freedom?",["Identity","Government","Behavioral"]],
+ ["What would you take back from the system?",["Behavioral","Government","Pharma"]],
+ ["What crime would you commit?",["Identity","Big Tech","Government"],"Can refuse"],
+ ["Who do you trust?",["Identity","Insurance","Pharma"],"Free text allowed"],
+ ["What are you here for?",["Big Tech","Insurance","Behavioral"]]
+];
+var PATH=[2,1,2,2,0,2]; /* generic sample path: 0=SEX 1=MNY 2=DRG */
+var TH=["s","m","d"],THN=["$SEX","$MNY","$DRG"],THC=["sex","mny","drg"];
+var qt=document.getElementById("qt");
+Q.forEach(function(q,i){
+  var row=document.createElement("div");row.className="qrow";
+  var h='<div class="q"><i>'+String(i+1).padStart(2,"0")+'</i><span>'+q[0]+(q[2]?'<small>'+q[2]+'</small>':'')+'</span></div>';
+  q[1].forEach(function(b,j){
+    h+='<div class="cell '+TH[j]+(PATH[i]===j?' on':'')+'"><span class="th" style="color:var(--'+THC[j]+')">'+THN[j]+'</span><span class="tx"><span class="b">'+b+'</span></span><span class="e">€'+BP[b]+'</span></div>';
+  });
+  row.innerHTML=h;qt.appendChild(row);
+});
+
+/* ---------- buyers: orbs + research table ---------- */
+var BUY=[
+ {n:"Pharma & Health",bg:"radial-gradient(circle at 50% 55%,#ff5de6 0%,#ff6aa8 42%,#ff8a5c 100%)",ink:"#0a0a0a",p:50,c:"#ff3b2f",c2:"#a3150d",g:"rgba(255,59,47,.55)",g2:"rgba(255,59,47,.18)",wh:"Health and behaviour signals",
+  real:"Health data trading made IQVIA a $9B company. €50–500+ per patient record.",why:"Feeds drug pipelines and trial recruitment."},
+ {n:"Government & Law Enf.",bg:"radial-gradient(circle at 62% 55%,#e0432f 0%,#ee6b8e 38%,#f7e57e 100%)",ink:"#fff",p:40,c:"#e8793c",c2:"#8c3a12",g:"rgba(232,121,60,.5)",g2:"rgba(232,121,60,.16)",wh:"Movement, associations, risk",
+  real:"A US border agency paid $476K for one location dataset. The NSA bought browsing records (2024).",why:"Buying the data skips the need for a warrant."},
+ {n:"Big Tech & Ads",bg:"radial-gradient(circle at 38% 38%,#fde9b8 0%,#e3c3f5 45%,#c79bff 100%)",ink:"#0a0a0a",p:30,c:"#d94383",c2:"#7d1745",g:"rgba(217,67,131,.55)",g2:"rgba(217,67,131,.18)",wh:"Attention and intent",
+  real:"Meta earned about $227 per US user in 2023 ($57 worldwide).",why:"The biggest volume, but each signal is cheap."},
+ {n:"Insurance",bg:"radial-gradient(circle at 50% 50%,#1414ff 0%,#6f6fff 45%,#8ff7e2 100%)",ink:"#fff",p:20,c:"#f2b692",c2:"#a8683e",g:"rgba(242,182,146,.5)",g2:"rgba(242,182,146,.16)",wh:"Risk and lifestyle",
+  real:"Allstate/Arity paid apps to install driving trackers. LexisNexis and Verisk were named in a 2024 Texas probe.",why:"One accurate risk guess saves thousands in claims."},
+ {n:"Behavioral",bg:"radial-gradient(circle at 50% 50%,#c2bedb 0%,#e6e29a 60%,#f6ef88 100%)",ink:"#0a0a0a",p:10,c:"#d4b906",c2:"#7a6a00",g:"rgba(212,185,6,.5)",g2:"rgba(212,185,6,.16)",wh:"Persuasion and profiling",
+  real:"Mental-health data on 5,000 people sold for $275. Cambridge Analytica ran on profiles like these.",why:"Cheap per profile, but powers manipulation at scale."},
+ {n:"Identity",bg:"radial-gradient(circle at 50% 50%,#ffd79a 0%,#f1dcc0 50%,#c3cdfb 100%)",ink:"#0a0a0a",p:2,c:"#fffff4",c2:"#8a8a7a",g:"rgba(255,255,244,.4)",g2:"rgba(255,255,244,.12)",wh:"Resolves you to one person",
+  real:"About $0.05 per profile (Acxiom), on hundreds of millions of people.",why:"The cheapest, and it does the most widespread harm."}
+];
+var og=document.getElementById("orbs"),rt=document.getElementById("rtable");
+BUY.forEach(function(b,i){
+  var d=Math.round(50+b.p*2.6);
+  var el=document.createElement("div");el.className="buyer";
+  el.innerHTML='<div class="orb" style="--w:'+d+'px;font-size:'+Math.max(16,Math.round(d/4.2))+'px;--bg:'+b.bg+';--ink:'+b.ink+';--d:'+(i*-1.3)+'s">€'+b.p+'</div><div><div class="nm">'+b.n+'</div><div class="wh">'+b.wh+'</div></div>';
+  og.appendChild(el);
+  var r=document.createElement("div");r.className="rrow";
+  r.innerHTML='<div class="by" style="--c:'+b.c+';--g:'+b.g+'"><i></i>'+b.n+'</div><div class="p">€'+b.p+'</div><div class="real">'+b.real+'</div><div class="why">'+b.why+'</div>';
+  rt.appendChild(r);
+});
+var note=document.createElement("div");note.className="rnote";
+note.textContent="Real-world figures come from my buyer research. The euro prices are artistic estimates scaled from those rates.";
+rt.appendChild(note);
+
+/* ---------- answer ranking (festival days; from the Supabase answers table) ---------- */
+var QS=["What's worth the risk?","What's your idea of freedom?","What would you take back from the system?","What crime would you commit?","Who do you trust?","What are you here for?"];
+var BUYER_OF={q1:["Pharma","Insurance","Big Tech"],q2:["Identity","Government","Behavioral"],q3:["Behavioral","Government","Pharma"],q4:["Identity","Big Tech","Government"],q5:["Identity","Insurance","Pharma"],q6:["Big Tech","Insurance","Behavioral"]};
+var RANK=[["q3","drg",162,8100],["q5","drg",142,7100],["q1","drg",217,6510],["q4","drg",111,4440],["q6","mny",169,3380],["q1","sex",60,3000],["q4","mny",99,2970],["q2","mny",70,2800],["q3","mny",67,2680],["q6","sex",57,1710],["q6","drg",98,980],["q3","sex",92,920],["q1","mny",46,920],["q5","mny",42,840],["q2","drg",68,680],["q2","sex",182,364],["q5","sex",137,274],["q4","sex",83,166]];
+var TIDX={sex:0,mny:1,drg:2},TCOL={sex:"var(--sex)",mny:"var(--mny)",drg:"var(--drg)"};
+var bars=document.getElementById("bars");
+RANK.forEach(function(r){
+  var qn=parseInt(r[0].slice(1),10),buyer=BUYER_OF[r[0]][TIDX[r[1]]];
+  var el=document.createElement("div");el.className="bar";
+  el.innerHTML='<div class="lb"><b>'+QS[qn-1]+'</b><small>$'+r[1].toUpperCase()+' answer · sold to '+buyer+'</small></div><div class="tr"><i style="--k:'+TCOL[r[1]]+';width:'+(r[3]/8100*100).toFixed(1)+'%"></i></div><div class="vl"><b>€'+r[3].toLocaleString("en-GB")+'</b>'+r[2]+' picks</div>';
+  bars.appendChild(el);
+});
+
+/* ---------- system trio: each photo keeps its own shape, all the same height ---------- */
+(function(){
+  document.querySelectorAll(".sysphotos .three .photo").forEach(function(f){
+    var im=f.querySelector("img");
+    function set(){if(im.naturalWidth&&im.naturalHeight)f.style.setProperty("--ar",(im.naturalWidth/im.naturalHeight).toFixed(4));}
+    if(im.complete)set();else im.addEventListener("load",set);
+  });
+})();
+
+/* ---------- receipt rail: scroll-linked ---------- */
+(function(){
+  var grid=document.querySelector(".page-grid"),view=document.getElementById("railView"),img=document.getElementById("railImg"),prog=document.getElementById("railProg");
+  if(!grid||!view||!img)return;
+  var still=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  function upd(){
+    if(getComputedStyle(view.parentNode.parentNode).display==="none")return;
+    var r=grid.getBoundingClientRect();
+    var total=r.height-view.offsetHeight-100;
+    var p=Math.min(1,Math.max(0,(-r.top+60)/Math.max(1,total)));
+    var travel=Math.max(0,img.offsetHeight-view.offsetHeight);
+    if(!still)img.style.transform="translateY("+(-p*travel).toFixed(1)+"px)";
+    prog.textContent=Math.round(p*100)+"% printed";
+  }
+  window.addEventListener("scroll",upd,{passive:true});window.addEventListener("resize",upd);
+  if(img.complete)upd();else img.addEventListener("load",upd);
+  upd();
+})();
+
+/* ---------- lightbox: band, step thumbnails, system photos ---------- */
+(function(){
+  var lb=document.getElementById("lb"),li=document.getElementById("lbImg");
+  document.querySelectorAll("#band img,.thumb img,.sysphotos img").forEach(function(im){
+    im.style.cursor="zoom-in";
+    im.addEventListener("click",function(){li.src=im.currentSrc||im.src;li.alt=im.alt;try{lb.showModal();}catch(e){}});
+  });
+  document.getElementById("lbClose").addEventListener("click",function(){lb.close();});
+  lb.addEventListener("click",function(e){if(e.target===lb)lb.close();});
+})();
+
+/* ---------- cursor (desktop with a mouse only) ---------- */
+(function(){
+  var c=document.getElementById("cursor");
+  if(!window.matchMedia("(hover:hover) and (pointer:fine)").matches)return;
+  document.addEventListener("mousemove",function(e){c.style.left=e.clientX+"px";c.style.top=e.clientY+"px";});
+  document.querySelectorAll("a,button").forEach(function(el){
+    el.addEventListener("mouseenter",function(){c.classList.add("hover");});
+    el.addEventListener("mouseleave",function(){c.classList.remove("hover");});
+  });
+})();
+</script>
+</body>
+</html>
